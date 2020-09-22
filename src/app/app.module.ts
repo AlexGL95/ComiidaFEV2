@@ -11,6 +11,7 @@ import { APP_ROUTING } from './app.routes';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { RondaComponent } from './components/ronda/ronda.component';
 
 
 
@@ -19,6 +20,7 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
     AppComponent,
     LoginComponent,
     NavbarComponent,
+    RondaComponent,
   ],
   imports: [
     BrowserModule,
