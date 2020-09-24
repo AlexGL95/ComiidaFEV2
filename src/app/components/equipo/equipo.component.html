@@ -1,0 +1,63 @@
+<!-- Alertas -->
+<div class="container mt-3">
+    <div class="alert alert-danger" *ngIf="mensajeError==true">
+        ¡Existen fechas sobrepuestas!
+    </div>
+    
+    <div class="alert alert-success alert-dismissible" *ngIf="mensajeEnviado==true">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Envio exitoso.
+      </div>
+</div>
+
+<!-- Lista de equipos -->
+<div class="container mt-3">
+    <ul class="list-group">
+        <!--Encabezado de la lista-->
+        <li class="list-group-item bg-secondary">
+            <div class="row row-cols-3">
+                <!-- Columna de fecha -->
+                <div class="col">Fecha</div>
+                <!-- Columna de integrantes -->
+                <div class="col">Integrantes</div>
+                <!-- Columna de recetas -->
+                <div class="col">Recetas</div>
+            </div>
+        </li>
+        <!-- Cuerpo de la lista -->
+        <li class="list-group-item" *ngFor="let equipo of equiposArr; index as i;">
+            <div class="row row-cols-3">
+                <!-- Columna de fecha -->
+                <div class="col">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                            {{fechasArr[i]}}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li *ngFor="let fechasEquipo of equiposArr">
+                                <button type="button" class="btn" (click)="modFechasArr(i,fechasEquipo.nombre)" >{{fechasEquipo.nombre}}</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Columna de integrantes -->
+                <div class="col">{{equipo.integrantes_nombres[0]}} y {{equipo.integrantes_nombres[1]}}</div>
+                <!-- Columna de recetas -->
+                <div class="col">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" *ngFor="let receta of equipo.recetas_nombres">
+                            {{receta}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!-- Boton de guardar -->
+<div class="container mt-3 ml-5">
+    <button type="button" class="btn btn-secondary" (click)="envioCambios()">
+        Guardar cambios
+    </button>
+</div>
