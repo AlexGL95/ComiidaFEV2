@@ -13,18 +13,27 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { EquipoComponent } from './components/equipo/equipo.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RegistroComponent } from './components/registro/registro.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
+    RegistroComponent,
     EquipoComponent
   ],
   imports: [
     BrowserModule,
-    APP_ROUTING,
-    HttpClientModule
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    APP_ROUTING
   ],
   providers: [],
   bootstrap: [AppComponent]
