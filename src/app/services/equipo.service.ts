@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 //Interfaces
-import { EquipoInterface } from "../components/equipo/equipo.interface";
+import { EquipoInterface, UpdateDateDto } from "../components/equipo/equipo.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,10 @@ export class EquipoService {
 
   getEquipos() {
     return this.http.get<EquipoInterface[]>(this.URL_API_EQUIPOS);
+  }
+
+  updateDate( fechaMod: UpdateDateDto ) {
+    return this.http.put(this.URL_API_EQUIPOS, fechaMod );
   }
 
 }

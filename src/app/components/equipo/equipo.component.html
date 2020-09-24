@@ -1,3 +1,15 @@
+<!-- Alertas -->
+<div class="container mt-3">
+    <div class="alert alert-danger" *ngIf="mensajeError==true">
+        ¡Existen fechas sobrepuestas!
+    </div>
+    
+    <div class="alert alert-success alert-dismissible" *ngIf="mensajeEnviado==true">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Envio exitoso.
+      </div>
+</div>
+
 <!-- Lista de equipos -->
 <div class="container mt-3">
     <ul class="list-group">
@@ -12,11 +24,25 @@
                 <div class="col">Recetas</div>
             </div>
         </li>
-        <!--Cuerpo de la lista-->
-        <li class="list-group-item" *ngFor="let equipo of equiposArr">
+        <!-- Cuerpo de la lista -->
+        <li class="list-group-item" *ngFor="let equipo of equiposArr; index as i;">
             <div class="row row-cols-3">
-                <div class="col">{{equipo.nombre}}</div>
+                <!-- Columna de fecha -->
+                <div class="col">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                            {{fechasArr[i]}}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li *ngFor="let fechasEquipo of equiposArr">
+                                <button type="button" class="btn" (click)="modFechasArr(i,fechasEquipo.nombre)" >{{fechasEquipo.nombre}}</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Columna de integrantes -->
                 <div class="col">{{equipo.integrantes_nombres[0]}} y {{equipo.integrantes_nombres[1]}}</div>
+                <!-- Columna de recetas -->
                 <div class="col">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" *ngFor="let receta of equipo.recetas_nombres">
@@ -31,17 +57,7 @@
 
 <!-- Boton de guardar -->
 <div class="container mt-3 ml-5">
-    <button type="button" class="btn btn-secondary">Secondary</button>
+    <button type="button" class="btn btn-secondary" (click)="envioCambios()">
+        Guardar cambios
+    </button>
 </div>
-
-<div class="container">
-    <div class="dropdown">
-      <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-      </button>
-      <ul class="dropdown-menu">
-        <li><a href="#">HTML</a></li>
-        <li><a href="#">CSS</a></li>
-        <li><a href="#">JavaScript</a></li>
-      </ul>
-    </div>
-  </div>
