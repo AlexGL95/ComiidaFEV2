@@ -1,10 +1,9 @@
 <div class="content p-lg-5">
     <br /><br />
-    <div class="mt-1 container border col-lg-4 bg-white pb-2">
+    <div class="mt-1 container border col-lg-6 bg-white pb-2">
         <br />
-        <div class="container p-4 text-center">
-            <img src="/assets/img/logo.png" class="p-2 img-fluid" />
-            <form [formGroup]="LoginForm" class="text-center" (ngSubmit)="singup(nombre.value, pass.value)">
+        <div class="container text-center">
+            <form [formGroup]="RegistroForm" class="text-center" (ngSubmit)="singin(nombre.value, pass.value, copass.value)">
                 <div class="form-group">
                     <label>Usuario</label>
                     <input type="text" formControlName="usuario" class="form-control" required #nombre />
@@ -20,12 +19,8 @@
                 <div class="form-group">
                     <label for="password">Contraseña</label>
                     <div class="input-group">
-                        <input #x type="password" class="form-control" formControlName="password" id="password" required #pass />
-                        <div class="input-group-append c-pointer" (click)="x.type = x.type == 'password' ? 'text' : 'password'">
-                            <span class="input-group-text">
-                  <i class="fa faEyeSlash"></i>
-                </span>
-                        </div>
+                        <input type="password" class="form-control" formControlName="password" required #pass />
+
                     </div>
                     <div class="alert-danger" *ngIf="password.errors && (password.dirty || password.touched)">
                         <div class="container-fluid" *ngIf="password.errors.required">
@@ -34,12 +29,32 @@
                         <div class="container-fluid" *ngIf="password.errors.minlength">
                             Al menos 8 caracteres de longitud
                         </div>
+                        <div *ngIf="password.errors.pattern">
+                            La contraseña debe contener al menos 8 caracteres, una letra mayuscula y un numero
+                        </div>
+                    </div>
+
+                    <label for="password">Repite la contraseña</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" formControlName="copassword" required #copass />
+
+                    </div>
+                    <div class="alert-danger" *ngIf="copassword.errors && (copassword.dirty || copassword.touched)">
+                        <div class="container-fluid" *ngIf="copassword.errors.required">
+                            Confirmacion de contraseña requerida
+                        </div>
+                        <div class="container-fluid" *ngIf="copassword.errors.minlength">
+                            Al menos 8 caracteres de longitud
+                        </div>
+                        <div class="container-fluid" *ngIf="copassword.errors.checkPasswords">
+                            Las contraseñas deben coincidir
+                        </div>
                     </div>
 
 
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">
-            Iniciar Sesion
+            Registrar
           </button>
             </form>
         </div>
