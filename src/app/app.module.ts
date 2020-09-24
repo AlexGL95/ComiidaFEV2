@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from "@angular/common/http";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule} from '@angular/forms';
 
 // RUTAS
 import { APP_ROUTING } from './app.routes';
@@ -11,11 +14,8 @@ import { APP_ROUTING } from './app.routes';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { EquipoComponent } from './components/equipo/equipo.component';
 import { RegistroComponent } from './components/registro/registro.component';
-
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ import { RegistroComponent } from './components/registro/registro.component';
     LoginComponent,
     NavbarComponent,
     RegistroComponent,
+    EquipoComponent
   ],
   imports: [
     BrowserModule,
