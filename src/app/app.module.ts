@@ -19,7 +19,7 @@ import { EquipoComponent } from './components/equipo/equipo.component';
     AppComponent,
     LoginComponent,
     NavbarComponent,
-    EquipoComponent,
+    EquipoComponent
   ],
   imports: [
     BrowserModule,

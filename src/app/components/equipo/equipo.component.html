@@ -1,4 +1,47 @@
-<!-- Barra de navegacion en la parte superior -->
-<app-navbar></app-navbar>
+<!-- Lista de equipos -->
+<div class="container mt-3">
+    <ul class="list-group">
+        <!--Encabezado de la lista-->
+        <li class="list-group-item bg-secondary">
+            <div class="row row-cols-3">
+                <!-- Columna de fecha -->
+                <div class="col">Fecha</div>
+                <!-- Columna de integrantes -->
+                <div class="col">Integrantes</div>
+                <!-- Columna de recetas -->
+                <div class="col">Recetas</div>
+            </div>
+        </li>
+        <!--Cuerpo de la lista-->
+        <li class="list-group-item" *ngFor="let equipo of equiposArr">
+            <div class="row row-cols-3">
+                <div class="col">{{equipo.nombre}}</div>
+                <div class="col">{{equipo.integrantes_nombres[0]}} y {{equipo.integrantes_nombres[1]}}</div>
+                <div class="col">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" *ngFor="let receta of equipo.recetas_nombres">
+                            {{receta}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
 
-<p>equipo works!</p>
+<!-- Boton de guardar -->
+<div class="container mt-3 ml-5">
+    <button type="button" class="btn btn-secondary">Secondary</button>
+</div>
+
+<div class="container">
+    <div class="dropdown">
+      <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#">HTML</a></li>
+        <li><a href="#">CSS</a></li>
+        <li><a href="#">JavaScript</a></li>
+      </ul>
+    </div>
+  </div>
