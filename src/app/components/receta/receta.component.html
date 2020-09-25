@@ -1,0 +1,66 @@
+<!-- Navbar -->
+
+<!-- Pagina completa -->
+<div class="container-fluid">
+    <div class="row">
+        <!--Primer tercio a la izquierda -->
+        <div class="col-sm-5 mt-4 border-right border-secondary">
+            <!-- Lista de encabezados -->
+            <ul class="list-group mx-3">
+                <li class="list-group-item bg-secondary">
+                    <div class="row row-cols-2">
+                        <!-- Columna de nombre -->
+                        <div class="col border-right"><h5>Nombre</h5></div>
+                        <!-- Columna de accion -->
+                        <div class="col"><h5>Accion</h5></div>
+                    </div>
+                </li>
+            </ul>
+            <!-- Lista de recetas y acciones-->
+            <ul class="list-group mx-3">
+                <li class="list-group-item" *ngFor="let receta of recetasArr; index as i;">
+                    <div class="row row-cols-2">
+                        <!-- Columna de nombre -->
+                        <div class="col">{{receta.nombre}}</div>
+                        <!-- Columna de accion -->
+                        <div class="col">
+                            <div class="btn-toolbar" role="toolbar">
+                                <!-- Boton de informacion -->
+                                <button type="button" class="btn btn-md btn-info mr-2" (click)="obtenerListaDeIngredientes(i)">
+                                    <fa-icon [icon]="faInfo"></fa-icon>
+                                </button>
+                                <!-- Boton de eliminar -->                                    
+                                <button type="button" class="btn btn-md btn-danger" (click)="borrarReceta(i)">
+                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!--Espacio restante a la derecha -->
+        <div class="col-auto">
+            <div class="container mt-5 ml-4">
+                <!-- Etiqueta de ingredientes -->
+                <h4>Ingredientes</h4>
+                <!-- Recuadro de ingredientes -->
+                <div class="container" *ngIf="ingrArr.length > 0">
+                    <!-- Lista de ingredientes de la receta seleccionada -->
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let ingrediente of ingrArr; index as j">
+                            <div class="row row-cols-2">
+                                <!-- Columna de numero -->
+                                <div class="col-2">{{j+1}}.-</div>
+                                <!-- Columna de ingrediente -->
+                                <div class="col-auto">{{ingrediente}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
