@@ -10,6 +10,7 @@ export class AuthService {
   usertoken: string;
   super: boolean;
   user: string;
+  id: string;
   // Autenticacion
   // /singin
 
@@ -28,11 +29,12 @@ export class AuthService {
       `${ this.url}/auth/singin`,
       authData
     ).pipe(
-      map(resp =>{
+      map(resp => {
         console.log('Entro a map');
         this.storetoken( resp['token']);
         this.storeuser( resp ['nombre']);
-        this.storesuper( resp['super'])
+        this.storesuper( resp['super']);
+        this.storeid( resp['iduser']);
         console.log(resp);
         return resp;
       })
@@ -56,13 +58,13 @@ export class AuthService {
   private storetoken( idtoken: string){
 
     this.usertoken = idtoken;
-    localStorage.setItem('token',idtoken);
+    localStorage.setItem('token', idtoken);
 
   }
   private storeuser( username: string){
 
     this.user = username;
-    localStorage.setItem('nombre',username);
+    localStorage.setItem('nombre', username);
 
   }
   private storesuper( sup: boolean){
@@ -72,8 +74,14 @@ export class AuthService {
 
   }
 
+  private storeid( id: string){
+
+    this.id = id;
+    localStorage.setItem('id', id);
+
+  }
   leertoker(){
-    if(localStorage.getItem('token')){
+    if (localStorage.getItem('token')){
       this.usertoken = localStorage.getItem('token');
     }else{
       this.usertoken = '';
@@ -82,7 +90,7 @@ export class AuthService {
   }
 
   leeruser(){
-    if(localStorage.getItem('nombre')){
+    if (localStorage.getItem('nombre')){
       this.user = localStorage.getItem('nombre');
     }else{
       this.user = '';
@@ -91,12 +99,21 @@ export class AuthService {
   }
 
   leersuper(){
-    if(localStorage.getItem('token')){
+    if (localStorage.getItem('token')){
       this.super = JSON.parse(localStorage.getItem('token'));
     }else{
       this.super = false;
     }
     return this.super;
+  }
+
+  leerid(){
+    if (localStorage.getItem('id')){
+      this.id = localStorage.getItem('id');
+    }else{
+      this.id = null;
+    }
+    return this.id;
   }
 
 
