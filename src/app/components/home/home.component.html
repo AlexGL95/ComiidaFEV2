@@ -1,0 +1,67 @@
+<!-- Navbar -->
+
+<!-- Titulo: Ronda actual -->
+<div class="container-fluid border-bottom border-secondary">
+    <h2 align="center">Ronda actual</h2>
+</div>
+
+<div class="container-fluid" >
+    <div class="row row-cols-2">
+        <!-- Lado izquierdo: Informacion -->
+        <div class="col border-right border-secondary">
+                <!-- Fecha asignada -->
+                <div class="mt-4 ml-3">
+                    <h5>Fecha asignada:</h5>
+                </div>
+                <!-- Compañero -->
+                <div class="mt-4 ml-3">
+                    <h5>Compañero:</h5>
+                </div>
+                <!-- Numero de recetas -->
+                <div class="row row-cols-2 mt-4 ml-3">
+                    <div class="col-5">
+                        <h5># Recetas:</h5>
+                    </div>
+                    <div class="col">
+                        <input type="number" value="{{recetasSel.length}}" min="1" max="5" onkeydown="return false" (click)="nRecetasMod(n.value)" #n/>
+                    </div>
+                </div>
+                <!-- Selector de recetas -->
+                <div class="dropdown mt-4 ml-3" *ngFor="let recetaTitulo of recetasSel">
+                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                        Sel. receta.
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li *ngFor="let receta of recetasElegibles; index as j;">
+                            <button type="button" class="btn">
+                                {{receta.nombre}}
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Boton de asignacion -->
+                <div class="mt-5 ml-5">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-secondary mr-2">
+                            Añadir receta
+                        </button>
+                        <button type="button" class="btn btn-secondary">
+                            Asignar recetas
+                        </button>
+                    </div>
+                </div>
+        </div>
+        <!-- Lado derecho: Recetas asignadas -->
+        <div class="col">
+            <div class="container">
+                <!-- Etiqueta de recetas asignadas -->
+                <div class="mt-3 ml-2">
+                    <h4>Recetas asignadas</h4>
+                </div>
+                <!-- Lista de recetas asignadas -->
+                    <!-- Nombre -->
+                    <!-- Ingredientes -->
+            </div>
+        </div>
+    </div>
+</div>

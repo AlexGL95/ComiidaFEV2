@@ -17,6 +17,7 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { EquipoComponent } from './components/equipo/equipo.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { RecetaComponent } from './components/receta/receta.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { RecetaComponent } from './components/receta/receta.component';
     RegistroComponent,
     EquipoComponent,
     RecetaComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
