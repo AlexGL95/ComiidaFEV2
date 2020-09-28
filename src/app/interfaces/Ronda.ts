@@ -4,3 +4,10 @@ export interface Ronda {
     fecha_final: string;
     activa: boolean;
 }
+
+export interface Receta {
+    nombre: string;
+    activo: boolean;
+    categoria: string;
+    ingredientes: string;
+}
