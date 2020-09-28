@@ -1,13 +1,12 @@
 <!-- Alertas -->
 <div class="container mt-3">
-    <div class="alert alert-danger" *ngIf="mensajeError==true">
+    <div class="alert alert-danger" *ngIf="mensajeError">
         ¡Existen fechas sobrepuestas!
     </div>
-    
-    <div class="alert alert-success alert-dismissible" *ngIf="mensajeEnviado==true">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Envio exitoso.
-      </div>
+
+    <div class="alert alert-success alert-dismissible" *ngIf="mensajeEnviado">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> Envio exitoso.
+    </div>
 </div>
 
 <!-- Lista de equipos -->
@@ -35,7 +34,7 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li *ngFor="let fechasEquipo of equiposArr">
-                                <button type="button" class="btn" (click)="modFechasArr(i,fechasEquipo.nombre)" >{{fechasEquipo.nombre}}</button>
+                                <button type="button" class="btn" (click)="modFechasArr(i,fechasEquipo.nombre)">{{fechasEquipo.nombre}}</button>
                             </li>
                         </ul>
                     </div>

@@ -1,3 +1,4 @@
+// tslint:disable: object-literal-shorthand
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { usuariomodel } from 'src/app/Models/Usuario.model';

@@ -16,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { EquipoComponent } from './components/equipo/equipo.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RegistroComponent } from './components/registro/registro.component';
     LoginComponent,
     NavbarComponent,
     RegistroComponent,
-    EquipoComponent
+    EquipoComponent,
+    EditarUsuarioComponent
   ],
   imports: [
     BrowserModule,
