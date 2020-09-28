@@ -28,10 +28,10 @@ import { SuccessComponent } from './components/success/success.component';
     LoginComponent,
     NavbarComponent,
     RegistroComponent,
-    EquipoComponent,
-    RondaComponent,
-    RecetaComponent,
     SuccessComponent,
+    RondaComponent,
+    EquipoComponent,
+    RecetaComponent,
   ],
   imports: [
     BrowserModule,

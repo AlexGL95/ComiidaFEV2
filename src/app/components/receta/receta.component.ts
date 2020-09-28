@@ -1,77 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Receta } from '../../interfaces/Ronda';
-import { RecetaService } from '../../service/receta.service';
-import { Router } from '@angular/router';
+//Modules
+import { Component } from '@angular/core';
+//Services
+import { RecetaService } from 'src/app/services/receta.service';
+//Interfaces
+import { RecetaInterface } from './receta.interface';
+//Icons
+import { faTrashAlt, faInfo } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-receta',
   templateUrl: './receta.component.html',
   styleUrls: ['./receta.component.css']
 })
-export class RecetaComponent implements OnInit {
+export class RecetaComponent{
+  //Icons
+  faTrashAlt = faTrashAlt;
+  faInfo = faInfo;
 
-  categorias = ['Entrada', 'Plato Fuerte', 'Acompañamiento', 'Postre'];
-  unidades = ['Kg', 'mg', 'g', 'L', 'ml', 'pz'];
-  mensajeCat = 'Seleccionar Categoria';
-  mensajeUni = ['Unidades'];
-  ingredientes = [];
-  ingredientes2 = [];
-  ing = [];
-  ing2 = [];
-  receta = '';
-  nombre = '';
-  recetta = {} as Receta;
-  
+  //Declaracion de variables
+  recetasArr: RecetaInterface[] = [];
+  ingrString: string = "";
+  ingrArr: string[] = [];
 
-  constructor(private recetaService: RecetaService,
-              private router: Router) { }
-
-  ngOnInit(): void {
-    this.ingredientes.length = 1;
-    this.ingredientes2.length = 1;
+  //Constructor
+  constructor( private recetaService: RecetaService ) {
+    //Adquisicion de datos
+    this.recetaService.getRecetas().subscribe( recetas => {
+      this.recetasArr = recetas;
+    } );
   }
 
-  selecCategoria(i:number){
-    this.mensajeCat = this.categorias[i];
+  obtenerListaDeIngredientes( posicion: number ) {
+    this.ingrString = this.recetasArr[posicion].ingredientes;
+    this.ingrArr = this.ingrString.split("/");
+    return this.ingrArr;
   }
 
-  selecUnidades(i:number, unidad: string){
-    this.mensajeUni[i] = unidad;
-  }
-
-  nuevoIng(): void{ 
-    if(this.ingredientes.length < 10 && this.ing[this.ingredientes.length-1] && this.ing2[this.ingredientes2.length-1] && this.mensajeUni[this.ingredientes.length-1]!=='Unidades' && this.mensajeCat!=='Seleccionar Categoria'){
-      this.mensajeUni[this.ingredientes.length] = 'Unidades';
-      this.ingredientes.length ++;
-      this.ingredientes2.length ++;
-    }
-  }
-
-  quitarIng(){
-    if (this.ingredientes.length > 1){
-      this.ingredientes.length --;
-      this.ingredientes2.length --;
-    }
-  }
-
-  guardar(): boolean{
-    this.receta = '';
-    for(let i = 0; i < this.ingredientes.length; i++){
-      this.receta = `${this.receta}-${this.ing[i]}-${this.ing2[i]}-${this.mensajeUni[i]}/` 
-    }
-    if(this.nombre!==''){
-      this.recetta.nombre = this.nombre;
-      this.recetta.categoria = this.mensajeCat;
-      this.recetta.ingredientes = this.receta;
-      this.recetta.activo = true;
-      console.log(this.recetta);
-      this.recetaService.crearReceta(this.recetta)
-          .subscribe(res => this.router.navigate(['/Success']),
-          err => console.log(err))
-      return false
-    }
-   
+  borrarReceta(id: number) {
+    //Eliminacion de la receta
+    this.recetaService.deleteById(id+1).subscribe( () => {
+      //Adquisicion de datos
+      this.recetaService.getRecetas().subscribe( recetas => {
+        this.recetasArr = recetas;
+      } );
+    } );
   }
 
 }

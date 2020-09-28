@@ -14,7 +14,7 @@ export class SuccessComponent implements OnInit {
   }
 
   back(){
-    this.router.navigate(['/Receta']);
+    this.router.navigate(['/NuevaReceta']);
   }
 
 }

@@ -9,6 +9,7 @@ import { EquipoInterface, UpdateDateDto } from './equipo.interface';
 })
 export class EquipoComponent {
 
+  //Declaracion de variables
   equiposArr: EquipoInterface[] = [];
   fechasArr: string[] = [];
   equiposModificados: UpdateDateDto[];
