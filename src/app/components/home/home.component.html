@@ -23,17 +23,17 @@
                         <h5># Recetas:</h5>
                     </div>
                     <div class="col">
-                        <input type="number" value="{{recetasSel.length}}" min="1" max="5" onkeydown="return false" (click)="nRecetasMod(n.value)" #n/>
+                        <input type="number" value="{{recetasSeleccionadas.length}}" min="1" max="5" onkeydown="return false" (click)="nRecetasMod(n.value)" #n/>
                     </div>
                 </div>
                 <!-- Selector de recetas -->
-                <div class="dropdown mt-4 ml-3" *ngFor="let recetaTitulo of recetasSel">
+                <div class="dropdown mt-4 ml-3" *ngFor="let recetaTitulo of recetasSeleccionadas; index as i;">
                     <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                        Sel. receta.
+                        {{recetaTitulo.nombre}}
                     </button>
                     <ul class="dropdown-menu">
                         <li *ngFor="let receta of recetasElegibles; index as j;">
-                            <button type="button" class="btn">
+                            <button type="button" class="btn" (click)="selReceta(i, receta.idLocal)">
                                 {{receta.nombre}}
                             </button>
                         </li>
@@ -59,8 +59,18 @@
                     <h4>Recetas asignadas</h4>
                 </div>
                 <!-- Lista de recetas asignadas -->
+                <ul class="list-group" *ngFor="let recetaSelect of recetasSeleccionadas">
                     <!-- Nombre -->
+                    <li class="list-group-item bg-secondary">
+                        {{recetaSelect.nombre}}
+                    </li>
                     <!-- Ingredientes -->
+                    <ul class="list-group list-group-flush" *ngFor="let ingrediente of recetaSelect.ingr">
+                        <li class="list-group-item">
+                            {{ingrediente}}
+                        </li>
+                    </ul>
+                  </ul>
             </div>
         </div>
     </div>

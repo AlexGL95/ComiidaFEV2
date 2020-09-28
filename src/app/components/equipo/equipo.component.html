@@ -2,11 +2,11 @@
 
 <!-- Alertas -->
 <div class="container mt-3">
-    <div class="alert alert-danger" *ngIf="mensajeError==true">
+    <div class="alert alert-danger" *ngIf="mensajeError">
         ¡Existen fechas sobrepuestas!
     </div>
     
-    <div class="alert alert-success alert-dismissible" *ngIf="mensajeEnviado==true">
+    <div class="alert alert-success alert-dismissible" *ngIf="mensajeEnviado">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         Envio exitoso.
       </div>
