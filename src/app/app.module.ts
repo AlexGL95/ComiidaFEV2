@@ -21,6 +21,7 @@ import { RecetaComponent } from '../app/components/receta/receta.component';
 import { EquipoComponent } from './components/equipo/equipo.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { SuccessComponent } from './components/success/success.component';
+import { NewRecetaComponent } from './components/new-receta/new-receta.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SuccessComponent } from './components/success/success.component';
     RondaComponent,
     EquipoComponent,
     RecetaComponent,
+    NewRecetaComponent
   ],
   imports: [
     BrowserModule,
