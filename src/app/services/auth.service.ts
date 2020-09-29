@@ -1,3 +1,4 @@
+// tslint:disable: no-string-literal
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { usuariomodel } from '../Models/Usuario.model';
