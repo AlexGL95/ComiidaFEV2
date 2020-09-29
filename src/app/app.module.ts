@@ -22,6 +22,8 @@ import { EquipoComponent } from './components/equipo/equipo.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { SuccessComponent } from './components/success/success.component';
 import { NewRecetaComponent } from './components/new-receta/new-receta.component';
+import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
+import { RecetaComponent } from './components/receta/receta.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { NewRecetaComponent } from './components/new-receta/new-receta.component
     SuccessComponent,
     RondaComponent,
     EquipoComponent,
+    EditarUsuarioComponent,
     RecetaComponent,
     NewRecetaComponent
   ],
