@@ -17,8 +17,12 @@ export class RecetaService {
     return this.http.get<RecetaInterface[]>(this.URL_API_RECETAS);
   }
 
-  deleteById( id:number ) {
+  deleteById( id: number ) {
     return this.http.delete(this.URL_API_RECETAS + `/${id}`);
+  }
+
+  changeStateById( id: number ) {
+    return this.http.put(this.URL_API_RECETAS + `/change/${id}`, {});
   }
 
 }

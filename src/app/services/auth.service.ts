@@ -11,7 +11,8 @@ export class AuthService {
   usertoken: string;
   super: boolean;
   user: string;
-  idequipo: string;
+  idEquipo: string;
+  fechaDeEquipo: string;
   id: string;
   // Autenticacion
   // /singin
@@ -36,7 +37,8 @@ export class AuthService {
         this.storetoken( resp['token']);
         this.storeuser( resp ['nombre']);
         this.storesuper( resp['super']);
-        this.storeidequipo( resp['idequipo']);
+        this.storeIdEquipo( resp['idequipo'] );
+        this.storeFechaDeEquipo( resp['fechaDeEquipo']);
         this.storeid( resp['iduser']);
         console.log(resp);
         return resp;
@@ -83,10 +85,16 @@ export class AuthService {
     localStorage.setItem('id', id);
 
   }
-  private storeidequipo( ideq: string){
 
-    this.idequipo = ideq;
-    localStorage.setItem('id_equipo', ideq);
+  private storeIdEquipo( idEq: string){
+    this.idEquipo = idEq;
+    localStorage.setItem('id_equipo', idEq);
+  }
+
+  private storeFechaDeEquipo( feEq: string){
+
+    this.fechaDeEquipo = feEq;
+    localStorage.setItem('fecha_equipo', feEq);
 
   }
   leertoker(){
@@ -125,14 +133,22 @@ export class AuthService {
     return this.id;
   }
 
-  leeridequipo(){
-    if (localStorage.getItem('id_equipo')){
-      this.idequipo = localStorage.getItem('id_equipo');
+  leerEquipo(){
+    if (localStorage.getItem('fecha_equipo')){
+      this.fechaDeEquipo = localStorage.getItem('fecha_equipo');
     }else{
-      this.idequipo = null;
+      this.fechaDeEquipo = null;
     }
-    return this.idequipo;
+    return this.fechaDeEquipo;
   }
 
+  leerIdEquipo() {
+    if (localStorage.getItem('id_equipo')){
+      this.idEquipo = localStorage.getItem('id_equipo');
+    } else {
+      this.idEquipo = null;
+    }
+    return this.idEquipo;
+  }
 
 }
