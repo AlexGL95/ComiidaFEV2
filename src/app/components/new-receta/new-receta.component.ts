@@ -10,8 +10,8 @@ import { NewrecetaService } from 'src/app/service/newreceta.service';
 })
 export class NewRecetaComponent implements OnInit {
 
-  categorias = ['Entrada', 'Plato Fuerte', 'Acompañamiento', 'Postre'];
-  unidades = ['Kg', 'mg', 'g', 'L', 'ml', 'pz'];
+  categorias = ['Entrada', 'Plato Fuerte', 'Acompañamiento', 'Postre', 'Agua', 'Salsa'];
+  unidades = ['Kg', 'g', 'L', 'ml', 'pz'];
   mensajeCat = 'Seleccionar Categoria';
   mensajeUni = ['Unidades'];
   ingredientes = [];
@@ -57,7 +57,12 @@ export class NewRecetaComponent implements OnInit {
   guardar(): boolean{
     this.receta = '';
     for(let i = 0; i < this.ingredientes.length; i++){
-      this.receta = `${this.receta}-${this.ing[i]}-${this.ing2[i]}-${this.mensajeUni[i]}/` 
+      if(this.ing[i]!=='' && this.ing2[i]!==0 && this.mensajeUni[i]!== 'Unidades' && this.mensajeCat!== 'Seleccionar Categoria'){
+        this.receta = `${this.receta}-${this.ing[i]}-${this.ing2[i]}${this.mensajeUni[i]}/`
+      } else{
+        console.log('Campos Vacios');
+        return false;
+      }
     }
     if(this.nombre!==''){
       this.recetta.nombre = this.nombre;
@@ -65,10 +70,11 @@ export class NewRecetaComponent implements OnInit {
       this.recetta.ingredientes = this.receta;
       this.recetta.activo = true;
       console.log(this.recetta);
+      /*
       this.recetaService.crearReceta(this.recetta)
           .subscribe(res => this.router.navigate(['/Success']),
           err => console.log(err))
-      return false
+      return false*/
     }
   }
 
