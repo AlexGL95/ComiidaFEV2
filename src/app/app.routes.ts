@@ -9,7 +9,6 @@ import { RecetaComponent } from "./components/receta/receta.component";
 import { NewRecetaComponent } from './components/new-receta/new-receta.component';
 import { HomeComponent } from "./components/home/home.component";
 
-
 const APP_ROUTES: Routes = [
     {path: 'Login', component: LoginComponent},
     {path: 'Ronda', component: RondaComponent},

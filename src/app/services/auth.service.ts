@@ -116,8 +116,8 @@ export class AuthService {
   }
 
   leersuper(){
-    if (localStorage.getItem('token')){
-      this.super = JSON.parse(localStorage.getItem('token'));
+    if (localStorage.getItem('super')){
+      this.super = JSON.parse(localStorage.getItem('super'));
     }else{
       this.super = false;
     }
