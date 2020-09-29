@@ -27,12 +27,17 @@ export class EditarUsuarioComponent implements OnInit {
           nombre: nombre,
           pass: pass};
         console.log('aqui actualizaria todo' + this.user);
+        this.userservice.updateusuario(this.idx, this.user).subscribe(res => {
+          console.log(res);
+        });
       } else {
         this.user = {
           nombre: nombre
         };
         console.log('aqui solo el nombre' + this.user);
-        this.userservice.updateusuario(this.idx, this.user);
+        this.userservice.updateusuario(this.idx, this.user).subscribe(res => {
+          console.log(res);
+        });
       }
         /*this.auth.registro(this.user)
         .subscribe(resp => {

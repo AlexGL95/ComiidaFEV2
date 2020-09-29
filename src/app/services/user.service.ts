@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { usuariomodel } from '../Models/Usuario.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-
+    private router: Router
   ) { }
 
 getOne(idx){
@@ -19,11 +20,21 @@ getOne(idx){
 }
 
 updateusuario(id, data: usuariomodel){
-/*  const Data = { // payload para Actualizacion de usuarios
+  const Data = { // payload para Actualizacion de usuarios
     ...data
   };
-  console.log(id,data);*/
-  this.http.put(`${this.url}/usuarios/${id}`, {nombre: "pablo"});
+  console.log(id,data);
+  return this.http.put(`${this.url}/usuarios/${id}`, Data);
 }
+
+/*
+updateusuario(){
+    const Data = { // payload para Actualizacion de usuarios
+      ...data
+    };
+    console.log(id,data);
+    return this.http.put(`http://localhost:3000/usuarios/1`, {nombre:"Pablo", pass: "hola"});
+  }
+  */
 
 }

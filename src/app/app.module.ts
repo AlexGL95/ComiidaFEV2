@@ -26,7 +26,7 @@ import { RecetaComponent } from './components/receta/receta.component';
     NavbarComponent,
     RegistroComponent,
     EquipoComponent,
-    EditarUsuarioComponent
+    EditarUsuarioComponent,
     RecetaComponent,
   ],
   imports: [

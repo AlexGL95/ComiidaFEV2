@@ -2,8 +2,8 @@ import {RouterModule, Routes} from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
-import { EquipoComponent } from "./components/equipo/equipo.component";
-import { RecetaComponent } from "./components/receta/receta.component";
+import { EquipoComponent } from './components/equipo/equipo.component';
+import { RecetaComponent } from './components/receta/receta.component';
 
 const APP_ROUTES: Routes = [
     {path: 'Login', component: LoginComponent},
