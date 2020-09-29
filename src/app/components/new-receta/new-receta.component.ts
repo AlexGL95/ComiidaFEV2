@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Receta } from '../../interfaces/Ronda';
 import { NewrecetaService } from 'src/app/service/newreceta.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-receta',
@@ -9,6 +10,8 @@ import { NewrecetaService } from 'src/app/service/newreceta.service';
   styleUrls: ['./new-receta.component.css']
 })
 export class NewRecetaComponent implements OnInit {
+
+  RecetaForm: FormGroup;
 
   categorias = ['Entrada', 'Plato Fuerte', 'Acompañamiento', 'Postre', 'Agua', 'Salsa'];
   unidades = ['Kg', 'g', 'L', 'ml', 'pz'];
@@ -21,15 +24,25 @@ export class NewRecetaComponent implements OnInit {
   receta = '';
   nombre = '';
   recetta = {} as Receta;
+
+  createFormGroup(){
+    return new FormGroup({
+      name: new FormControl('', [Validators.required]),
+    });
+  }
   
 
   constructor(private recetaService: NewrecetaService,
-              private router: Router) { }
+              private router: Router) {
+                this.RecetaForm = this.createFormGroup();
+              }
 
   ngOnInit(): void {
     this.ingredientes.length = 1;
     this.ingredientes2.length = 1;
   }
+
+  get name(){ return this.RecetaForm.get('name'); }
 
   selecCategoria(i:number){
     this.mensajeCat = this.categorias[i];
@@ -58,9 +71,14 @@ export class NewRecetaComponent implements OnInit {
     this.receta = '';
     for(let i = 0; i < this.ingredientes.length; i++){
       if(this.ing[i]!=='' && this.ing2[i]!==0 && this.mensajeUni[i]!== 'Unidades' && this.mensajeCat!== 'Seleccionar Categoria'){
-        this.receta = `${this.receta}-${this.ing[i]}-${this.ing2[i]}${this.mensajeUni[i]}/`
+        if(this.ingredientes.length <= 1){
+          this.receta = `${this.ing[i]}-${this.ing2[i]}${this.mensajeUni[i]}`
+        }else if(i===0){
+          this.receta = `${this.ing[i]}-${this.ing2[i]}${this.mensajeUni[i]}`
+        }else{
+          this.receta = `${this.receta}/${this.ing[i]}-${this.ing2[i]}${this.mensajeUni[i]}`
+        }
       } else{
-        console.log('Campos Vacios');
         return false;
       }
     }
@@ -68,14 +86,15 @@ export class NewRecetaComponent implements OnInit {
       this.recetta.nombre = this.nombre;
       this.recetta.categoria = this.mensajeCat;
       this.recetta.ingredientes = this.receta;
-      this.recetta.activo = true;
+      this.recetta.activo = false;
       console.log(this.recetta);
-      /*
       this.recetaService.crearReceta(this.recetta)
           .subscribe(res => this.router.navigate(['/Success']),
           err => console.log(err))
-      return false*/
+      return false
     }
   }
+
+  
 
 }
