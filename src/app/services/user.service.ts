@@ -23,8 +23,16 @@ updateusuario(id, data: usuariomodel){
   const Data = { // payload para Actualizacion de usuarios
     ...data
   };
-  console.log(id,data);
+  console.log(id, data);
   return this.http.put(`${this.url}/usuarios/${id}`, Data);
+}
+
+getAll(){
+return this.http.get(`${this.url}/usuarios`);
+}
+
+delete(id){
+  return this.http.delete(`${this.url}/usuarios/${id}`);
 }
 
 /*
