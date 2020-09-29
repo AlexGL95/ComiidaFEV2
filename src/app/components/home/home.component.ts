@@ -2,8 +2,7 @@
 import { Component } from '@angular/core';
 //Services
 import { RecetaService } from 'src/app/services/receta.service';
-//Interfaces
-import { RecetaInterface } from "../receta/receta.interface";
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +16,13 @@ export class HomeComponent {
   recetasElegibles = [];  //Recetas que no an sido seleccionadas por el usuario
   recetasSeleccionadas = [ {nombre: "Sel. receta.", ingr: []} ]; //Recetas seleccionadas por el usuario
 
-  constructor( private recetaService: RecetaService ) { 
+  constructor(
+    private recetaService: RecetaService,
+    private authService: AuthService
+  ) {
+
+    console.log(authService.leerid());
+
     //Adquisicion de datos
     this.recetaService.getRecetas().subscribe( recetas => {
       for (let m = 0; m < recetas.length; m++) {
