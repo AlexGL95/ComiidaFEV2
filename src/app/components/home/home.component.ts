@@ -21,7 +21,7 @@ export class HomeComponent {
     private authService: AuthService
   ) {
 
-    console.log(authService.leerid());
+    console.log(authService.leeridequipo());
 
     //Adquisicion de datos
     this.recetaService.getRecetas().subscribe( recetas => {

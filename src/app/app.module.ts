@@ -4,8 +4,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule} from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+
 // RUTAS
 import { APP_ROUTING } from './app.routes';
 
@@ -22,7 +22,6 @@ import { EquipoComponent } from './components/equipo/equipo.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { SuccessComponent } from './components/success/success.component';
 import { NewRecetaComponent } from './components/new-receta/new-receta.component';
-import { RecetaComponent } from './components/receta/receta.component';
 import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
