@@ -24,6 +24,7 @@ export class NewRecetaComponent implements OnInit {
   receta = '';
   nombre = '';
   recetta = {} as Receta;
+  camposFaltantes: boolean;
 
   createFormGroup(){
     return new FormGroup({
@@ -35,6 +36,7 @@ export class NewRecetaComponent implements OnInit {
   constructor(private recetaService: NewrecetaService,
               private router: Router) {
                 this.RecetaForm = this.createFormGroup();
+                
               }
 
   ngOnInit(): void {
@@ -70,7 +72,7 @@ export class NewRecetaComponent implements OnInit {
   guardar(): boolean{
     this.receta = '';
     for(let i = 0; i < this.ingredientes.length; i++){
-      if(this.ing[i]!=='' && this.ing2[i]!==0 && this.mensajeUni[i]!== 'Unidades' && this.mensajeCat!== 'Seleccionar Categoria'){
+      if(this.ing[i]!==undefined && this.ing2[i]!==0 && this.mensajeUni[i]!== 'Unidades' && this.mensajeCat!== 'Seleccionar Categoria'){
         if(this.ingredientes.length <= 1){
           this.receta = `${this.ing[i]}-${this.ing2[i]}${this.mensajeUni[i]}`
         }else if(i===0){
@@ -79,6 +81,7 @@ export class NewRecetaComponent implements OnInit {
           this.receta = `${this.receta}/${this.ing[i]}-${this.ing2[i]}${this.mensajeUni[i]}`
         }
       } else{
+        this.camposFaltantes = true;
         return false;
       }
     }
@@ -88,10 +91,11 @@ export class NewRecetaComponent implements OnInit {
       this.recetta.ingredientes = this.receta;
       this.recetta.activo = false;
       console.log(this.recetta);
+      /*
       this.recetaService.crearReceta(this.recetta)
           .subscribe(res => this.router.navigate(['/Success']),
           err => console.log(err))
-      return false
+      return false*/
     }
   }
 
