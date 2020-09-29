@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule} from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // RUTAS
 import { APP_ROUTING } from './app.routes';
 
@@ -23,7 +23,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { SuccessComponent } from './components/success/success.component';
 import { NewRecetaComponent } from './components/new-receta/new-receta.component';
 import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuario.component';
-import { RecetaComponent } from './components/receta/receta.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,8 @@ import { RecetaComponent } from './components/receta/receta.component';
     EquipoComponent,
     EditarUsuarioComponent,
     RecetaComponent,
-    NewRecetaComponent
+    NewRecetaComponent,
+    UsuariosComponent
   ],
   imports: [
     BrowserModule,
