@@ -5,72 +5,132 @@
     <h2 align="center">Ronda actual</h2>
 </div>
 
-<div class="container-fluid" >
-    <div class="row row-cols-2">
-        <!-- Lado izquierdo: Informacion -->
-        <div class="col border-right border-secondary">
-                <!-- Fecha asignada -->
-                <div class="mt-4 ml-3">
-                    <h5>Fecha asignada:</h5>
-                </div>
-                <!-- Compañero -->
-                <div class="mt-4 ml-3">
-                    <h5>Compañero:</h5>
-                </div>
-                <!-- Numero de recetas -->
-                <div class="row row-cols-2 mt-4 ml-3">
-                    <div class="col-5">
-                        <h5># Recetas:</h5>
-                    </div>
-                    <div class="col">
-                        <input type="number" value="{{recetasSeleccionadas.length}}" min="1" max="5" onkeydown="return false" (click)="nRecetasMod(n.value)" #n/>
-                    </div>
-                </div>
-                <!-- Selector de recetas -->
-                <div class="dropdown mt-4 ml-3" *ngFor="let recetaTitulo of recetasSeleccionadas; index as i;">
-                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                        {{recetaTitulo.nombre}}
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li *ngFor="let receta of recetasElegibles; index as j;">
-                            <button type="button" class="btn" (click)="selReceta(i, receta.idLocal)">
-                                {{receta.nombre}}
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Boton de asignacion -->
-                <div class="mt-5 ml-5">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-secondary mr-2">
-                            Añadir receta
-                        </button>
-                        <button type="button" class="btn btn-secondary">
-                            Asignar recetas
-                        </button>
-                    </div>
-                </div>
+<!-- Mensajes -->
+    <!-- No cocinas -->
+    <div class="container mt-5" *ngIf="mensajeHoyNoCocinas">
+        <div class="alert alert-success" role="alert">
+            No cocinas.
         </div>
-        <!-- Lado derecho: Recetas asignadas -->
-        <div class="col">
-            <div class="container">
-                <!-- Etiqueta de recetas asignadas -->
-                <div class="mt-3 ml-2">
-                    <h4>Recetas asignadas</h4>
+    </div>
+    <!-- Ya hay recetas asignadas -->
+    <div class="container mt-5" *ngIf="mensajeExistenRecetas">
+        <div class="alert alert-primary" role="alert">
+            Tu equipo ya tiene recetas asignadas.
+        </div>
+    </div>
+    <!-- Hay espacios vacios -->
+    <div class="container mt-5" *ngIf="mensajeEspaciosSinAsignar">
+        <div class="alert alert-danger" role="alert">
+            Hay espacios vacios.
+        </div>
+    </div>
+
+<div *ngIf="!mensajeHoyNoCocinas">
+    <!-- Cuerpo de la pagina (Si no hay recetas asignadas) -->
+    <div class="container-fluid"  *ngIf="!mensajeExistenRecetas">
+        <div class="row row-cols-2">
+            <!-- Lado izquierdo: Informacion -->
+            <div class="col border-right border-secondary">
+                    <!-- Fecha asignada -->
+                    <div class="row-cols-2 mt-4 ml-3">
+                            <h5>Fecha asignada:</h5>
+                            {{equipoUsuario.nombre}}
+                    </div>
+                    <!-- Compañero -->
+                    <div class="mt-4 ml-3">
+                        <h5>Cocinan:</h5>
+                        {{equipoUsuario.integrantes_nombres[0]}} y {{equipoUsuario.integrantes_nombres[1]}}
+                    </div>
+                    <!-- Numero de recetas -->
+                    <div class="row row-cols-2 mt-4 ml-3">
+                        <div class="col-5">
+                            <h5># Recetas:</h5>
+                        </div>
+                        <div class="col">
+                            <input type="number" value="{{recetasSeleccionadas.length}}" min="1" max="5" onkeydown="return false" (click)="nRecetasMod(n.value)" #n/>
+                        </div>
+                    </div>
+                    <!-- Selector de recetas -->
+                    <div class="dropdown mt-4 ml-3" *ngFor="let recetaTitulo of recetasSeleccionadas; index as i;">
+                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                            {{recetaTitulo.nombre}}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li *ngFor="let receta of recetasElegibles; index as j;">
+                                <button type="button" class="btn" (click)="selReceta(i, receta.idLocal)">
+                                    {{receta.nombre}}
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Boton de asignacion -->
+                    <div class="mt-5 ml-5">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-secondary mr-2" (click)="linkNuevaReceta()">
+                                Añadir receta
+                            </button>
+                            <button type="button" class="btn btn-secondary" (click)="asignarRecetasAlEquipo()">
+                                Asignar recetas
+                            </button>
+                        </div>
+                    </div>
+            </div>
+            <!-- Lado derecho: Recetas asignadas -->
+            <div class="col">
+                <div class="container">
+                    <!-- Etiqueta de recetas asignadas -->
+                    <div class="mt-3 ml-2">
+                        <h4>Recetas asignadas</h4>
+                    </div>
+                    <!-- Lista de recetas asignadas -->
+                    <ul class="list-group" *ngFor="let recetaSelect of recetasSeleccionadas">
+                        <!-- Nombre -->
+                        <li class="list-group-item bg-secondary">
+                            {{recetaSelect.nombre}}
+                        </li>
+                        <!-- Ingredientes -->
+                        <ul class="list-group list-group-flush" *ngFor="let ingrediente of recetaSelect.ingr">
+                            <li class="list-group-item">
+                                {{ingrediente}}
+                            </li>
+                        </ul>
+                    </ul>
                 </div>
-                <!-- Lista de recetas asignadas -->
-                <ul class="list-group" *ngFor="let recetaSelect of recetasSeleccionadas">
-                    <!-- Nombre -->
-                    <li class="list-group-item bg-secondary">
-                        {{recetaSelect.nombre}}
-                    </li>
-                    <!-- Ingredientes -->
-                    <ul class="list-group list-group-flush" *ngFor="let ingrediente of recetaSelect.ingr">
-                        <li class="list-group-item">
-                            {{ingrediente}}
+            </div>
+        </div>
+    </div>
+
+    <!-- Cuerpo de la pagina (Si hay recetas asignadas) -->
+    <div class="container-fluid"  *ngIf="mensajeExistenRecetas">
+        <div class="row row-cols-2">
+            <!-- Lado izquierdo: Informacion -->
+            <div class="col border-right border-secondary">
+                    <!-- Fecha asignada -->
+                    <div class="row-cols-2 mt-4 ml-3">
+                            <h5>Fecha asignada:</h5>
+                            {{equipoUsuario.nombre}}
+                    </div>
+                    <!-- Compañero -->
+                    <div class="mt-4 ml-3">
+                        <h5>Cocinan:</h5>
+                        {{equipoUsuario.integrantes_nombres[0]}} y {{equipoUsuario.integrantes_nombres[1]}}
+                    </div>
+            </div>
+            <!-- Lado derecho: Recetas asignadas -->
+            <div class="col"  *ngIf="mensajeExistenRecetas">
+                <div class="container">
+                    <!-- Etiqueta de recetas asignadas -->
+                    <div class="mt-3 ml-2">
+                        <h4>Recetas asignadas</h4>
+                    </div>
+                    <!-- Lista de recetas asignadas -->
+                    <ul class="list-group">
+                        <!-- Nombre -->
+                        <li class="list-group-item"  *ngFor="let recetaNombre of recetasAsignadas">
+                            {{recetaNombre}}
                         </li>
                     </ul>
-                  </ul>
+                </div>
             </div>
         </div>
     </div>
