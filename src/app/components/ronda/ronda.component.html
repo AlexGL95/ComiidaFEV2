@@ -1,6 +1,18 @@
 <app-navbar></app-navbar>
 
 <div class="container">
+  <div class="col-md-8" *ngIf="mensajeRondaActiva">
+    No Hay Ronda Activa
+  </div>
+  <div class="col-md-8" *ngIf="mensajeCrearRonda">
+    No Se Pudo Crear Ronda
+  </div>
+  <div class="col-md-8" *ngIf="mensajeBorrarRonda">
+    No Se Pudo Borrar Ronda
+  </div>
+  <div class="col-md-8" *ngIf="mensajeIngredientes">
+    No Hay Ingredientes Activos
+  </div>
   <div class="row mt-5">
 
     <div class="col-md-7">

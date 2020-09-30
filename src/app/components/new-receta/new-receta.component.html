@@ -22,7 +22,7 @@
                         Nombre:
                     </label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Nombre De Receta" [(ngModel)]="nombre" required #name>
+                        <input type="text" class="form-control" placeholder="Nombre De Receta" [(ngModel)]="nombre">
                     </div>
                 </div>
 
@@ -58,7 +58,7 @@
                     <div class="form-group">
                         <div *ngFor="let ingrediente2 of ingredientes2; index as i">
                             <div class="form-inline mt-3 w-2">
-                                <input type="number" class="form-control" id="name" name="name.{{i}}.cant" OnlyNumber="true" placeholder="Cant." [(ngModel)]="ing2[i]">
+                                <input type="number" class="form-control" id="name" name="name.{{i}}.cant" OnlyNumber="true" onkeydown="return false" placeholder="Cant." [(ngModel)]="ing2[i]">
 
                                 <div class="form-group">
                                     <div class="dropdown">
@@ -77,11 +77,15 @@
                         </div>
                     </div>      
                     
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success" (click)="nuevoIng()">Agregar</button>
-                        <button type="button" class="btn btn-danger" (click)="quitarIng()">Retirar</button>
-                        <button type="button" class="btn btn-info" (click)="guardar()">Guardar</button>
-                        <button type="button" class="btn btn-primary" (click)="regreso()">Regresar A Home</button>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-success" (click)="nuevoIng()">Agregar</button>
+                            <button type="button" class="btn btn-danger" (click)="quitarIng()">Retirar</button>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-info" (click)="guardar()">Guardar</button>
+                            <button type="button" class="btn btn-primary" (click)="regreso()">Regresar A Home</button>
+                        </div>
                     </div>
 
                 </div>
