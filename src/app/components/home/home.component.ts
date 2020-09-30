@@ -23,6 +23,7 @@ export class HomeComponent{
   recetasArr = []; //Recetas no activas en Db
   recetasElegibles = [];  //Recetas que no an sido seleccionadas por el usuario
   recetasSeleccionadas = [ {idDb: 0 , nombre: "Sel. receta.", ingr: []} ]; //Recetas seleccionadas por el usuario
+  mensajeNoHayRonda: boolean = false;
   mensajeHoyNoCocinas: boolean = false;
   mensajeExistenRecetas: boolean = false;
   mensajeEspaciosSinAsignar: boolean = false;
@@ -42,6 +43,10 @@ export class HomeComponent{
       //Condicion. Si equipo id es nulo = no cocinas
       if (equipo === 'undefined') {
         this.mensajeHoyNoCocinas = true;
+      }
+
+      else if ( equipos === null ) {
+        this.mensajeNoHayRonda = true;
       }
 
       //Condicion. Si equipo id tiene un valor = cocinas
