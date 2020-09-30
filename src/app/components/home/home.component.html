@@ -13,6 +13,12 @@
             No cocinas.
         </div>
     </div>
+    <!-- No hay ronda activa -->
+    <div class="container mt-5" *ngIf="mensajeNoHayRonda">
+        <div class="alert alert-success" role="alert">
+            No hay ronda activa.
+        </div>
+    </div>
     <!-- Ya hay recetas asignadas -->
     <div class="container mt-5" *ngIf="mensajeExistenRecetas">
         <div class="alert alert-primary" role="alert">
@@ -26,7 +32,7 @@
         </div>
     </div>
 
-<div *ngIf="!mensajeHoyNoCocinas">
+<div *ngIf="!mensajeHoyNoCocinas && !mensajeNoHayRonda">
     <!-- Cuerpo de la pagina (Si no hay recetas asignadas) -->
     <div class="container-fluid"  *ngIf="!mensajeExistenRecetas">
         <div class="row row-cols-2">
