@@ -1,17 +1,25 @@
 <!-- Navbar -->
 <app-navbar></app-navbar>
 
-<!-- Pagina completa -->
+<!-- Buscador -->
+<div class="mt-3 ml-4">
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</div>
+
+<!-- Cuerpo de la pagina -->
 <div class="container-fluid">
     <div class="row">
         <!--Primer tercio a la izquierda -->
-        <div class="col-sm-5 mt-4 border-right border-secondary">
+        <div class="col-auto mt-4 border-right border-secondary">
             <!-- Lista de encabezados -->
             <ul class="list-group mx-3">
                 <li class="list-group-item bg-secondary">
                     <div class="row row-cols-2">
                         <!-- Columna de nombre -->
-                        <div class="col border-right"><h5>Nombre</h5></div>
+                        <div class="col-5"><h5>Nombre</h5></div>
                         <!-- Columna de accion -->
                         <div class="col"><h5>Accion</h5></div>
                     </div>
