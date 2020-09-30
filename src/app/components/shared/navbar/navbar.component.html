@@ -11,11 +11,17 @@
             <li class="nav-item" *ngIf="IS_SUPER">
                 <a class="nav-link" href="/Ronda">Rondas</a>
             </li>
-            <li class="nav-item" *ngIf="IS_SUPER">
+            <li class="nav-item" *ngIf="IS_SUPER && !mensajeSinEquipos">
                 <a class="nav-link" href="/Equipo">Equipos</a>
             </li>
-            <li class="nav-item" *ngIf="IS_SUPER">
+            <li class="nav-item" *ngIf="IS_SUPER && !mensajeSinRecetas">
                 <a class="nav-link" href="/Receta">Recetas</a>
+            </li>
+            <li class="nav-item" *ngIf="IS_SUPER && mensajeSinEquipos">
+                <a class="nav-link disabled" href="/Equipo">Equipos</a>
+            </li>
+            <li class="nav-item" *ngIf="IS_SUPER && mensajeSinRecetas">
+                <a class="nav-link disabled" href="/Receta">Recetas</a>
             </li>
             <li class="nav-item" *ngIf="IS_SUPER">
                 <a class="nav-link" href="/Usuarios">Usuarios</a>
