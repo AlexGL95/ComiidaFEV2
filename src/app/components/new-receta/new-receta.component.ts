@@ -91,14 +91,17 @@ export class NewRecetaComponent implements OnInit {
       this.recetta.ingredientes = this.receta;
       this.recetta.activo = false;
       console.log(this.recetta);
-      /*
+      
       this.recetaService.crearReceta(this.recetta)
           .subscribe(res => this.router.navigate(['/Success']),
           err => console.log(err))
-      return false*/
+      return false
     }
   }
 
+  regreso(){
+    this.router.navigate(['/Home']);
+  }
   
 
 }
