@@ -2,7 +2,7 @@
 // tslint:disable: object-literal-shorthand
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { usuariomodel } from 'src/app/Models/Usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -63,7 +63,8 @@ export class EditarUsuarioComponent implements OnInit {
       private formBuilder: FormBuilder,
       private userservice: UserService,
       private activatedRoute: ActivatedRoute,
-      private auth: AuthService) {
+      private auth: AuthService,
+      private router: Router) {
         this.RegistroForm = this.formBuilder.group(
           {
             usuario: new FormControl('', [
@@ -105,6 +106,11 @@ export class EditarUsuarioComponent implements OnInit {
               });
             });
 
+          }
+
+          //Metodo para redirigir a 
+          linkBack(){
+            this.router.navigate(['/Usuarios']);
           }
 
 }
