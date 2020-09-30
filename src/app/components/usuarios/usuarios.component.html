@@ -1,0 +1,47 @@
+<!-- Navbar -->
+<app-navbar></app-navbar>
+
+<!-- Lista de usuarios -->
+<div class="container-fluid row">
+    <div class="container mt-3 col-6 text-left">
+        <ul class="list-group">
+            <!--Encabezado de la lista-->
+            <li class="list-group-item bg-secondary">
+                <div class="row ">
+                    <!-- Columna de integrantes -->
+                    <div class="col pl-2 text-center">Nombre</div>
+                    <!-- Columna de recetas -->
+                    <div class="col pl-2 text-center">Acciones</div>
+                </div>
+            </li>
+            <!-- Cuerpo de la lista -->
+            <li class="list-group-item" *ngFor="let equipo of usuariosarr; index as i;">
+                <div class="row">
+                    <!-- Columna de usuarios -->
+                    <ul class=" list-group text-justify">
+                        <div class="ml-5">{{ usuariosarr[i].nombre }}</div>
+                    </ul>
+                    <!-- Columna de acciones -->
+                    <div class="col text-right">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <button class="btn btn-danger" *ngIf="!usuariosarr[i].super" (click)="delusuario(usuariosarr[i].id)"> borrar </button>
+                                <button class=" ml-1 btn btn-warning" (click)="editarusuario(usuariosarr[i].id)"> Editar </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="mt-5 text-center row-cols col-5">
+        <form action="">
+            <input class="ml-1 input" (keyup)="ngOnInit(Bus.value)" type="text" #Bus placeholder="Buscar">
+            <button class="btn ml-1 btn-success btn-rounded" type="submit">buscar</button>
+        </form>
+        <br>
+        <div class=" text-center">
+            <button class="btn btn-success" (click)="nuevousuario()">Agregar usuario</button>
+        </div>
+    </div>
+</div>
