@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { usuariomodel } from 'src/app/Models/Usuario.model';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -45,7 +46,7 @@ export class RegistroComponent implements OnInit {
   get password(){ return this.RegistroForm.get('password'); }
   get copassword(){ return this.RegistroForm.get('copassword'); }
 
-  constructor(private formBuilder: FormBuilder, private auth: AuthService) {
+  constructor(private formBuilder: FormBuilder, private auth: AuthService, private router: Router) {
     this.RegistroForm = this.formBuilder.group(
       {
         usuario: new FormControl('', [
@@ -76,6 +77,11 @@ export class RegistroComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  }
+
+  //Metodo para redirigir a 
+  linkBack(){
+    this.router.navigate(['/Usuarios']);
   }
 
   /**/
