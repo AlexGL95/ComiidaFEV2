@@ -12,6 +12,7 @@ export class RondaComponent implements OnInit {
   rondas = [];
   ingredientes={};
   show: boolean;
+  mensajeCreaRonda: boolean = false;
   mensajeRondaActiva: boolean;
   mensajeCrearRonda: boolean;
   mensajeBorrarRonda: boolean;
@@ -24,6 +25,10 @@ export class RondaComponent implements OnInit {
     this.rondaService.activarRonda()
           .subscribe(
             res => {
+              //Condicional. ¿Existe al menos una ronda?
+              if ( res.length === 0 ) {
+                this.mensajeCreaRonda = true;
+              }
               this.rondas = res;
             },
             err => this.mensajeRondaActiva = true
@@ -34,6 +39,7 @@ export class RondaComponent implements OnInit {
   createRonda(): boolean{
     this.rondaService.createRonda()
         .subscribe(res => {
+          this.mensajeCreaRonda = false; //Al crear una ronda, ya existe al menos una
           this.rondas = res;
         },
         err => this.mensajeCrearRonda = true
@@ -46,6 +52,10 @@ export class RondaComponent implements OnInit {
         .subscribe(res => {
           this.rondaService.activarRonda()
               .subscribe(res => {
+                //Condicional. ¿Existe al menos una ronda?
+                if ( res.length === 0 ) {
+                  this.mensajeCreaRonda = true;
+                }
                 this.rondas = res;
               },
               err => this.mensajeRondaActiva = true
