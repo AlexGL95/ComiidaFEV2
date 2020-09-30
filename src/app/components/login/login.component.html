@@ -1,3 +1,12 @@
+<!-- Mensajes -->
+<div class="alert alert-danger" role="alert" *ngIf="mensajeError">
+    Usuario o contraseña incorrectas.
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="mensajeDatoInvalido">
+    Formato de contraseña invalido.
+</div>
+
+<!-- Cuerpo de la pagina -->
 <div class="content p-lg-5">
     <br /><br />
     <div class="mt-1 container border col-lg-4 bg-white pb-2">
@@ -35,12 +44,10 @@
                             Al menos 8 caracteres de longitud
                         </div>
                     </div>
-
-
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">
-            Iniciar Sesion
-          </button>
+                    Iniciar Sesion
+                </button>
             </form>
         </div>
     </div>

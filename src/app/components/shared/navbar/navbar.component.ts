@@ -11,9 +11,7 @@ export class NavbarComponent {
   IS_SUPER: boolean = false;
 
   constructor( private authService: AuthService ) {
-    this.IS_SUPER = authService.leersuper();
-    console.log(this.IS_SUPER);
-    
+    this.IS_SUPER = authService.leersuper(); 
   }
 
 }
