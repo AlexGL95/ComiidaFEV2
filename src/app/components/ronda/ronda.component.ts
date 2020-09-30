@@ -12,6 +12,10 @@ export class RondaComponent implements OnInit {
   rondas = [];
   ingredientes={};
   show: boolean;
+  mensajeRondaActiva: boolean;
+  mensajeCrearRonda: boolean;
+  mensajeBorrarRonda: boolean;
+  mensajeIngredientes: boolean;
 
   constructor(private rondaService: RondaService, private router: Router) { }
 
@@ -22,7 +26,7 @@ export class RondaComponent implements OnInit {
             res => {
               this.rondas = res;
             },
-            err => console.log(err)
+            err => this.mensajeRondaActiva = true
           )
 
   }
@@ -32,7 +36,7 @@ export class RondaComponent implements OnInit {
         .subscribe(res => {
           this.rondas = res;
         },
-        err => console.log(err)
+        err => this.mensajeCrearRonda = true
         )
     return false;
   }
@@ -44,10 +48,10 @@ export class RondaComponent implements OnInit {
               .subscribe(res => {
                 this.rondas = res;
               },
-              err => console.log(err)
+              err => this.mensajeRondaActiva = true
             )
         },
-        err => console.log(err)
+        err => this.mensajeBorrarRonda = true
       )
   }
 
@@ -56,7 +60,7 @@ export class RondaComponent implements OnInit {
         .subscribe(res => {
           this.ingredientes = res;
         },
-        err => console.log(err))
+        err => this.mensajeIngredientes = true)
     this.show = true;
   }
 
