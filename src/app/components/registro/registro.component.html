@@ -8,6 +8,21 @@
     <div class="mt-1 container border col-lg-6 bg-white pb-2">
         <br />
         <div class="container text-center">
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeRegistro">
+                <strong>No Se Pudo Registrar Usuario</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeRegistro = false">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeInvalido">
+                <strong>Campo Invalido</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeInvalido = false">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
             <form [formGroup]="RegistroForm" class="text-center" (ngSubmit)="singin(nombre.value, pass.value, copass.value)">
                 <div class="form-group">
                     <label>Usuario</label>
