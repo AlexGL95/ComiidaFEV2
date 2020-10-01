@@ -8,6 +8,8 @@ import { EquipoService } from 'src/app/services/equipo.service';
 //Interfaces
 import { EquipoInterface } from '../equipo/equipo.interface';
 import { EquipoRecetaService } from 'src/app/services/equipo-receta.service';
+import { RondaService } from 'src/app/services/ronda.service';
+import { Ronda } from 'src/app/interfaces/Ronda';
 
 @Component({
   selector: 'app-home',
@@ -27,14 +29,20 @@ export class HomeComponent{
   mensajeHoyNoCocinas: boolean = false;
   mensajeExistenRecetas: boolean = false;
   mensajeEspaciosSinAsignar: boolean = false;
+  tiempoRestante = { horas: 8, minutos: 0 };
 
   constructor(
     private recetaService: RecetaService,
     private authService: AuthService,
     private equipoService: EquipoService,
     private equipoRecetaService: EquipoRecetaService,
-    private router: Router
+    private router: Router,
+    private rondasService: RondaService
   ) {
+
+    //Arranque del cronometro
+    this.cronometroIni();
+
     //Adquisicion de equipos
     equipoService.getEquipos().subscribe( equipos => {
       this.equiposArr = equipos;
@@ -193,6 +201,34 @@ export class HomeComponent{
         window.location.reload();
       });
     }
+  }
+
+  //Subir
+  fechaActual: Date = new Date;
+  rondaActual: Ronda;
+
+  //Inicializacion del cronometro
+  cronometroIni() {
+    //Obtencion de fecha de la ronda y hora de creacion
+    this.rondasService.getAll().subscribe( rondas => {
+      console.log(rondas);
+    } );
+
+
+
+    this.cronometro();
+  }
+
+  timeLeft: number = 60;
+
+  cronometro() {
+    setInterval( () => {
+      if( this.timeLeft > 0 ) {
+        this.timeLeft--;
+      } else {
+        this.timeLeft = 60;
+      }
+    },1000)
   }
 
 }
