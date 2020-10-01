@@ -252,9 +252,9 @@ export class HomeComponent{
             }
             //Verificar la diferencia de tiempo entre la hora de creacion + 8 horas, con la hora actual
             this.tiempoRestante = {
-              horas: horaFinal - this.fechaActual.getHours() - this.horasAbierto,
-              minutos: 59 - this.fechaActual.getMinutes() - this.minutosAbierto,
-              segundos: 60 - this.fechaActual.getSeconds() - this.segundosAbierto
+              horas: (parseInt(this.rondaInmediata.hora_de_generacion) + 7) - this.fechaActual.getHours() - this.horasAbierto,
+              minutos: 59 - this.minutosAbierto,
+              segundos: 59 - this.segundosAbierto
             }
           }
           //Condicional. Si se agota el tiempo
@@ -282,8 +282,8 @@ export class HomeComponent{
     return diaAnterior;
   }
 
-  segundosAbierto: number = 0;
-  minutosAbierto: number = 0;
+  segundosAbierto: number = this.fechaActual.getSeconds();
+  minutosAbierto: number = this.fechaActual.getMinutes();
   horasAbierto: number = 0;
 
   //Cronometro de 1 minuto
@@ -310,9 +310,9 @@ export class HomeComponent{
         }
         //Verificar la diferencia de tiempo entre la hora de creacion + 8 horas, con la hora actual
         this.tiempoRestante = {
-          horas: horaFinal - this.fechaActual.getHours() - this.horasAbierto,
-          minutos: 59 - this.fechaActual.getMinutes() - this.minutosAbierto,
-          segundos: 60 - this.fechaActual.getSeconds() - this.segundosAbierto
+          horas: (parseInt(this.rondaInmediata.hora_de_generacion) + 7) - this.fechaActual.getHours() - this.horasAbierto,
+          minutos: 59 - this.minutosAbierto,
+          segundos: 59 - this.segundosAbierto
         }
       }
       //Condicional. Si se agota el tiempo
