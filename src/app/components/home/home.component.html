@@ -12,12 +12,20 @@
         <div class="alert alert-success" role="alert">
             No cocinas.
         </div>
+        <!-- Boton de añadir recetas -->
+        <button type="button" class="btn btn-secondary mt-3 mr-2" (click)="linkNuevaReceta()">
+            Añadir receta
+        </button>
     </div>
     <!-- No hay ronda activa -->
     <div class="container mt-5" *ngIf="mensajeNoHayRonda">
         <div class="alert alert-info" role="alert">
             No hay ronda activa.
         </div>
+        <!-- Boton de añadir recetas -->
+        <button type="button" class="btn btn-secondary mt-3 mr-2" (click)="linkNuevaReceta()">
+            Añadir receta
+        </button>
     </div>
     <!-- Ya hay recetas asignadas -->
     <div class="container mt-5" *ngIf="mensajeExistenRecetas">
@@ -36,6 +44,10 @@
         <div class="alert alert-info" role="alert">
             La ronda actual esta en curso.
         </div>
+        <!-- Boton de añadir recetas -->
+        <button type="button" class="btn btn-secondary mt-3 mr-2" (click)="linkNuevaReceta()">
+            Añadir receta
+        </button>
     </div>
 
 
@@ -154,6 +166,10 @@
                             {{recetaNombre}}
                         </li>
                     </ul>
+                    <!-- Boton de añadir recetas -->
+                    <button type="button" class="btn btn-secondary mt-3 mr-2" (click)="linkNuevaReceta()">
+                        Añadir receta
+                    </button>
                 </div>
             </div>
         </div>
