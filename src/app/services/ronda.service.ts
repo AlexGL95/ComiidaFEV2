@@ -25,6 +25,11 @@ export class RondaService {
   }
 
   getIng(){
-    return this.http.get(`${this.URIrecetas}/ing`)
+    return this.http.get(`${this.URIrecetas}/ing`);
   }
+
+  getAll() {
+    return this.http.get<Ronda[]>(this.URIrondas);
+  }
+
 }
