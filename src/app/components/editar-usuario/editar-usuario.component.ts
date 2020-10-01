@@ -19,6 +19,8 @@ export class EditarUsuarioComponent implements OnInit {
   user: usuariomodel;
   usu: any;
   idx;
+  mensajeUpdate: boolean;
+  mensajeInv: boolean;
 
   update(nombre: string, pass: string, copass: string){
     if (this.RegistroForm.valid || ((this.password.value <= 0) && (this.copassword.value <= 0)) ) {
@@ -27,24 +29,26 @@ export class EditarUsuarioComponent implements OnInit {
           nombre: nombre,
           pass: pass};
         console.log('aqui actualizaria todo' + this.user);
-        this.userservice.updateusuario(this.idx, this.user).subscribe(res => {
-          console.log(res);
-        });
+        this.userservice.updateusuario(this.idx, this.user).subscribe(res => 
+          console.log(res),
+          err => this.mensajeUpdate = true
+        );
       } else {
         this.user = {
           nombre: nombre
         };
         console.log('aqui solo el nombre' + this.user);
-        this.userservice.updateusuario(this.idx, this.user).subscribe(res => {
-          console.log(res);
-        });
+        this.userservice.updateusuario(this.idx, this.user).subscribe(res => 
+          console.log(res),
+          err => this.mensajeUpdate = true
+        );
       }
         /*this.auth.registro(this.user)
         .subscribe(resp => {
           console.log(resp);
         });*/
       } else {
-        console.log('Nones');
+        this.mensajeInv = true;
       }
     }
 
