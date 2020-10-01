@@ -18,6 +18,7 @@ export class RondaComponent implements OnInit {
   mensajeCrearRonda: boolean;
   mensajeBorrarRonda: boolean;
   mensajeIngredientes: boolean;
+  mensajeUsuariosInsuficientes: boolean = false;
 
   constructor(private rondaService: RondaService, private router: Router, private userService: UserService) { }
 
@@ -33,7 +34,13 @@ export class RondaComponent implements OnInit {
               this.rondas = res;
             },
             err => this.mensajeRondaActiva = true
-          )
+          );
+    this.userService.getAll().subscribe( usuarios => {
+      if ( usuarios.length < 4 ) {
+        this.mensajeUsuariosInsuficientes = true;
+      }
+    } );
+          
 
   }
 

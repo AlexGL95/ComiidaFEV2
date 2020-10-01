@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { usuariomodel } from '../Models/Usuario.model';
 import { Router } from '@angular/router';
+import { UsuarioInterface } from '../interfaces/usuario.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ updateusuario(id, data: usuariomodel){
 }
 
 getAll(){
-return this.http.get(`${this.url}/usuarios`);
+return this.http.get<UsuarioInterface[]>(`${this.url}/usuarios`);
 }
 
 delete(id){
