@@ -15,7 +15,8 @@ export class RegistroComponent implements OnInit {
   RegistroForm: FormGroup;
   user: usuariomodel;
   patt = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-zd$@$!%*?&].{7,}';
-
+  mensajeInvalido: boolean;
+  mensajeRegistro: boolean;
 
   singin(nombre: string, pass: string, copass: string){
     if (this.RegistroForm.valid) {
@@ -27,11 +28,13 @@ export class RegistroComponent implements OnInit {
       pass: pass};
 
       this.auth.registro(this.user)
-      .subscribe(resp => {
-      console.log(resp);
-    });
+      .subscribe(resp => 
+      console.log(resp),
+      err => this.mensajeRegistro = true
+    );
+    this.router.navigate(['/Usuarios']);
   } else {
-    console.log('Nones');
+    this.mensajeInvalido = true;
   }
   }
 
