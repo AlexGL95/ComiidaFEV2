@@ -17,16 +17,6 @@
             Añadir receta
         </button>
     </div>
-    <!-- No hay ronda activa -->
-    <div class="container mt-5" *ngIf="mensajeNoHayRonda">
-        <div class="alert alert-info" role="alert">
-            No hay ronda activa.
-        </div>
-        <!-- Boton de añadir recetas -->
-        <button type="button" class="btn btn-secondary mt-3 mr-2" (click)="linkNuevaReceta()">
-            Añadir receta
-        </button>
-    </div>
     <!-- Ya hay recetas asignadas -->
     <div class="container mt-5" *ngIf="mensajeExistenRecetas">
         <div class="alert alert-info" role="alert">
@@ -51,7 +41,7 @@
     </div>
 
 
-<div *ngIf="!mensajeHoyNoCocinas && !mensajeNoHayRonda && !mensajeRondaEnCurso">
+<div *ngIf="!mensajeHoyNoCocinas && !mensajeRondaEnCurso">
     <!-- Cuerpo de la pagina (Si no hay recetas asignadas) -->
     <div class="container-fluid"  *ngIf="!mensajeExistenRecetas">
         <div class="row row-cols-2">
