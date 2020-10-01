@@ -18,33 +18,32 @@ export class NavbarComponent {
   constructor(
     private authService: AuthService,
     private equiposService: EquipoService,
-    private recetasService: RecetaService
+    private recetasService: RecetaService,
+    private router: Router
     ) {
 
-      //Condicion. ¿Es un super usuario?
+
+      // Condicion. ¿Es un super usuario?
       this.IS_SUPER = authService.leersuper();
 
-      //Condicion. ¿Hay equipos en la Db?
+      // Condicion. ¿Hay equipos en la Db?
       this.equiposService.getEquipos().subscribe( equipos => {
         if ( equipos === null) {
           this.mensajeSinEquipos = true;
         }
       } );
 
-      //Condicion. ¿Hay recetas en la Db?
+      // Condicion. ¿Hay recetas en la Db?
       this.recetasService.getRecetas().subscribe( recetas => {
         if ( recetas === null ) {
           this.mensajeSinRecetas = true;
         }
       });
 
-  constructor( private authService: AuthService, private router: Router ) {
-    this.IS_SUPER = authService.leersuper(); 
-  }
 
+  }
   logout(){
     this.authService.logout();
     this.router.navigate(['Login']);
   }
-
-}
+  }
