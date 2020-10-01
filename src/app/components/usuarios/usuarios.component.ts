@@ -16,7 +16,7 @@ export class UsuariosComponent implements OnInit {
   constructor(
     private user: UserService,
     private route: Router,
-  ) { }
+  ) {}
 
   ngOnInit( bus?: string): void {
     this.user.getAll().subscribe(res => {
@@ -41,8 +41,8 @@ editarusuario(id){
 delusuario(id){
   this.user.delete(id).subscribe(res => {
     console.log(res);
+    this.ngOnInit();
   });
-  this.ngOnInit();
 }
 nuevousuario(){
   this.route.navigate(['Registro']);

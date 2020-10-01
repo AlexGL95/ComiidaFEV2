@@ -41,8 +41,6 @@ export class RondaComponent implements OnInit {
         this.mensajeUsuariosInsuficientes = true;
       }
     } );
-          
-
   }
 
   createRonda(): boolean{
