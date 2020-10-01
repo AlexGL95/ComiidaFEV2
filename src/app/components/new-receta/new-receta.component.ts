@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Receta } from '../../interfaces/Ronda';
-import { NewrecetaService } from 'src/app/service/newreceta.service';
+import { NewrecetaService } from 'src/app/services/newreceta.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-new-receta',
@@ -33,8 +34,9 @@ export class NewRecetaComponent implements OnInit {
   }
   
 
-  constructor(private recetaService: NewrecetaService,
-              private router: Router) {
+  constructor(private nuevaRecetaService: NewrecetaService,
+              private router: Router,
+              private authService: AuthService) {
                 this.RecetaForm = this.createFormGroup();
                 
               }
@@ -85,14 +87,13 @@ export class NewRecetaComponent implements OnInit {
         return false;
       }
     }
-    if(this.nombre!==''){
-      this.recetta.nombre = this.nombre;
+    if(this.nombre!=='' && this.receta !== ''){
+      this.recetta.nombre = this.nombre + "(" + this.authService.leeruser() + ")";
       this.recetta.categoria = this.mensajeCat;
       this.recetta.ingredientes = this.receta;
       this.recetta.activo = false;
       console.log(this.recetta);
-      
-      this.recetaService.crearReceta(this.recetta)
+      this.nuevaRecetaService.crearReceta(this.recetta)
           .subscribe(res => this.router.navigate(['/Success']),
           err => console.log(err))
       return false

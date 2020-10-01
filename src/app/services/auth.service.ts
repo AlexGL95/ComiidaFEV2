@@ -1,8 +1,9 @@
 // tslint:disable: no-string-literal
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { usuariomodel } from '../Models/Usuario.model';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +21,24 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  logout(){}
+  logout(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('nombre');
+    localStorage.removeItem('super');
+    localStorage.removeItem('id');
+    localStorage.removeItem('id_equipo');
+    localStorage.removeItem('fecha_equipo');
+  }
+
+  verify(): Observable<boolean> {
+    const TOKEN = this.leertoker();
+    const header = {
+      headers: new HttpHeaders()
+        .set('Authorization',  `Bearer ${TOKEN}`)
+    };
+    return this.http.get<{ autorized: boolean; }>(`${this.url}/auth`, header).pipe(map(
+      () => true), catchError( async () => false ));
+  }
 
   login( usuario: usuariomodel){
     const authData = { // payload para Log in de usuarios
