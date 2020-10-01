@@ -36,6 +36,8 @@ export class HomeComponent{
   tiempoRestante = { horas: 8, minutos: 0, segundos: 0 };
   fechaActual: Date = new Date;
   rondaInmediata: Ronda = null;
+  cambio: boolean;
+  cambio2: boolean;
 
   constructor(
     private recetaService: RecetaService,
@@ -201,25 +203,30 @@ export class HomeComponent{
     //Condicion. Si hay espacios sin asignar = Muestra el mensaje de error
     if ( espaciosSinAsignar === true ) {
       this.mensajeEspaciosSinAsignar = true;
+      this.cambio = false;
     }
     //Condicion. Si todo es correcto = continua
     else {
       this.mensajeEspaciosSinAsignar = false;
-
-      //2.-Obtener datos del equipo
-      let idEquipo: number = parseInt( this.authService.leerIdEquipo() );
-      let idRecetas: number[] = [];
-
-      //3.-Cambiar estado de las recetas
-      for (let m = 0; m < this.recetasSeleccionadas.length; m++) {
-        this.recetaService.changeStateById( this.recetasSeleccionadas[m].idDb ).subscribe();
-        idRecetas.push(this.recetasSeleccionadas[m].idDb);
-      }
-      //4.-Asignarlas al equipo
-      this.equipoRecetaService.asignacion(idEquipo, idRecetas).subscribe( () => {
-        window.location.reload();
-      });
+      this.cambio = true;
+      
     }
+  }
+
+  asignarRecetaConfirmada(){
+     //2.-Obtener datos del equipo
+     let idEquipo: number = parseInt( this.authService.leerIdEquipo() );
+     let idRecetas: number[] = [];
+
+     //3.-Cambiar estado de las recetas
+     for (let m = 0; m < this.recetasSeleccionadas.length; m++) {
+       this.recetaService.changeStateById( this.recetasSeleccionadas[m].idDb ).subscribe();
+       idRecetas.push(this.recetasSeleccionadas[m].idDb);
+     }
+     //4.-Asignarlas al equipo
+     this.equipoRecetaService.asignacion(idEquipo, idRecetas).subscribe( () => {
+       window.location.reload();
+     });
   }
 
   //Inicializacion del cronometro

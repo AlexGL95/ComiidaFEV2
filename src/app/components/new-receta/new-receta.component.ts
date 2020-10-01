@@ -14,7 +14,7 @@ export class NewRecetaComponent implements OnInit {
 
   RecetaForm: FormGroup;
 
-  categorias = ['Entrada', 'Plato Fuerte', 'Acompañamiento', 'Postre', 'Agua', 'Salsa'];
+  categorias = ['Entrada', 'Plato Fuerte', 'Acompañamiento', 'Postre', 'Bebida', 'Salsa'];
   unidades = ['Kg', 'g', 'L', 'ml', 'pz'];
   mensajeCat = 'Seleccionar Categoria';
   mensajeUni = ['Unidades'];
@@ -26,6 +26,8 @@ export class NewRecetaComponent implements OnInit {
   nombre = '';
   recetta = {} as Receta;
   camposFaltantes: boolean;
+  cambio: boolean;
+  cambio2: boolean;
 
   createFormGroup(){
     return new FormGroup({

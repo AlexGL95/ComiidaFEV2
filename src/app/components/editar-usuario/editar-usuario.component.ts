@@ -33,6 +33,7 @@ export class EditarUsuarioComponent implements OnInit {
           console.log(res),
           err => this.mensajeUpdate = true
         );
+        this.router.navigate(['/Usuarios']);
       } else {
         this.user = {
           nombre: nombre
@@ -47,10 +48,10 @@ export class EditarUsuarioComponent implements OnInit {
         .subscribe(resp => {
           console.log(resp);
         });*/
-      } else {
+    } else {
         this.mensajeInv = true;
-      }
     }
+  }
 
     checkPasswords(formGroup: FormGroup) {
       // here we have the 'passwords' group
