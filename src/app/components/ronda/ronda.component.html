@@ -18,7 +18,7 @@
 </div>
 
 <!-- Vista cuando existen rondas -->
-<div class="container" *ngIf="!mensajeCreaRonda && !mensajeUsuariosInsuficientes">
+<div class="container" *ngIf="!mensajeCreaRonda">
 
   <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeRondaActiva">
     <strong>No Hay Ronda Activa</strong>
@@ -73,12 +73,12 @@
     
     <div class="col-md-4 p-3">
       <form (submit)="createRonda()">
-        <button class="btn btn-success btn-block p-3">
+        <button class="btn btn-success btn-block p-3" *ngIf="!mensajeUsuariosInsuficientes">
             Crear Ronda
         </button>
   
-          <div class="row">
-            <div class="col-md-4 mt-5 ml-3">
+          <div class="row cols-2">
+            <div class="col mt-5 ml-3">
               <button type="button" class="btn btn-info" (click)="getIng()">
                 Ingredientes
               </button>
