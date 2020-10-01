@@ -1,6 +1,8 @@
 //Modules
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
+import { Moment } from "moment";
 //Services
 import { RecetaService } from 'src/app/services/receta.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -8,6 +10,8 @@ import { EquipoService } from 'src/app/services/equipo.service';
 //Interfaces
 import { EquipoInterface } from '../equipo/equipo.interface';
 import { EquipoRecetaService } from 'src/app/services/equipo-receta.service';
+import { RondaService } from 'src/app/services/ronda.service';
+import { Ronda } from 'src/app/interfaces/Ronda';
 
 @Component({
   selector: 'app-home',
@@ -27,14 +31,20 @@ export class HomeComponent{
   mensajeHoyNoCocinas: boolean = false;
   mensajeExistenRecetas: boolean = false;
   mensajeEspaciosSinAsignar: boolean = false;
+  mensajeRondaEnCurso: boolean = false;
+  tiempoRestante = { horas: 8, minutos: 0, segundos: 0 };
+  fechaActual: Date = new Date;
+  rondaInmediata: Ronda = null;
 
   constructor(
     private recetaService: RecetaService,
     private authService: AuthService,
     private equipoService: EquipoService,
     private equipoRecetaService: EquipoRecetaService,
-    private router: Router
+    private router: Router,
+    private rondasService: RondaService
   ) {
+
     //Adquisicion de equipos
     equipoService.getEquipos().subscribe( equipos => {
       this.equiposArr = equipos;
@@ -52,6 +62,10 @@ export class HomeComponent{
       //Condicion. Si equipo id tiene un valor = cocinas
       else {
         this.mensajeHoyNoCocinas = false;
+
+        //Arranque del cronometro
+        this.cronometroIni();
+
         //Adquisicion del equipo del usuario
         for (let m = 0; m < this.equiposArr.length; m++) {
           if ( this.equiposArr[m].nombre === equipo ) {
@@ -193,6 +207,106 @@ export class HomeComponent{
         window.location.reload();
       });
     }
+  }
+
+  //Inicializacion del cronometro
+  cronometroIni() {
+    //Obtencion de una ronda que se active el dia siguiente habil
+    this.rondasService.getAll().subscribe( rondas => {
+      for (let m = 0; m < rondas.length; m++) {
+        let diaAnteriorDeRonda = this.diaAnterior( moment(rondas[m].fecha_inicio, 'MMM Do YY') );
+        //Condicional. Si existe ronda inmediata = Abre la seleccion y habilita el cronometro
+        if ( moment( diaAnteriorDeRonda ).format('MMM Do YY') === moment(this.fechaActual).format('MMM Do YY') ) {
+          this.rondaInmediata = rondas[m];
+          this.mensajeRondaEnCurso = false;
+          //Calculo de tiempo restante inicial.
+          //Crea la hora final
+          let horaFinal = parseInt(this.rondaInmediata.hora_de_generacion) + 7;
+          if ( horaFinal >= 24 ) {
+            horaFinal -= 24;
+          }
+          //Condicional. Si queda tiempo
+          if ( ( parseInt(this.rondaInmediata.hora_de_generacion) + 7 ) > ( this.fechaActual.getHours() + this.horasAbierto ) ) {
+            //Calculo de tiempo abierto
+            this.segundosAbierto += 1;
+            if ( this.segundosAbierto >= 60 ) {
+              this.segundosAbierto = 0;
+              this.minutosAbierto += 1;
+            }
+            if ( this.minutosAbierto >= 60 ) {
+              this.minutosAbierto = 0;
+              this.horasAbierto += 1;
+            }
+            //Verificar la diferencia de tiempo entre la hora de creacion + 8 horas, con la hora actual
+            this.tiempoRestante = {
+              horas: horaFinal - this.fechaActual.getHours() - this.horasAbierto,
+              minutos: 59 - this.fechaActual.getMinutes() - this.minutosAbierto,
+              segundos: 60 - this.fechaActual.getSeconds() - this.segundosAbierto
+            }
+          }
+          //Condicional. Si se agota el tiempo
+          else {
+            this.mensajeRondaEnCurso = true;
+          }
+          this.cronometro();
+        }
+        //Condicional. Si es la ultima ronda y no existe ronda inmediata = Notifica y modifica la vista
+        if ( ( m === (rondas.length - 1) ) && (this.rondaInmediata === null) ) {
+          this.mensajeRondaEnCurso = true;
+        }
+      }
+    } );
+  }
+
+  //Funcion que busca el dia habil anterior.
+  diaAnterior( dia: Moment ) {
+    let diaAnterior = dia.toDate();
+    if ((diaAnterior.getDay()-1)!==0){
+      diaAnterior.setDate(diaAnterior.getDate()-1);
+    } else{
+      diaAnterior.setDate(diaAnterior.getDate()-3);
+    }
+    return diaAnterior;
+  }
+
+  segundosAbierto: number = 0;
+  minutosAbierto: number = 0;
+  horasAbierto: number = 0;
+
+  //Cronometro de 1 minuto
+  cronometro() {
+    //Llamada cada 1 minuto
+    setInterval( () => {
+      
+      //Crea la hora final
+      let horaFinal = parseInt(this.rondaInmediata.hora_de_generacion) + 7;
+      if ( horaFinal >= 24 ) {
+        horaFinal -= 24;
+      }
+      //Condicional. Si queda tiempo
+      if ( ( parseInt(this.rondaInmediata.hora_de_generacion) + 7 ) > ( this.fechaActual.getHours() + this.horasAbierto ) ) {
+        //Calculo de tiempo abierto
+        this.segundosAbierto += 1;
+        if ( this.segundosAbierto >= 60 ) {
+          this.segundosAbierto = 0;
+          this.minutosAbierto += 1;
+        }
+        if ( this.minutosAbierto >= 60 ) {
+          this.minutosAbierto = 0;
+          this.horasAbierto += 1;
+        }
+        //Verificar la diferencia de tiempo entre la hora de creacion + 8 horas, con la hora actual
+        this.tiempoRestante = {
+          horas: horaFinal - this.fechaActual.getHours() - this.horasAbierto,
+          minutos: 59 - this.fechaActual.getMinutes() - this.minutosAbierto,
+          segundos: 60 - this.fechaActual.getSeconds() - this.segundosAbierto
+        }
+      }
+      //Condicional. Si se agota el tiempo
+      else {
+        this.mensajeRondaEnCurso = true;
+      }
+    },1000)
   }
 
 }

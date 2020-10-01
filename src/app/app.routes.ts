@@ -7,21 +7,23 @@ import { RondaComponent } from './components/ronda/ronda.component';
 import { SuccessComponent } from './components/success/success.component';
 import { RecetaComponent } from './components/receta/receta.component';
 import { NewRecetaComponent } from './components/new-receta/new-receta.component';
-import { HomeComponent } from "./components/home/home.component";
+import { HomeComponent } from './components/home/home.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { AuthGuard } from './auth.guard';
+import { LogGuard } from './log.guard';
 
 const APP_ROUTES: Routes = [
-    {path: 'Edicion_Usuario/:id', component: EditarUsuarioComponent},
-    {path: 'Equipo', component: EquipoComponent},
-    {path: 'Login', component: LoginComponent},
-    {path: 'NuevaReceta', component: NewRecetaComponent},
-    {path: 'Receta', component: RecetaComponent},
-    {path: 'Registro', component: RegistroComponent},
-    {path: 'Ronda', component: RondaComponent},
-    {path: 'Success', component: SuccessComponent},
-    {path: 'Home', component: HomeComponent},
-    {path: 'Usuarios', component: UsuariosComponent},
-    {path: '**', pathMatch: 'full', redirectTo: 'Login'}
+    {path: 'Edicion_Usuario/:id', component: EditarUsuarioComponent, canActivate: [AuthGuard]},
+    {path: 'Equipo', component: EquipoComponent, canActivate: [AuthGuard]},
+    {path: 'Login', component: LoginComponent, canActivate:[LogGuard]},
+    {path: 'NuevaReceta', component: NewRecetaComponent, canActivate: [AuthGuard]},
+    {path: 'Receta', component: RecetaComponent, canActivate: [AuthGuard]},
+    {path: 'Registro', component: RegistroComponent, canActivate: [AuthGuard]},
+    {path: 'Ronda', component: RondaComponent, canActivate: [AuthGuard]},
+    {path: 'Success', component: SuccessComponent, canActivate: [AuthGuard]},
+    {path: 'Home', component: HomeComponent, canActivate: [AuthGuard]},
+    {path: 'Usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
+    {path: '**', pathMatch: 'full', redirectTo: 'Home'}
 ];
 
 export const APP_ROUTING = RouterModule.forRoot(APP_ROUTES);
