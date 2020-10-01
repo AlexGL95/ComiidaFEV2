@@ -29,10 +29,11 @@ export class RegistroComponent implements OnInit {
 
       this.auth.registro(this.user)
       .subscribe(resp => 
-      console.log(resp),
+      {console.log(resp);
+      this.router.navigate(['/Usuarios']);},
       err => this.mensajeRegistro = true
     );
-    this.router.navigate(['/Usuarios']);
+
   } else {
     this.mensajeInvalido = true;
   }

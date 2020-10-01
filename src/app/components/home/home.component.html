@@ -12,12 +12,10 @@
         <div class="alert alert-success" role="alert">
             No cocinas.
         </div>
-    </div>
-    <!-- No hay ronda activa -->
-    <div class="container mt-5" *ngIf="mensajeNoHayRonda">
-        <div class="alert alert-info" role="alert">
-            No hay ronda activa.
-        </div>
+        <!-- Boton de añadir recetas -->
+        <button type="button" class="btn btn-secondary mt-3 mr-2" (click)="linkNuevaReceta()">
+            Añadir receta
+        </button>
     </div>
     <!-- Ya hay recetas asignadas -->
     <div class="container mt-5" *ngIf="mensajeExistenRecetas">
@@ -36,10 +34,14 @@
         <div class="alert alert-info" role="alert">
             La ronda actual esta en curso.
         </div>
+        <!-- Boton de añadir recetas -->
+        <button type="button" class="btn btn-secondary mt-3 mr-2" (click)="linkNuevaReceta()">
+            Añadir receta
+        </button>
     </div>
 
 
-<div *ngIf="!mensajeHoyNoCocinas && !mensajeNoHayRonda && !mensajeRondaEnCurso">
+<div *ngIf="!mensajeHoyNoCocinas && !mensajeRondaEnCurso">
     <!-- Cuerpo de la pagina (Si no hay recetas asignadas) -->
     <div class="container-fluid"  *ngIf="!mensajeExistenRecetas">
         <div class="row row-cols-2">
@@ -55,15 +57,25 @@
                         <h5>Cocinan:</h5>
                         {{equipoUsuario.integrantes_nombres[0]}} y {{equipoUsuario.integrantes_nombres[1]}}
                     </div>
-                    <!-- Tiempo restante si minutos es mayor a 10 -->
-                    <div class="mt-4 ml-3" *ngIf="tiempoRestante.minutos >= 10">
+                    <!-- Tiempo restante si minutos es mayor a 10 y segundos tambien -->
+                    <div class="mt-4 ml-3" *ngIf="(tiempoRestante.minutos >= 10) && (tiempoRestante.segundos >= 10)">
                         <h5>Tiempo restante:</h5>
                         0{{tiempoRestante.horas}}: {{tiempoRestante.minutos}}: {{tiempoRestante.segundos}}
                     </div>
-                    <!-- Tiempo restante si minutos es menor a 10 -->
-                    <div class="mt-4 ml-3" *ngIf="tiempoRestante.minutos < 10">
+                    <!-- Tiempo restante si minutos es menor a 10 y segundos no -->
+                    <div class="mt-4 ml-3" *ngIf="(tiempoRestante.minutos < 10) && (tiempoRestante.segundos >= 10)">
                         <h5>Tiempo restante:</h5>
                         0{{tiempoRestante.horas}}: 0{{tiempoRestante.minutos}}: {{tiempoRestante.segundos}}
+                    </div>
+                    <!-- Tiempo restante si minutos es mayor a 10 y segundos no -->
+                    <div class="mt-4 ml-3" *ngIf="(tiempoRestante.minutos >= 10) && (tiempoRestante.segundos < 10)">
+                        <h5>Tiempo restante:</h5>
+                        0{{tiempoRestante.horas}}: {{tiempoRestante.minutos}}: 0{{tiempoRestante.segundos}}
+                    </div>
+                    <!-- Tiempo restante si minutos es menor a 10 y segundos tambien -->
+                    <div class="mt-4 ml-3" *ngIf="(tiempoRestante.minutos < 10) && (tiempoRestante.segundos < 10)">
+                        <h5>Tiempo restante:</h5>
+                        0{{tiempoRestante.horas}}: 0{{tiempoRestante.minutos}}: 0{{tiempoRestante.segundos}}
                     </div>
                     <!-- Numero de recetas -->
                     <div class="row row-cols-2 mt-4 ml-3">
@@ -154,6 +166,10 @@
                             {{recetaNombre}}
                         </li>
                     </ul>
+                    <!-- Boton de añadir recetas -->
+                    <button type="button" class="btn btn-secondary mt-3 mr-2" (click)="linkNuevaReceta()">
+                        Añadir receta
+                    </button>
                 </div>
             </div>
         </div>

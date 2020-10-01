@@ -12,6 +12,7 @@ import { EquipoInterface } from '../equipo/equipo.interface';
 import { EquipoRecetaService } from 'src/app/services/equipo-receta.service';
 import { RondaService } from 'src/app/services/ronda.service';
 import { Ronda } from 'src/app/interfaces/Ronda';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -44,26 +45,38 @@ export class HomeComponent{
     private equipoService: EquipoService,
     private equipoRecetaService: EquipoRecetaService,
     private router: Router,
-    private rondasService: RondaService
+    private rondasService: RondaService,
+    private usuarioService: UserService
   ) {
+    //Equipo del usuario
+    let equipo: string;// = this.authService.leerEquipo();
+    usuarioService.getAll().subscribe( usuarios => {
+        for (let m = 0; m < usuarios.length; m++) {
+          if ( usuarios[m].id.toString() === this.authService.leerid() ) {
 
-    //Adquisicion de equipos
-    equipoService.getEquipos().subscribe( equipos => {
+            //Condicion. Si fecha de equipo es nulo = No tienes hay actividades programadas
+            if ( usuarios[m].equipo === null ) {
+              this.mensajeHoyNoCocinas = true;
+            }
+
+            //Condicion. Si fecha de equipo no es nulo se envia
+            else {
+              equipo = usuarios[m].equipo.fecha;
+
+              console.log(equipo);
+
+              this.homeInit(equipo);
+            }
+          }
+        }
+    } );
+  }
+
+  //Metodo de inicializacion.
+  homeInit( equipo: string ) {
+    this.equipoService.getEquipos().subscribe( equipos => {
+      //Adquisicion de equipos
       this.equiposArr = equipos;
-      let equipo = this.authService.leerEquipo();
-
-      //Condicion. Si equipo id es nulo = no cocinas
-      if (equipo === 'undefined') {
-        this.mensajeHoyNoCocinas = true;
-      }
-
-      else if ( equipos === null ) {
-        this.mensajeNoHayRonda = true;
-      }
-
-      //Condicion. Si equipo id tiene un valor = cocinas
-      else {
-        this.mensajeHoyNoCocinas = false;
 
         //Arranque del cronometro
         this.cronometroIni();
@@ -103,7 +116,7 @@ export class HomeComponent{
           this.recetasAsignadas = this.equipoUsuario.recetas_nombres ;
         }
       }
-    } );
+    );
   }
 
   //Metodo para modificacion del arreglo recetasSeleccionadas
@@ -246,9 +259,9 @@ export class HomeComponent{
             }
             //Verificar la diferencia de tiempo entre la hora de creacion + 8 horas, con la hora actual
             this.tiempoRestante = {
-              horas: horaFinal - this.fechaActual.getHours() - this.horasAbierto,
-              minutos: 59 - this.fechaActual.getMinutes() - this.minutosAbierto,
-              segundos: 60 - this.fechaActual.getSeconds() - this.segundosAbierto
+              horas: (parseInt(this.rondaInmediata.hora_de_generacion) + 7) - this.fechaActual.getHours() - this.horasAbierto,
+              minutos: 59 - this.minutosAbierto,
+              segundos: 59 - this.segundosAbierto
             }
           }
           //Condicional. Si se agota el tiempo
@@ -276,8 +289,8 @@ export class HomeComponent{
     return diaAnterior;
   }
 
-  segundosAbierto: number = 0;
-  minutosAbierto: number = 0;
+  segundosAbierto: number = this.fechaActual.getSeconds();
+  minutosAbierto: number = this.fechaActual.getMinutes();
   horasAbierto: number = 0;
 
   //Cronometro de 1 minuto
@@ -304,9 +317,9 @@ export class HomeComponent{
         }
         //Verificar la diferencia de tiempo entre la hora de creacion + 8 horas, con la hora actual
         this.tiempoRestante = {
-          horas: horaFinal - this.fechaActual.getHours() - this.horasAbierto,
-          minutos: 59 - this.fechaActual.getMinutes() - this.minutosAbierto,
-          segundos: 60 - this.fechaActual.getSeconds() - this.segundosAbierto
+          horas: (parseInt(this.rondaInmediata.hora_de_generacion) + 7) - this.fechaActual.getHours() - this.horasAbierto,
+          minutos: 59 - this.minutosAbierto,
+          segundos: 59 - this.segundosAbierto
         }
       }
       //Condicional. Si se agota el tiempo

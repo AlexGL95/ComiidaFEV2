@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RondaService } from 'src/app/services/ronda.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-ronda',
@@ -17,8 +18,10 @@ export class RondaComponent implements OnInit {
   mensajeCrearRonda: boolean;
   mensajeBorrarRonda: boolean;
   mensajeIngredientes: boolean;
+  mensajeUsuariosInsuficientes: boolean = false;
+  mensajeNavbar: boolean = true;
 
-  constructor(private rondaService: RondaService, private router: Router) { }
+  constructor(private rondaService: RondaService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
 
@@ -32,17 +35,24 @@ export class RondaComponent implements OnInit {
               this.rondas = res;
             },
             err => this.mensajeRondaActiva = true
-          )
-
+          );
+    this.userService.getAll().subscribe( usuarios => {
+      if ( usuarios.length < 4 ) {
+        this.mensajeUsuariosInsuficientes = true;
+      }
+    } );
   }
 
   createRonda(): boolean{
+    this.mensajeNavbar = false;
     this.rondaService.createRonda()
         .subscribe(res => {
           this.mensajeCreaRonda = false; //Al crear una ronda, ya existe al menos una
+          this.mensajeNavbar = true;
           this.rondas = res;
         },
-        err => this.mensajeCrearRonda = true
+        err => {this.mensajeCrearRonda = true
+        this.mensajeNavbar = true;}
         )
     return false;
   }
