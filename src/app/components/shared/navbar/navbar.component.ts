@@ -22,7 +22,6 @@ export class NavbarComponent {
     private router: Router
     ) {
 
-
       // Condicion. ¿Es un super usuario?
       this.IS_SUPER = authService.leersuper();
 
@@ -39,7 +38,6 @@ export class NavbarComponent {
           this.mensajeSinRecetas = true;
         }
       });
-
 
   }
   logout(){

@@ -1,7 +1,14 @@
-<app-navbar></app-navbar>
+<app-navbar *ngIf="mensajeNavbar"></app-navbar>
+
+<!-- Vista cuando no hay suficientes usurios -->
+<div class="container mt-5" *ngIf="mensajeUsuariosInsuficientes">
+  <div class="alert alert-info" role="alert">
+      Necesitas al menos 4 usuarios para generar una ronda.
+  </div>
+</div>
 
 <!-- Vista cuando no existen rondas -->
-<div class="container mt-5" *ngIf="mensajeCreaRonda">
+<div class="container mt-5" *ngIf="mensajeCreaRonda && !mensajeUsuariosInsuficientes">
   <div class="alert alert-info" role="alert">
       Crea una ronda.
   </div>
@@ -11,7 +18,7 @@
 </div>
 
 <!-- Vista cuando existen rondas -->
-<div class="container" *ngIf="!mensajeCreaRonda">
+<div class="container" *ngIf="!mensajeCreaRonda && !mensajeUsuariosInsuficientes">
 
   <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeRondaActiva">
     <strong>No Hay Ronda Activa</strong>
