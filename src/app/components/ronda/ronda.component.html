@@ -1,18 +1,46 @@
 <app-navbar></app-navbar>
 
-<div class="container">
-  <div class="col-md-8" *ngIf="mensajeRondaActiva">
-    No Hay Ronda Activa
+<!-- Vista cuando no existen rondas -->
+<div class="container mt-5" *ngIf="mensajeCreaRonda">
+  <div class="alert alert-info" role="alert">
+      Crea una ronda.
   </div>
-  <div class="col-md-8" *ngIf="mensajeCrearRonda">
-    No Se Pudo Crear Ronda
+  <button class="btn btn-success btn-block" (click)="createRonda()">
+    Create
+  </button>
+</div>
+
+<!-- Vista cuando existen rondas -->
+<div class="container" *ngIf="!mensajeCreaRonda">
+
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeRondaActiva">
+    <strong>No Hay Ronda Activa</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeRondaActiva = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-  <div class="col-md-8" *ngIf="mensajeBorrarRonda">
-    No Se Pudo Borrar Ronda
+
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeCrearRonda">
+    <strong>No Se Pudo Crear Ronda</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeCrearRonda = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
-  <div class="col-md-8" *ngIf="mensajeIngredientes">
-    No Hay Ingredientes Activos
+
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeBorrarRonda">
+    <strong>No Se Pudo Eliminar Ronda</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeBorrarRonda = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
+
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeIngredientes">
+    <strong>No Hay Ingredientes Activos</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeIngredientes = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
   <div class="row mt-5">
 
     <div class="col-md-7">
@@ -68,4 +96,3 @@
       </form>
     </div>
 </div>
-  
