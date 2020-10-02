@@ -44,14 +44,40 @@
                     <div class="col text-right">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <button class="btn btn-danger" *ngIf="((!usuariosarr[i].super) && usuariosarr.length > 4) " (click)="delusuario(usuariosarr[i].id)"> borrar </button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" *ngIf="((!usuariosarr[i].super) && usuariosarr.length > 4)" (click)="const = i">
+                                    Borrar
+                                </button>
                                 <button class=" ml-1 btn btn-warning" (click)="editarusuario(usuariosarr[i].id)"> Editar </button>
                             </li>
                         </ul>
                     </div>
                 </div>
+
             </li>
         </ul>
     </div>
 
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+        ¿Seguro que quieres borrar este usuario?
+        </div>
+        <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="delusuario(usuariosarr[const].id)"> Sí, estoy seguro </button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No estoy seguro</button>
+        </div>
+    </div>
+    </div>
+</div>
+
+  

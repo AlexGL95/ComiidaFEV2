@@ -61,7 +61,7 @@
                 <div class="form-group">
                     <div *ngFor="let ingrediente2 of ingredientes2; index as i">
                         <div class="form-inline mt-3 w-2">
-                            <input type="number" class="form-control" min="0" name="name.{{i}}.cant" OnlyNumber="true" onkeydown="return false" placeholder="Cant." [(ngModel)]="ing2[i]">
+                            <input type="number" class="form-control" min="0" max="999" name="name.{{i}}.cant" OnlyNumber="true" onkeydown="return false" placeholder="Cant." [(ngModel)]="ing2[i]">
 
                             <div class="form-group">
                                 <div class="dropdown">
@@ -75,6 +75,9 @@
                                     </ul>
                                 </div>
                             </div>
+
+                            <button type="button" class="btn btn-info" (click)="borrarIng(i)">Guardar</button>
+
                         </div>
                         
                     </div>

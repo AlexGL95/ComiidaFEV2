@@ -108,6 +108,19 @@ export class NewRecetaComponent implements OnInit {
   regreso(){
     this.router.navigate(['/Home']);
   }
+
+  borrarIng(i: number){
+    this.ing[i] = "";
+    this.ing2[i]= 0;
+    for(let z = i; z<this.ing.length; z++){
+      this.ing[z] = this.ing[z+1];
+      this.ing2[z] = this.ing2[z+1];
+      this.mensajeUni[z] = this.mensajeUni[z+1];
+    }
+    this.ingredientes.length --;
+    this.ingredientes2.length --;
+
+  }
   
 
 }
