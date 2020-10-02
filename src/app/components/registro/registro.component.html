@@ -31,7 +31,7 @@
             <form [formGroup]="RegistroForm" class="text-center" (ngSubmit)="singin(nombre.value, pass.value, copass.value)">
                 <div class="form-group">
                     <label>Usuario</label>
-                    <input type="text" formControlName="usuario" maxlength="15" class="form-control" required #nombre />
+                    <input type="text" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)" formControlName="usuario" maxlength="15" class="form-control" required #nombre />
                     <div class="alert-danger" *ngIf="usuario.errors && (usuario.dirty || usuario.touched)">
                         <div class="container-fluid" *ngIf="usuario.errors.required">
                             Nombre de usuario requerido
