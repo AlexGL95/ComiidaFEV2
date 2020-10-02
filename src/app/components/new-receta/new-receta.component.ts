@@ -29,9 +29,8 @@ export class NewRecetaComponent implements OnInit {
   camposFaltantes: boolean;
   cambio: boolean;
   cambio2: boolean;
-  k = 0;
-  s = false;
-  modal: boolean;
+  nombreValido = false;
+  mensajeRecetaRepetida = false;
   createFormGroup(){
     return new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -101,29 +100,24 @@ export class NewRecetaComponent implements OnInit {
       this.recetta.categoria = this.mensajeCat;
       this.recetta.ingredientes = this.receta;
       this.recetta.activo = false;
-      console.log(this.recetta);
-      this.verificaruni(this.recetta.nombre);
-      if (this.k != 0) {
-        this.nuevaRecetaService.crearReceta(this.recetta)
-            .subscribe(res => this.router.navigate(['/Success']),
-            err => console.log(err))
-        return false;
-      } else {
-        this.s = true;
-      }
-
+      this.verificaruni();
     }
   }
 
-  verificaruni(nombre: string){
-    this.recetaserv.getRecetas().subscribe(res =>{
-      for (let i = 0; i < res.length ; i++) {
-        if (nombre.toLowerCase() == res[i].nombre.toLowerCase()) {
-            this.k = 1;
-          }
+  verificaruni(){
+    this.nuevaRecetaService.crearReceta(this.recetta).subscribe( res => {
+      console.log(res);
+      if (res === null) {
+        this.mensajeRecetaRepetida = true;
+      } else if (res !== null) {
+        this.router.navigate(['/Success']);
+        this.mensajeRecetaRepetida = false;
       }
-    });
+    },
+    err => console.log(err)
+    );
   }
+
   regreso(){
     this.router.navigate(['/Home']);
   }

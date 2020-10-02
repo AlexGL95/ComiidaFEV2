@@ -8,18 +8,24 @@
     </button>
     <!-- Etiquetas -->
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav nav-fill w-100">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item" *ngIf="IS_SUPER" [routerLinkActive]="['active']">
+                <a class="nav-link" href="/Home" [routerLink]="['/Home']">
+                    <fa-icon [icon]="faHome"></fa-icon>
+                    Inicio
+                </a>
+            </li>
             <li class="nav-item" *ngIf="IS_SUPER" [routerLinkActive]="['active']">
                 <a class="nav-link" href="/Ronda" [routerLink]="['/Ronda']">Rondas</a>
             </li>
-            <li class="nav-item" *ngIf="IS_SUPER && !mensajeSinEquipos" [routerLinkActive]="['active']">
+            <li class="nav-item" *ngIf="IS_SUPER && (!mensajeSinEquipos && !mensajeSinRondas)" [routerLinkActive]="['active']">
                 <a class="nav-link" href="/Equipo" [routerLink]="['/Equipo']">Equipos</a>
-            </li>
-            <li class="nav-item" *ngIf="IS_SUPER && !mensajeSinRecetas" [routerLinkActive]="['active']">
-                <a class="nav-link" href="/Receta" [routerLink]="['/Receta']">Recetas</a>
             </li>
             <li class="nav-item" *ngIf="IS_SUPER && (mensajeSinEquipos || mensajeSinRondas)" [routerLinkActive]="['active']">
                 <a class="nav-link disabled" href="/Equipo" [routerLink]="['/Equipo']">Equipos</a>
+            </li>
+            <li class="nav-item" *ngIf="IS_SUPER && !mensajeSinRecetas" [routerLinkActive]="['active']">
+                <a class="nav-link" href="/Receta" [routerLink]="['/Receta']">Recetas</a>
             </li>
             <li class="nav-item" *ngIf="IS_SUPER && mensajeSinRecetas" [routerLinkActive]="['active']">
                 <a class="nav-link disabled" href="/Receta" [routerLink]="['/Receta']">Recetas</a>
@@ -28,7 +34,10 @@
                 <a class="nav-link" href="/Usuarios" [routerLink]="['/Usuarios']">Usuarios</a>
             </li>
             <li class="nav-item float-right">
-                <a class="nav-link" href="" (click)="logout()">Logout</a>
+                <a class="nav-link" href="" (click)="logout()">
+                    <fa-icon [icon]="faSignOutAlt"></fa-icon>
+                    Salir
+                </a>
             </li>
         </ul>
     </div>

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { usuariomodel } from 'src/app/Models/Usuario.model';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { LowerCasePipe } from '@angular/common';
+//Icons
+import { faEdit, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-usuarios',
@@ -15,6 +16,9 @@ export class UsuariosComponent implements OnInit {
   auxarr = [] ;
   resultado = false; // control de mensaje si no se encuentran coincidencias
   confirmar: boolean;
+  faEdit = faEdit;
+  faTrashAlt = faTrashAlt;
+
   const;
   constructor(
     private user: UserService,
@@ -56,4 +60,5 @@ delusuario(id){
 nuevousuario(){
   this.route.navigate(['Registro']);
 }
+
 }

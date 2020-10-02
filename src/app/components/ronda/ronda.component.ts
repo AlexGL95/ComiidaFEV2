@@ -47,6 +47,7 @@ export class RondaComponent implements OnInit {
         .subscribe(res => {
           this.mensajeCreaRonda = false; //Al crear una ronda, ya existe al menos una
           this.rondas = res;
+          window.location.reload();
         },
         err => {this.mensajeCrearRonda = true}
         )
@@ -61,6 +62,7 @@ export class RondaComponent implements OnInit {
                 //Condicional. ¿Existe al menos una ronda?
                 if ( res.length === 0 ) {
                   this.mensajeCreaRonda = true;
+                  window.location.reload();
                 }
                 this.rondas = res;
               },
