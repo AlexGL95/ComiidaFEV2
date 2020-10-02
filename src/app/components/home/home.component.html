@@ -32,20 +32,24 @@
     <!-- Ronda en curso -->
     <div class="container mt-3" *ngIf="mensajeRondaEnCurso">
         <div class="alert alert-info text-center" role="alert">
-            La ronda actual esta en curso.
+            La ronda actual esta en curso, y el tiempo de seleccion de ingredientes expiro.
         </div>
+        <!-- Boton de redireccion a rondas -->
+        <button type="button" class="btn btn-success mt-3 mr-2 btn-block" *ngIf="IS_SUPER" (click)="linkRondas()">
+            Ir a rondas.
+        </button>
         <!-- Boton de añadir recetas -->
         <button type="button" class="btn btn-secondary mt-3 mr-2 btn-block" (click)="linkNuevaReceta()">
             Añadir receta
         </button>
     </div>
-    <!-- Sin rondas -->
+    <!-- Sin rondas usuario -->
     <div class="container mt-3" *ngIf="mensajeNoHayRonda">
         <div class="alert alert-danger text-center" role="alert">
             No existen rondas actualmente.
         </div>
-        <!-- Boton de añadir recetas -->
-        <button type="button" class="btn btn-success mt-3 mr-2 btn-block" (click)="linkRondas()">
+        <!-- Boton de redireccion a rondas -->
+        <button type="button" class="btn btn-success mt-3 mr-2 btn-block" *ngIf="IS_SUPER" (click)="linkRondas()">
             Ir a rondas.
         </button>
     </div>

@@ -93,26 +93,31 @@
                 <div class="row cols-2">
                     <div class="col mt-5 ml-3">
                         <button type="button" class="btn btn-info" (click)="getIng()">
-                Ingredientes
-              </button>
-                    </div>
+                        Ingredientes de la ronda actual
+                    </button>
+                </div>
                     <div class="col mt-5 ml-1 mr-2">
                         <button type="button" class="btn btn-danger" (click)="deleteRonda()">Eliminar Última Ronda</button>
                     </div>
                 </div>
-
-                <div class="row" *ngIf="show==true">
+                <div class="row" *ngIf="(show==true) && (!mensajeSinRecetas)">
                     <div class="col-md-12 mt-5">
-                        <h5>Ingredientes</h5>
-                        <div class="alert alert-info" role="alert">
-                            {{ingredientes}}
-                        </div>
+                            <div class="container">
+                                <button type="button" class="btn btn-danger" (click)="ocultar()">Ocultar</button>
+                            </div>
+                        <ul class="list-group list-group-flush" *ngFor="let ingrediente of ingredientes">
+                            <li class="list-group-item">{{ingrediente}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row" *ngIf="(show==true) && (mensajeSinRecetas)">
+                    <div class="col-md-12 mt-5">
                         <div class="container">
                             <button type="button" class="btn btn-danger" (click)="ocultar()">Ocultar</button>
                         </div>
+                        <h4>No existen recetas asignadas aun a la ronda.</h4>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>
