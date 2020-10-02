@@ -160,6 +160,10 @@
                         <h5>Cocinan:</h5>
                         {{equipoUsuario.integrantes_nombres[0]}} y {{equipoUsuario.integrantes_nombres[1]}}
                     </div>
+                    <!-- Boton de añadir recetas -->
+                    <button type="button" class="btn btn-secondary mt-4 ml-3 mr-2" (click)="linkNuevaReceta()">
+                        Añadir receta
+                    </button>
             </div>
             <!-- Lado derecho: Recetas asignadas -->
             <div class="col"  *ngIf="mensajeExistenRecetas">
@@ -175,10 +179,6 @@
                             {{recetaNombre}}
                         </li>
                     </ul>
-                    <!-- Boton de añadir recetas -->
-                    <button type="button" class="btn btn-secondary mt-3 mr-2" (click)="linkNuevaReceta()">
-                        Añadir receta
-                    </button>
                 </div>
             </div>
         </div>
