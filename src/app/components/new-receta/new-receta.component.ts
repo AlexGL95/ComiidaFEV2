@@ -4,6 +4,7 @@ import { Receta } from '../../interfaces/Ronda';
 import { NewrecetaService } from 'src/app/services/newreceta.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { RecetaService } from 'src/app/services/receta.service';
 
 @Component({
   selector: 'app-new-receta',
@@ -28,7 +29,8 @@ export class NewRecetaComponent implements OnInit {
   camposFaltantes: boolean;
   cambio: boolean;
   cambio2: boolean;
-
+  k = 0;
+  s = false;
   createFormGroup(){
     return new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -38,6 +40,7 @@ export class NewRecetaComponent implements OnInit {
 
   constructor(private nuevaRecetaService: NewrecetaService,
               private router: Router,
+              private recetaserv: RecetaService,
               private authService: AuthService) {
                 this.RecetaForm = this.createFormGroup();
                 
@@ -95,13 +98,28 @@ export class NewRecetaComponent implements OnInit {
       this.recetta.ingredientes = this.receta;
       this.recetta.activo = false;
       console.log(this.recetta);
-      this.nuevaRecetaService.crearReceta(this.recetta)
-          .subscribe(res => this.router.navigate(['/Success']),
-          err => console.log(err))
-      return false
+      this.verificaruni(this.recetta.nombre);
+      if (this.k != 0) {
+        this.nuevaRecetaService.crearReceta(this.recetta)
+            .subscribe(res => this.router.navigate(['/Success']),
+            err => console.log(err))
+        return false;
+      } else {
+        this.s = true;
+      }
+
     }
   }
 
+  verificaruni(nombre: string){
+    this.recetaserv.getRecetas().subscribe(res =>{
+      for (let i = 0; i < res.length ; i++) {
+        if (nombre.toLowerCase() == res[i].nombre.toLowerCase()) {
+            this.k = 1;
+          }
+      }
+    });
+  }
   regreso(){
     this.router.navigate(['/Home']);
   }
