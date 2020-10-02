@@ -15,7 +15,7 @@ export class NewRecetaComponent implements OnInit {
   RecetaForm: FormGroup;
 
   categorias = ['Entrada', 'Plato Fuerte', 'Acompañamiento', 'Postre', 'Bebida', 'Salsa'];
-  unidades = ['Kg', 'g', 'L', 'ml', 'pz'];
+  unidades = ['Kg', 'gr', 'Lt', 'ml', 'pz'];
   mensajeCat = 'Seleccionar Categoria';
   mensajeUni = ['Unidades'];
   ingredientes = [];
@@ -63,6 +63,9 @@ export class NewRecetaComponent implements OnInit {
       this.mensajeUni[this.ingredientes.length] = 'Unidades';
       this.ingredientes.length ++;
       this.ingredientes2.length ++;
+      this.camposFaltantes = false;
+    } else {
+      this.camposFaltantes = true;
     }
   }
 
