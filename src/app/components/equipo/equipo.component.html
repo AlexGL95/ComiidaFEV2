@@ -12,7 +12,8 @@
     </div>
 
     <div class="alert alert-success alert-dismissible" *ngIf="mensajeEnviado">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> Envio exitoso.
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="mensajeEnviado = false">&times;</a>
+        Envio exitoso.
     </div>
 </div>
 

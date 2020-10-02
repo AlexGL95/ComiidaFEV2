@@ -12,7 +12,7 @@
         <form action="" class="form-inline text-center">
             <input class="form-control mr-sm-2" (keyup)="ngOnInit(Bus.value)" type="search" maxlength="15" #Bus placeholder="Buscar">
             <button class="btn btn-outline-secondary my-2 my-sm-0 mr-sm-2" type="submit">Buscar</button>
-            <button class="btn btn-success" (click)="nuevousuario()">Agregar usuario</button>
+            <button class="btn btn-success mt-3" (click)="nuevousuario()">Agregar usuario</button>
         </form>
         <br>
         <div class=" text-center">
@@ -44,10 +44,12 @@
                     <div class="col text-right">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" *ngIf="((!usuariosarr[i].super) && usuariosarr.length > 4)" (click)="const = i">
-                                    Borrar
+                                <button class=" ml-1 btn btn-warning" (click)="editarusuario(usuariosarr[i].id)">
+                                    <fa-icon [icon]="faEdit"></fa-icon>
                                 </button>
-                                <button class=" ml-1 btn btn-warning" (click)="editarusuario(usuariosarr[i].id)"> Editar </button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" *ngIf="((!usuariosarr[i].super) && usuariosarr.length > 4)" (click)="const = i">
+                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                </button>
                             </li>
                         </ul>
                     </div>

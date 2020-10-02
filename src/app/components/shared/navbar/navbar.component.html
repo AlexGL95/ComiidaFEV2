@@ -18,14 +18,14 @@
             <li class="nav-item" *ngIf="IS_SUPER" [routerLinkActive]="['active']">
                 <a class="nav-link" href="/Ronda" [routerLink]="['/Ronda']">Rondas</a>
             </li>
-            <li class="nav-item" *ngIf="IS_SUPER && !mensajeSinEquipos" [routerLinkActive]="['active']">
+            <li class="nav-item" *ngIf="IS_SUPER && (!mensajeSinEquipos && !mensajeSinRondas)" [routerLinkActive]="['active']">
                 <a class="nav-link" href="/Equipo" [routerLink]="['/Equipo']">Equipos</a>
-            </li>
-            <li class="nav-item" *ngIf="IS_SUPER && !mensajeSinRecetas" [routerLinkActive]="['active']">
-                <a class="nav-link" href="/Receta" [routerLink]="['/Receta']">Recetas</a>
             </li>
             <li class="nav-item" *ngIf="IS_SUPER && (mensajeSinEquipos || mensajeSinRondas)" [routerLinkActive]="['active']">
                 <a class="nav-link disabled" href="/Equipo" [routerLink]="['/Equipo']">Equipos</a>
+            </li>
+            <li class="nav-item" *ngIf="IS_SUPER && !mensajeSinRecetas" [routerLinkActive]="['active']">
+                <a class="nav-link" href="/Receta" [routerLink]="['/Receta']">Recetas</a>
             </li>
             <li class="nav-item" *ngIf="IS_SUPER && mensajeSinRecetas" [routerLinkActive]="['active']">
                 <a class="nav-link disabled" href="/Receta" [routerLink]="['/Receta']">Recetas</a>
