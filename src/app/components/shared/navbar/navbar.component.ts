@@ -41,7 +41,7 @@ export class NavbarComponent {
 
       // Condicion. ¿Hay recetas en la Db?
       this.recetasService.getRecetas().subscribe( recetas => {
-        if ( recetas === null ) {
+        if ( recetas.length === 0 ) {
           this.mensajeSinRecetas = true;
         }
       });

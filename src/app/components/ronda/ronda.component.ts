@@ -62,6 +62,7 @@ export class RondaComponent implements OnInit {
                 //Condicional. ¿Existe al menos una ronda?
                 if ( res.length === 0 ) {
                   this.mensajeCreaRonda = true;
+                  window.location.reload();
                 }
                 this.rondas = res;
               },
