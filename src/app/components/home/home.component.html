@@ -26,7 +26,7 @@
     <!-- Hay espacios vacios -->
     <div class="container mt-3" *ngIf="mensajeEspaciosSinAsignar">
         <div class="alert alert-danger text-center" role="alert">
-            Hay espacios vacios.
+            Hay espacios vacíos.
         </div>
     </div>
     <!-- Ronda en curso -->
@@ -194,16 +194,16 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Alerta</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body" *ngIf="mensajeEspaciosSinAsignar">
-          Hay Espacios Vacios
+          Hay Espacios Vacíos
         </div>
         <div class="modal-body" *ngIf="cambio">
-          Seguro de asignar esta(s) receta(s)? No Se Puede Reasignar Posteriormente
+          ¿Seguro de asignar esta(s) receta(s)? No Se Puede Reasignar Posteriormente
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" *ngIf="cambio" (click)="asignarRecetaConfirmada()">Estoy Seguro</button>
@@ -211,4 +211,4 @@
         </div>
       </div>
     </div>
-  </div>
+</div>

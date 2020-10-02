@@ -17,7 +17,7 @@ export class NewRecetaComponent implements OnInit {
 
   categorias = ['Entrada', 'Plato Fuerte', 'Acompañamiento', 'Postre', 'Bebida', 'Salsa'];
   unidades = ['Kg', 'gr', 'Lt', 'ml', 'pz'];
-  mensajeCat = 'Seleccionar Categoria';
+  mensajeCat = 'Seleccionar Categoría';
   mensajeUni = ['Unidades'];
   ingredientes = [];
   ingredientes2 = [];
@@ -62,7 +62,7 @@ export class NewRecetaComponent implements OnInit {
   }
 
   nuevoIng(): void{ 
-    if(this.ingredientes.length < 10 && this.ing[this.ingredientes.length-1] && this.ing2[this.ingredientes2.length-1] && this.mensajeUni[this.ingredientes.length-1]!=='Unidades' && this.mensajeCat!=='Seleccionar Categoria'){
+    if(this.ingredientes.length < 10 && this.ing[this.ingredientes.length-1] && this.ing2[this.ingredientes2.length-1] && this.mensajeUni[this.ingredientes.length-1]!=='Unidades' && this.mensajeCat!=='Seleccionar Categoría'){
       this.mensajeUni[this.ingredientes.length] = 'Unidades';
       this.ingredientes.length ++;
       this.ingredientes2.length ++;
@@ -82,7 +82,7 @@ export class NewRecetaComponent implements OnInit {
   guardar(): boolean{
     this.receta = '';
     for(let i = 0; i < this.ingredientes.length; i++){
-      if(this.ing[i]!==undefined && this.ing2[i]!==0 && this.mensajeUni[i]!== 'Unidades' && this.mensajeCat!== 'Seleccionar Categoria'){
+      if(this.ing[i]!==undefined && this.ing2[i]!==0 && this.mensajeUni[i]!== 'Unidades' && this.mensajeCat!== 'Seleccionar Categoría'){
         if(this.ingredientes.length <= 1){
           this.receta = `${this.ing[i]}-${this.ing2[i]}${this.mensajeUni[i]}`
         }else if(i===0){
