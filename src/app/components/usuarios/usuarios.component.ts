@@ -14,6 +14,8 @@ export class UsuariosComponent implements OnInit {
   usuariosarr: any = [];
   auxarr = [] ;
   resultado = false; // control de mensaje si no se encuentran coincidencias
+  confirmar: boolean;
+  const;
   constructor(
     private user: UserService,
     private route: Router,
