@@ -1,3 +1,4 @@
+// tslint:disable: prefer-for-of
 // tslint:disable: no-string-literal
 // tslint:disable: object-literal-shorthand
 import { Component, OnInit } from '@angular/core';
@@ -17,40 +18,60 @@ export class EditarUsuarioComponent implements OnInit {
   patt = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-zd$@$!%*?&].{7,}';
   RegistroForm: FormGroup;
   user: usuariomodel;
+  usuariosarr: any = [];
   usu: any;
   idx;
+  i = 0;
   mensajeUpdate: boolean;
   mensajeInv: boolean;
 
   update(nombre: string, pass: string, copass: string){
-    if (this.RegistroForm.valid || ((this.password.value <= 0) && (this.copassword.value <= 0)) ) {
-      if (this.password.valid && this.copassword.valid) {
-        this.user = {
-          nombre: nombre,
-          pass: pass};
-        console.log('aqui actualizaria todo' + this.user);
-        this.userservice.updateusuario(this.idx, this.user).subscribe(res => 
-          console.log(res),
-          err => this.mensajeUpdate = true
-        );
-        this.router.navigate(['/Usuarios']);
-      } else {
-        this.user = {
-          nombre: nombre
-        };
-        console.log('aqui solo el nombre' + this.user);
-        this.userservice.updateusuario(this.idx, this.user).subscribe(res => 
-          console.log(res),
-          err => this.mensajeUpdate = true
-        );
-      }
-        /*this.auth.registro(this.user)
-        .subscribe(resp => {
-          console.log(resp);
-        });*/
-    } else {
-        this.mensajeInv = true;
-    }
+    this.usrse.getAll().subscribe(res => {
+          this.usuariosarr = res;
+          for (let index = 0; index < this.usuariosarr.length; index++) {
+            if ((this.usuariosarr[index].nombre.toLowerCase() == nombre.toLowerCase())) {
+              this.i++;
+              console.log(this.i);
+            }
+          }
+          if (this.RegistroForm.valid || ((this.password.value <= 0) && (this.copassword.value <= 0)) ) {
+              if (this.password.valid && this.copassword.valid) {
+                this.user = {
+                  nombre: nombre,
+                  pass: pass};
+                console.log('Coincidencias', this.i);
+                if (this.i > 0) {
+                      this.mensajeUpdate = true;
+                    }else{
+                      this.userservice.updateusuario(this.idx, this.user).subscribe(res => 
+                        {}, err => {this.mensajeUpdate = true; });
+                      this.router.navigate(['/Usuarios']);
+                    }
+              } else {
+                this.user = {
+                  nombre: nombre
+                };
+                console.log('aqui solo el nombre' + this.user);
+                console.log('Coincidencias', this.i);
+                if (this.i > 0) {
+                  this.mensajeUpdate = true;
+                } else {
+                  this.userservice.updateusuario(this.idx, this.user).subscribe(res => 
+                  console.log(res),
+                  err => this.mensajeUpdate = true);
+                }
+
+              }
+                /*this.auth.registro(this.user)
+                .subscribe(resp => {
+                  console.log(resp);
+                });*/
+            } else {
+                this.mensajeInv = true;
+            }
+
+        });
+
   }
 
     checkPasswords(formGroup: FormGroup) {
@@ -69,6 +90,7 @@ export class EditarUsuarioComponent implements OnInit {
       private userservice: UserService,
       private activatedRoute: ActivatedRoute,
       private auth: AuthService,
+      private usrse: UserService,
       private router: Router) {
         this.RegistroForm = this.formBuilder.group(
           {

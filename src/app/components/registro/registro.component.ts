@@ -28,11 +28,18 @@ export class RegistroComponent implements OnInit {
       pass: pass};
 
       this.auth.registro(this.user)
-      .subscribe(resp => 
-      {console.log(resp);
-      this.router.navigate(['/Usuarios']);},
-      err => this.mensajeRegistro = true
-    );
+      .subscribe(resp => {
+        if (!resp) {
+          this.mensajeRegistro = true;
+        }else{
+          console.log(resp);
+          this.router.navigate(['/Usuarios']);
+        }
+      },
+      err => {
+        console.log(err);
+
+      });
 
   } else {
     this.mensajeInvalido = true;
