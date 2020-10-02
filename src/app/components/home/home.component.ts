@@ -36,6 +36,9 @@ export class HomeComponent{
   tiempoRestante = { horas: 8, minutos: 0, segundos: 0 };
   fechaActual: Date = new Date;
   rondaInmediata: Ronda = null;
+  segundosAbierto: number = this.fechaActual.getSeconds();
+  minutosAbierto: number = this.fechaActual.getMinutes();
+  horasAbierto: number = 0;
   cambio: boolean;
   cambio2: boolean;
 
@@ -62,13 +65,17 @@ export class HomeComponent{
             //Condicion. Si fecha de equipo no es nulo se envia
             else {
               equipo = usuarios[m].equipo.fecha;
-
-              console.log(equipo);
-
               this.homeInit(equipo);
             }
+
           }
         }
+    } );
+
+    rondasService.getAll().subscribe( rondas => {
+      if ( rondas.length === 0 ) {
+        this.mensajeNoHayRonda = true;
+      }
     } );
   }
 
@@ -185,11 +192,6 @@ export class HomeComponent{
     }
   }
 
-  //Metodo para redirigir a nueva receta
-  linkNuevaReceta(){
-    this.router.navigate(['/NuevaReceta']);
-  }
-
   //Metodo que hace los cambios necesarios en la base de datos
   asignarRecetasAlEquipo() {
     let espaciosSinAsignar = false;
@@ -289,10 +291,6 @@ export class HomeComponent{
     return diaAnterior;
   }
 
-  segundosAbierto: number = this.fechaActual.getSeconds();
-  minutosAbierto: number = this.fechaActual.getMinutes();
-  horasAbierto: number = 0;
-
   //Cronometro de 1 minuto
   cronometro() {
     //Llamada cada 1 minuto
@@ -327,6 +325,16 @@ export class HomeComponent{
         this.mensajeRondaEnCurso = true;
       }
     },1000)
+  }
+
+  //Metodo para redirigir a nueva receta
+  linkNuevaReceta(){
+    this.router.navigate(['/NuevaReceta']);
+  }
+
+  //Metodo para redirigir a nueva receta
+  linkRondas(){
+    this.router.navigate(['/Ronda']);
   }
 
 }

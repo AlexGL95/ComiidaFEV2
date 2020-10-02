@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLinkActive } from '@angular/router';
 import { RecetaService } from 'src/app/services/receta.service';
 import { EquipoService } from 'src/app/services/equipo.service';
+import { RondaService } from 'src/app/services/ronda.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,11 +15,13 @@ export class NavbarComponent {
   IS_SUPER: boolean = false;
   mensajeSinEquipos: boolean = false;
   mensajeSinRecetas: boolean = false;
+  mensajeSinRondas: boolean = false;
 
   constructor(
     private authService: AuthService,
     private equiposService: EquipoService,
     private recetasService: RecetaService,
+    private rondaService: RondaService,
     private router: Router
     ) {
 
@@ -39,9 +42,16 @@ export class NavbarComponent {
         }
       });
 
+      // Condicion. ¿Hay rondas en la Db?
+      this.rondaService.getAll().subscribe( rondas => {
+        if ( rondas.length === 0 ) {
+          this.mensajeSinRondas = true;
+        }
+      });
+
   }
   logout(){
     this.authService.logout();
     this.router.navigate(['Login']);
   }
-  }
+}

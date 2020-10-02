@@ -1,105 +1,118 @@
-<app-navbar *ngIf="mensajeNavbar"></app-navbar>
+<app-navbar></app-navbar>
 
+<!-- Titulo: Rondas -->
+<div class="container-fluid border-bottom border-secondary mt-2">
+    <h2 align="center">Rondas</h2>
+</div>
 <!-- Vista cuando no hay suficientes usurios -->
 <div class="container mt-5" *ngIf="mensajeUsuariosInsuficientes">
-  <div class="alert alert-info" role="alert">
-      Necesitas al menos 4 usuarios para generar una ronda.
-  </div>
+    <div class="alert alert-danger text-center" role="alert">
+        Necesitas al menos 4 usuarios para generar una ronda.
+    </div>
+    <button type="button" class="btn btn-success btn-block mt-3" (click)="linkUsuarios()">
+    Ir a usuarios.
+  </button>
 </div>
 
 <!-- Vista cuando no existen rondas -->
 <div class="container mt-5" *ngIf="mensajeCreaRonda && !mensajeUsuariosInsuficientes">
-  <div class="alert alert-info" role="alert">
-      Crea una ronda.
-  </div>
-  <button class="btn btn-success btn-block" (click)="createRonda()">
-    Create
+    <div class="alert alert-info" role="alert">
+        Crea una ronda.
+    </div>
+    <button class="btn btn-success btn-block" (click)="createRonda()">
+    Crear Ronda
   </button>
 </div>
 
 <!-- Vista cuando existen rondas -->
 <div class="container" *ngIf="!mensajeCreaRonda">
 
-  <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeRondaActiva">
-    <strong>No Hay Ronda Activa</strong>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeRondaActiva = false">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeRondaActiva">
+        <strong>No Hay Ronda Activa</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeRondaActiva = false">
       <span aria-hidden="true">&times;</span>
     </button>
-  </div>
-
-  <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeCrearRonda">
-    <strong>No Se Pudo Crear Ronda</strong>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeCrearRonda = false">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-
-  <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeBorrarRonda">
-    <strong>No Se Pudo Eliminar Ronda</strong>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeBorrarRonda = false">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-
-  <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeIngredientes">
-    <strong>No Hay Ingredientes Activos</strong>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeIngredientes = false">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-
-  <div class="row mt-5">
-
-    <div class="col-md-7">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">id</th>
-            <th scope="col">Fecha Inicial</th>
-            <th scope="col">Fecha Final</th>
-            <th scope="col">Activa</th>
-          </tr>
-        </thead>
-        <tbody *ngFor = "let ronda of rondas">
-          <tr>
-            <td>{{ ronda.id }}</td>
-            <td>{{ ronda.fecha_inicio }}</td>
-            <td>{{ ronda.fecha_final }}</td>
-            <td>{{ ronda.activa }}</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
-    
-    <div class="col-md-4 p-3">
-      <form (submit)="createRonda()">
-        <button class="btn btn-success btn-block p-3" *ngIf="!mensajeUsuariosInsuficientes">
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeCrearRonda">
+        <strong>No Se Pudo Crear Ronda</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeCrearRonda = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeBorrarRonda">
+        <strong>No Se Pudo Eliminar Ronda</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeBorrarRonda = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeIngredientes">
+        <strong>No Hay Ingredientes Activos</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeIngredientes = false">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+
+    <div class="row mt-5">
+
+        <div class="col-md-7">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Fecha Inicial</th>
+                        <th scope="col">Fecha Final</th>
+                        <th scope="col">Activa</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let ronda of rondas">
+                    <tr>
+                        <td>{{ ronda.id }}</td>
+                        <td>{{ ronda.fecha_inicio }}</td>
+                        <td>{{ ronda.fecha_final }}</td>
+                        <td>{{ ronda.activa }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4 p-3">
+            <form (submit)="createRonda()">
+                <!-- Vista cuando no hay suficientes usurios -->
+                <div class="container mt-5" *ngIf="(rondas.length >= 5)">
+                    <div class="alert alert-info" role="alert">
+                        Solo puedes crear un maximo de 5 rondas a la vez
+                    </div>
+                </div>
+                <button class="btn btn-success btn-block p-3" *ngIf="((!mensajeUsuariosInsuficientes) && (rondas.length < 5))">
             Crear Ronda
         </button>
-  
-          <div class="row cols-2">
-            <div class="col mt-5 ml-3">
-              <button type="button" class="btn btn-info" (click)="getIng()">
+
+                <div class="row cols-2">
+                    <div class="col mt-5 ml-3">
+                        <button type="button" class="btn btn-info" (click)="getIng()">
                 Ingredientes
               </button>
-            </div>
-            <div class="col mt-5 ml-1 mr-2">
-              <button type="button" class="btn btn-danger" (click)="deleteRonda()">Eliminar Última Ronda</button>
-            </div>
-          </div>
-  
-          <div class="row" *ngIf="show==true">
-            <div class="col-md-12 mt-5">
-              <h5>Ingredientes</h5>
-              <div class="alert alert-info" role="alert">
-                {{ingredientes}}
-              </div>
-              <div class="container">
-                <button type="button" class="btn btn-danger" (click)="ocultar()">Ocultar</button>
-              </div>
-            </div>
-          </div>
-  
-      </form>
+                    </div>
+                    <div class="col mt-5 ml-1 mr-2">
+                        <button type="button" class="btn btn-danger" (click)="deleteRonda()">Eliminar Última Ronda</button>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="show==true">
+                    <div class="col-md-12 mt-5">
+                        <h5>Ingredientes</h5>
+                        <div class="alert alert-info" role="alert">
+                            {{ingredientes}}
+                        </div>
+                        <div class="container">
+                            <button type="button" class="btn btn-danger" (click)="ocultar()">Ocultar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
     </div>
-</div>

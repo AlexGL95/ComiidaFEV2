@@ -8,38 +8,47 @@
 
 <!-- Mensajes -->
     <!-- No cocinas -->
-    <div class="container mt-5" *ngIf="mensajeHoyNoCocinas">
-        <div class="alert alert-success" role="alert">
+    <div class="container mt-3" *ngIf="mensajeHoyNoCocinas && !mensajeNoHayRonda">
+        <div class="alert alert-success text-center" role="alert">
             No cocinas.
         </div>
         <!-- Boton de añadir recetas -->
-        <button type="button" class="btn btn-secondary mt-3 mr-2" (click)="linkNuevaReceta()">
+        <button type="button" class="btn btn-secondary mt-3 mr-2 btn-block" (click)="linkNuevaReceta()">
             Añadir receta
         </button>
     </div>
     <!-- Ya hay recetas asignadas -->
-    <div class="container mt-5" *ngIf="mensajeExistenRecetas">
-        <div class="alert alert-info" role="alert">
+    <div class="container mt-3" *ngIf="mensajeExistenRecetas">
+        <div class="alert alert-info text-center" role="alert">
             Tu equipo ya tiene recetas asignadas.
         </div>
     </div>
     <!-- Hay espacios vacios -->
-    <div class="container mt-5" *ngIf="mensajeEspaciosSinAsignar">
-        <div class="alert alert-danger" role="alert">
+    <div class="container mt-3" *ngIf="mensajeEspaciosSinAsignar">
+        <div class="alert alert-danger text-center" role="alert">
             Hay espacios vacios.
         </div>
     </div>
     <!-- Ronda en curso -->
-    <div class="container mt-5" *ngIf="mensajeRondaEnCurso">
-        <div class="alert alert-info" role="alert">
+    <div class="container mt-3" *ngIf="mensajeRondaEnCurso">
+        <div class="alert alert-info text-center" role="alert">
             La ronda actual esta en curso.
         </div>
         <!-- Boton de añadir recetas -->
-        <button type="button" class="btn btn-secondary mt-3 mr-2" (click)="linkNuevaReceta()">
+        <button type="button" class="btn btn-secondary mt-3 mr-2 btn-block" (click)="linkNuevaReceta()">
             Añadir receta
         </button>
     </div>
-
+    <!-- Sin rondas -->
+    <div class="container mt-3" *ngIf="mensajeNoHayRonda">
+        <div class="alert alert-danger text-center" role="alert">
+            No existen rondas actualmente.
+        </div>
+        <!-- Boton de añadir recetas -->
+        <button type="button" class="btn btn-success mt-3 mr-2 btn-block" (click)="linkRondas()">
+            Ir a rondas.
+        </button>
+    </div>
 
 <div *ngIf="!mensajeHoyNoCocinas && !mensajeRondaEnCurso">
     <!-- Cuerpo de la pagina (Si no hay recetas asignadas) -->
