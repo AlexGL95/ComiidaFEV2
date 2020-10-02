@@ -2,7 +2,6 @@
     <!-- Titulo: Nueva receta -->
     <div class="container-fluid border-bottom border-secondary mt-2">
         <h2 align="center">Nueva receta</h2>
-    <button type="button" class="btn btn-primary" (click)="regreso()">Regresar A Home</button>
     </div>
 
     <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="camposFaltantes">
@@ -18,15 +17,22 @@
         </button>
     </div>
     <div class="row">
-        <div class="col mx-auto">
-            
+        <div class="col mx-auto mt-3">
+            <div class="form-inline">
+                <button type="button" class="btn btn-secondary" (click)="regreso()">Regresar A Home</button>
+                <div class="col-md-5">
+                    <button type="button" class="btn btn-info" (click)="guardar()">
+                        Guardar Receta
+                    </button>
+                </div>
+            </div>
 
-            <div class="form-group">
+            <div class="form-group mt-3">
                 <label for="name" class="control-label-sm-3">
                     Nombre:
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Nombre De Receta" [(ngModel)]="nombre">
+                    <input type="text" class="form-control" maxlength="30" placeholder="Nombre De Receta" [(ngModel)]="nombre">
                 </div>
             </div>
 
@@ -52,48 +58,32 @@
                 <button class="btn btn-success ml-3" (click)="nuevoIng()">Agregar</button>
             </div>
 
-            <div class="row">
+            <div class="row row-cols-6 mt-3" *ngFor="let ingrediente of ingredientes; index as i">
+                <div class="col" >
+                    <input type="text" maxlength="15" class="form-control" name="name.{{i}}.ing" placeholder="Nuevo ingrediente" [(ngModel)]="ing[i]">
+                </div>
 
-                <div class="form-group">
-                    <div class="col mt-3" *ngFor="let ingrediente of ingredientes; index as i">
-                        <input type="text" class="form-control" name="name.{{id}}.ing" placeholder="Nuevo ingrediente" [(ngModel)]="ing[i]">
+                <div class="col">
+                    <input type="number" class="form-control" min="1" max="999" name="name.{{i}}.cant" OnlyNumber="true" onkeydown="return false" placeholder="Cant." [(ngModel)]="ing2[i]">
+                </div>
+
+                <div class="col">
+                    <div class="col-md-4">
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle btn-block" type="button" data-toggle="dropdown">
+                                {{mensajeUni[i]}}
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li *ngFor="let unidad of unidades">
+                                    <button type="button" class="btn btn-block" (click)="selecUnidades(i, unidad)">{{unidad}}</button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="form-group">
-                    <div *ngFor="let ingrediente2 of ingredientes2; index as i">
-                        <div class="form-inline mt-3 w-2">
-                            <input type="number" class="form-control" min="0" max="999" name="name.{{i}}.cant" OnlyNumber="true" onkeydown="return false" placeholder="Cant." [(ngModel)]="ing2[i]">
-
-                            <div class="form-group">
-                                <div class="dropdown">
-                                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                                        {{mensajeUni[i]}}
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li *ngFor="let unidad of unidades">
-                                            <button type="button" class="btn" (click)="selecUnidades(i, unidad)">{{unidad}}</button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <button type="button" class="btn btn-info" (click)="borrarIng(i)">Guardar</button>
-
-                        </div>
-                        
-                    </div>
-                </div>     
-                
-                <div class="row">
-                    <div class="col-md-5">
-                        
-                        <button type="button" class="btn btn-danger" (click)="quitarIng()">Retirar</button>
-                    </div>
-                    <div class="col-md-5">
-                        <button type="button" class="btn btn-info" (click)="guardar()">Guardar</button>
-                        
-                    </div>
+     
+                <div class="col">
+                    <button type="button" class="btn btn-danger float-right" (click)="borrarIng(i)" *ngIf="ingredientes.length > 1">Retirar</button>
                 </div>
 
             </div>
@@ -101,4 +91,5 @@
         </div>
     </div>
 </div>
+
 
