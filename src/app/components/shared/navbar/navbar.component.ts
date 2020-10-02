@@ -4,6 +4,8 @@ import { Router, RouterLinkActive } from '@angular/router';
 import { RecetaService } from 'src/app/services/receta.service';
 import { EquipoService } from 'src/app/services/equipo.service';
 import { RondaService } from 'src/app/services/ronda.service';
+//Icons
+import { faHome, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +14,8 @@ import { RondaService } from 'src/app/services/ronda.service';
 })
 export class NavbarComponent {
 
+  faHome = faHome;
+  faSignOutAlt = faSignOutAlt;
   IS_SUPER: boolean = false;
   mensajeSinEquipos: boolean = false;
   mensajeSinRecetas: boolean = false;
