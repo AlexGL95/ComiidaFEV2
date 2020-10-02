@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 export class RondaComponent implements OnInit {
 
   rondas = [];
-  ingredientes={};
+  ingredientes = {};
   show: boolean;
   mensajeCreaRonda: boolean = false;
   mensajeRondaActiva: boolean;
@@ -27,7 +27,7 @@ export class RondaComponent implements OnInit {
     this.rondaService.activarRonda()
           .subscribe(
             res => {
-              //Condicional. ¿Existe al menos una ronda?
+              // Condicional. ¿Existe al menos una ronda?
               if ( res.length === 0 ) {
                 this.mensajeCreaRonda = true;
               }
