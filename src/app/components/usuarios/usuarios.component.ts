@@ -11,7 +11,7 @@ import { LowerCasePipe } from '@angular/common';
 })
 export class UsuariosComponent implements OnInit {
 
-  usuariosarr: any;
+  usuariosarr: any = [];
   auxarr = [] ;
   resultado = false; // control de mensaje si no se encuentran coincidencias
   constructor(
