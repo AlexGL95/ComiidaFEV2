@@ -3,12 +3,18 @@
     <!-- Logo -->
     <a class="navbar-brand" href="/Home">Comiida</a>
     <!-- Bonton de despliege -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
     </button>
     <!-- Etiquetas -->
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav nav-fill w-100">
+        <ul class="navbar-nav nav-fill ml-auto">
+            <li class="nav-item" *ngIf="IS_SUPER" [routerLinkActive]="['active']">
+                <a class="nav-link" href="/Home" [routerLink]="['/Home']">
+                    <fa-icon [icon]="faHome"></fa-icon>
+                    Inicio
+                </a>
+            </li>
             <li class="nav-item" *ngIf="IS_SUPER" [routerLinkActive]="['active']">
                 <a class="nav-link" href="/Ronda" [routerLink]="['/Ronda']">Rondas</a>
             </li>
@@ -28,7 +34,10 @@
                 <a class="nav-link" href="/Usuarios" [routerLink]="['/Usuarios']">Usuarios</a>
             </li>
             <li class="nav-item float-right">
-                <a class="nav-link" href="" (click)="logout()">Logout</a>
+                <a class="nav-link" href="" (click)="logout()">
+                    <fa-icon [icon]="faSignOutAlt"></fa-icon>
+                    Salir
+                </a>
             </li>
         </ul>
     </div>
