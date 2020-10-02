@@ -4,7 +4,7 @@
 </div>
 <!-- Boton de retorno -->
 <div class="container-fluid mt-3 ml-3">
-    <button type="button" class="btn btn-secondary" (click)="linkBack()">Back</button>
+    <button type="button" class="btn btn-secondary" (click)="linkBack()">Regresar</button>
 </div>
 
 
@@ -23,7 +23,7 @@
             </div>
 
             <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeInv">
-                <strong>Campo Invalido</strong>
+                <strong>Campo Inválido</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeInv = false">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -38,7 +38,7 @@
                             Nombre de usuario requerido
                         </div>
                         <div class="container-fluid" *ngIf="usuario.errors.minlength">
-                            Al menos 4 caracteres de longitud
+                            Al menos 4 carácteres de longitud
                         </div>
                     </div>
                 </div>
@@ -53,10 +53,10 @@
                             Contraseña requerida
                         </div>
                         <div class="container-fluid" *ngIf="password.errors.minlength">
-                            Al menos 8 caracteres de longitud
+                            Al menos 8 carácteres de longitud
                         </div>
                         <div *ngIf="password.errors.pattern">
-                            La contraseña debe contener al menos 8 caracteres, una letra mayuscula y un numero
+                            La contraseña debe contener al menos 8 carácteres, una letra mayúscula y un número
                         </div>
                     </div>
 
@@ -67,10 +67,10 @@
                     </div>
                     <div class="alert-danger" *ngIf="copassword.errors && (copassword.dirty || copassword.touched)">
                         <div class="container-fluid" *ngIf="copassword.errors.required">
-                            Confirmacion de contraseña requerida
+                            Confirmación de contraseña requerida
                         </div>
                         <div class="container-fluid" *ngIf="copassword.errors.minlength">
-                            Al menos 8 caracteres de longitud
+                            Al menos 8 carácteres de longitud
                         </div>
                         <div class="container-fluid" *ngIf="copassword.errors.checkPasswords">
                             Las contraseñas deben coincidir
