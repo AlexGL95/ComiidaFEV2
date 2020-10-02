@@ -112,21 +112,7 @@ export class NewRecetaComponent implements OnInit {
           }
       }
       if (this.nombreValido == true) {
-        this.nuevaRecetaService.crearReceta(this.recetta).subscribe( res => {
-          if (res !== null) {
-            this.router.navigate(['/Success']);
-            this.mensajeRecetaRepetida = false;
-          } else if ( res === null ) {
-            this.mensajeRecetaRepetida = true;
-          }
-        }, err => {
-          console.log(err);
-        } )
       }
-    } );
-  }
-  
-
   regreso(){
     this.router.navigate(['/Home']);
   }
