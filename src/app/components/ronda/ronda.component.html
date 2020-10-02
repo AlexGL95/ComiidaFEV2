@@ -1,11 +1,15 @@
 <app-navbar></app-navbar>
 
+<!-- Titulo: Rondas -->
+<div class="container-fluid border-bottom border-secondary mt-2">
+    <h2 align="center">Rondas</h2>
+</div>
 <!-- Vista cuando no hay suficientes usurios -->
 <div class="container mt-5" *ngIf="mensajeUsuariosInsuficientes">
-  <div class="alert alert-danger text-center" role="alert">
-      Necesitas al menos 4 usuarios para generar una ronda.
-  </div>
-  <button type="button" class="btn btn-success btn-block mt-3" (click)="linkUsuarios()">
+    <div class="alert alert-danger text-center" role="alert">
+        Necesitas al menos 4 usuarios para generar una ronda.
+    </div>
+    <button type="button" class="btn btn-success btn-block mt-3" (click)="linkUsuarios()">
     Ir a usuarios.
   </button>
 </div>

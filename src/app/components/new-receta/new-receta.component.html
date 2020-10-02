@@ -1,10 +1,7 @@
 <div class="container app">
-    <div class="row">
-        <div class="col-sm-12">
-            <h1 class="text-center"> 
-                Nueva Receta
-            </h1>
-        </div>
+    <!-- Titulo: Nueva receta -->
+    <div class="container-fluid border-bottom border-secondary mt-2">
+        <h2 align="center">Nueva receta</h2>
     </div>
 
     <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="camposFaltantes">
@@ -13,7 +10,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    
+
     <div class="row">
         <div class="col mx-auto">
             <div class="form-horizontal">
@@ -52,10 +49,10 @@
 
                     <div class="form-group">
                         <div class="col mt-3" *ngFor="let ingrediente of ingredientes; index as i">
-                            <input type="text" class="form-control" id="name.{{id}}.ing" name="name" placeholder="Nuevo ingrediente" [(ngModel)]="ing[i]">
+                            <input type="text" class="form-control" id="name.{{i}}.ing" name="name" placeholder="Nuevo ingrediente" [(ngModel)]="ing[i]">
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <div *ngFor="let ingrediente2 of ingredientes2; index as i">
                             <div class="form-inline mt-3 w-2">
@@ -74,10 +71,10 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
-                    </div>      
-                    
+                    </div>
+
                     <div class="row">
                         <div class="col-md-3">
                             <button type="submit" class="btn btn-success" (click)="nuevoIng()">Agregar</button>
@@ -98,24 +95,24 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="cambio=true">
     Launch demo modal
   </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="cambio2">
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="cambio2">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
+            </div>
+            <div class="modal-body" *ngIf="cambio">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" *ngIf="cambio">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
-        <div class="modal-body" *ngIf="cambio">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" *ngIf="cambio">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
