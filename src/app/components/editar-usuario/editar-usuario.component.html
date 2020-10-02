@@ -26,7 +26,7 @@
             <form [formGroup]="RegistroForm" class="text-center" (ngSubmit)="update(nombre.value, pass.value, copass.value)">
                 <div class="form-group">
                     <label>Usuario</label>
-                    <input type="text" formControlName="usuario" class="form-control" required #nombre />
+                    <input type="text" formControlName="usuario" maxlength="15" class="form-control" required #nombre />
                     <div class="alert-danger" *ngIf="usuario.errors && (usuario.dirty || usuario.touched)">
                         <div class="container-fluid" *ngIf="usuario.errors.required">
                             Nombre de usuario requerido
@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label for="password">Nueva contraseña</label>
                     <div class="input-group">
-                        <input type="password" class="form-control" formControlName="password" required #pass />
+                        <input type="password" class="form-control" maxlength="15" formControlName="password" required #pass />
 
                     </div>
                     <div class="alert-danger" *ngIf="password.errors && (password.dirty || password.touched)">
@@ -56,7 +56,7 @@
 
                     <label for="password">Confirmar contraseña</label>
                     <div class="input-group">
-                        <input type="password" class="form-control" formControlName="copassword" required #copass />
+                        <input type="password" class="form-control" maxlength="15" formControlName="copassword" required #copass />
 
                     </div>
                     <div class="alert-danger" *ngIf="copassword.errors && (copassword.dirty || copassword.touched)">

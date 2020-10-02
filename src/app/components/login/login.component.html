@@ -16,7 +16,7 @@
             <form [formGroup]="LoginForm" class="text-center" (ngSubmit)="singup(nombre.value, pass.value)">
                 <div class="form-group">
                     <label>Usuario</label>
-                    <input type="text" formControlName="usuario" class="form-control" required #nombre />
+                    <input type="text" formControlName="usuario" class="form-control" maxlength="15" required #nombre/>
                     <div class="alert-danger" *ngIf="usuario.errors && (usuario.dirty || usuario.touched)">
                         <div class="container-fluid" *ngIf="usuario.errors.required">
                             Nombre de usuario requerido
@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <label for="password">Contraseña</label>
                     <div class="input-group">
-                        <input #x type="password" class="form-control" formControlName="password" id="password" required #pass />
+                        <input #x type="password" class="form-control" formControlName="password" maxlength="15" id="password" required #pass />
                         <div class="input-group-append c-pointer" (click)="x.type = x.type == 'password' ? 'text' : 'password'">
                             <span class="input-group-text">
                   <i class="fa faEyeSlash"></i>

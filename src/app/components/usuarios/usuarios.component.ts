@@ -13,6 +13,7 @@ export class UsuariosComponent implements OnInit {
 
   usuariosarr: any;
   auxarr = [] ;
+  resultado = false; // control de mensaje si no se encuentran coincidencias
   constructor(
     private user: UserService,
     private route: Router,
@@ -32,9 +33,15 @@ export class UsuariosComponent implements OnInit {
           }
         }
         this.usuariosarr = this.auxarr;
+        if (this.usuariosarr.length <= 0) {
+          this.resultado = true;
+        }else{
+          this.resultado = true;
+        }
       }
     });
   }
+
 editarusuario(id){
   this.route.navigate(['Edicion_Usuario/', id]);
 }
