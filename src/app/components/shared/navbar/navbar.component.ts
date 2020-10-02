@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLinkActive } from '@angular/router';
 import { RecetaService } from 'src/app/services/receta.service';
 import { EquipoService } from 'src/app/services/equipo.service';
 
@@ -44,4 +44,4 @@ export class NavbarComponent {
     this.authService.logout();
     this.router.navigate(['Login']);
   }
-  }
+}
