@@ -19,7 +19,6 @@ export class RondaComponent implements OnInit {
   mensajeBorrarRonda: boolean;
   mensajeIngredientes: boolean;
   mensajeUsuariosInsuficientes: boolean = false;
-  mensajeNavbar: boolean = true;
 
   constructor(private rondaService: RondaService, private router: Router, private userService: UserService) { }
 
@@ -44,15 +43,12 @@ export class RondaComponent implements OnInit {
   }
 
   createRonda(): boolean{
-    this.mensajeNavbar = false;
     this.rondaService.createRonda()
         .subscribe(res => {
           this.mensajeCreaRonda = false; //Al crear una ronda, ya existe al menos una
-          this.mensajeNavbar = true;
           this.rondas = res;
         },
-        err => {this.mensajeCrearRonda = true
-        this.mensajeNavbar = true;}
+        err => {this.mensajeCrearRonda = true}
         )
     return false;
   }
