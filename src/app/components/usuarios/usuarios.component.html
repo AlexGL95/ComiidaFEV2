@@ -7,15 +7,16 @@
 <!-- Mensaje de alerta no menos de 4 usuarios-->
 
 <!-- Lista de usuarios -->
-<div class="container-fluid row">
+<div class="container row">
     <div class="mt-4 text-center row-cols col-5">
-        <form action="">
-            <input class="ml-1 input" (keyup)="ngOnInit(Bus.value)" type="text" maxlength="15" #Bus placeholder="Buscar">
-            <button class="btn ml-1 btn-success btn-rounded" type="submit">buscar</button>
+        <form action="" class="form-inline text-center">
+            <input class="form-control mr-sm-2" (keyup)="ngOnInit(Bus.value)" type="search" maxlength="15" #Bus placeholder="Buscar">
+            <button class="btn btn-outline-secondary my-2 my-sm-0 mr-sm-2" type="submit">Buscar</button>
+            <button class="btn btn-success" (click)="nuevousuario()">Agregar usuario</button>
         </form>
         <br>
         <div class=" text-center">
-            <button class="btn btn-success" (click)="nuevousuario()">Agregar usuario</button>
+
         </div>
     </div>
     <div class="container mt-4 col-6 text-left">
