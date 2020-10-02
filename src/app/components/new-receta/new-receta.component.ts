@@ -29,8 +29,8 @@ export class NewRecetaComponent implements OnInit {
   camposFaltantes: boolean;
   cambio: boolean;
   cambio2: boolean;
-  nombreValido = false;
-  mensajeRecetaRepetida = false;
+  k = 0;
+  s = false;
   createFormGroup(){
     return new FormGroup({
       name: new FormControl('', [Validators.required]),

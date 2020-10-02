@@ -8,13 +8,7 @@
     </button>
     <!-- Etiquetas -->
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item" *ngIf="IS_SUPER" [routerLinkActive]="['active']">
-                <a class="nav-link" href="/Home" [routerLink]="['/Home']">
-                    <fa-icon [icon]="faHome"></fa-icon>
-                    Inicio
-                </a>
-            </li>
+        <ul class="navbar-nav nav-fill w-100">
             <li class="nav-item" *ngIf="IS_SUPER" [routerLinkActive]="['active']">
                 <a class="nav-link" href="/Ronda" [routerLink]="['/Ronda']">Rondas</a>
             </li>
@@ -34,10 +28,7 @@
                 <a class="nav-link" href="/Usuarios" [routerLink]="['/Usuarios']">Usuarios</a>
             </li>
             <li class="nav-item float-right">
-                <a class="nav-link" href="" (click)="logout()">
-                    <fa-icon [icon]="faSignOutAlt"></fa-icon>
-                    Salir
-                </a>
+                <a class="nav-link" href="" (click)="logout()">Logout</a>
             </li>
         </ul>
     </div>
