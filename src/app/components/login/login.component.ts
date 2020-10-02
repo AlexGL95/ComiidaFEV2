@@ -36,13 +36,11 @@ export class LoginComponent implements OnInit {
         console.log(this.user);
         this.auth.login(this.user).subscribe(
           (resp) => {
-            console.log(resp);
             this.router.navigate(['/Home']);
           },
           (err) => {this.mensajeError = true;}
           );
     } else {
-      console.log('Nones');
       this.mensajeDatoInvalido = true;
     }
   }

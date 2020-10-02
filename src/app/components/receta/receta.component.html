@@ -4,7 +4,7 @@
 <!-- Buscador -->
 <div class="mt-3 ml-4">
     <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Buscar" (keyup.enter)="buscador(texto.value)" #texto>
+        <input class="form-control mr-sm-2" type="search" maxlength="15" placeholder="Buscar" (keyup.enter)="buscador(texto.value)" #texto>
         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" (click)="buscador(texto.value)">Buscar</button>
     </form>
 </div>
@@ -24,9 +24,13 @@
                 <li class="list-group-item bg-secondary">
                     <div class="row row-cols-2">
                         <!-- Columna de nombre -->
-                        <div class="col-5"><h5>Nombre</h5></div>
+                        <div class="col-5">
+                            <h5>Nombre</h5>
+                        </div>
                         <!-- Columna de accion -->
-                        <div class="col"><h5>Accion</h5></div>
+                        <div class="col">
+                            <h5>Accion</h5>
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -43,7 +47,7 @@
                                 <button type="button" class="btn btn-md btn-info mr-2" (click)="obtenerListaDeIngredientes(i)">
                                     <fa-icon [icon]="faInfo"></fa-icon>
                                 </button>
-                                <!-- Boton de eliminar -->                                    
+                                <!-- Boton de eliminar -->
                                 <button type="button" class="btn btn-md btn-danger" (click)="borrarReceta(i)">
                                     <fa-icon [icon]="faTrashAlt"></fa-icon>
                                 </button>
@@ -76,5 +80,3 @@
         </div>
     </div>
 </div>
-
-
