@@ -4,13 +4,6 @@
 <div class="container-fluid border-bottom border-secondary mt-2">
     <h2 align="center">Recetas</h2>
 </div>
-<!-- Buscador -->
-<div class="mt-3 ml-4">
-    <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" maxlength="15" placeholder="Buscar" (keyup.enter)="buscador(texto.value)" #texto>
-        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" (click)="buscador(texto.value)">Buscar</button>
-    </form>
-</div>
 
 <!-- Mensajes -->
 <div class="alert alert-danger mt-3" role="alert" *ngIf="mensajeNoHayCoincidencias">
@@ -18,10 +11,38 @@
 </div>
 
 <!-- Cuerpo de la pagina -->
-<div class="container-fluid" *ngIf="!mensajeNoHayCoincidencias">
+<div class="container" *ngIf="!mensajeNoHayCoincidencias">
     <div class="row">
-        <!--Primer tercio a la izquierda -->
-        <div class="col-auto mt-4 border-right border-secondary">
+        <!-- izquierda -->
+        <div class="col-5">
+            <div class="container">
+                <!-- Buscador -->
+                <div class="container mt-4">
+                    <form class="form-inline">
+                        <input class="form-control mr-sm-2" type="search" maxlength="15" placeholder="Buscar" (keyup.enter)="buscador(texto.value)" #texto>
+                        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" (click)="buscador(texto.value)">Buscar</button>
+                    </form>
+                </div>
+                <!-- Etiqueta de ingredientes -->
+                <h4 class="mt-4 ml-3"  *ngIf="ingrArr.length > 0">Ingredientes</h4>
+                <!-- Recuadro de ingredientes -->
+                <div class="container" *ngIf="ingrArr.length > 0">
+                    <!-- Lista de ingredientes de la receta seleccionada -->
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let ingrediente of ingrArr; index as j">
+                            <div class="row row-cols-2">
+                                <!-- Columna de numero -->
+                                <div class="col-2">{{j+1}}.-</div>
+                                <!-- Columna de ingrediente -->
+                                <div class="col-auto">{{ingrediente}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Derecha -->
+        <div class="col-auto mt-4">
             <!-- Lista de encabezados -->
             <ul class="list-group mx-3">
                 <li class="list-group-item bg-secondary">
@@ -31,7 +52,7 @@
                             <h5>Nombre</h5>
                         </div>
                         <!-- Columna de accion -->
-                        <div class="col">
+                        <div class="col ml-4">
                             <h5>Accion</h5>
                         </div>
                     </div>
@@ -59,27 +80,6 @@
                     </div>
                 </li>
             </ul>
-        </div>
-        <!--Espacio restante a la derecha -->
-        <div class="col-auto">
-            <div class="container mt-5 ml-4">
-                <!-- Etiqueta de ingredientes -->
-                <h4>Ingredientes</h4>
-                <!-- Recuadro de ingredientes -->
-                <div class="container" *ngIf="ingrArr.length > 0">
-                    <!-- Lista de ingredientes de la receta seleccionada -->
-                    <ul class="list-group">
-                        <li class="list-group-item" *ngFor="let ingrediente of ingrArr; index as j">
-                            <div class="row row-cols-2">
-                                <!-- Columna de numero -->
-                                <div class="col-2">{{j+1}}.-</div>
-                                <!-- Columna de ingrediente -->
-                                <div class="col-auto">{{ingrediente}}</div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </div>
 </div>
