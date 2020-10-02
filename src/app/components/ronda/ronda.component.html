@@ -2,9 +2,12 @@
 
 <!-- Vista cuando no hay suficientes usurios -->
 <div class="container mt-5" *ngIf="mensajeUsuariosInsuficientes">
-  <div class="alert alert-info" role="alert">
+  <div class="alert alert-danger text-center" role="alert">
       Necesitas al menos 4 usuarios para generar una ronda.
   </div>
+  <button type="button" class="btn btn-success btn-block mt-3" (click)="linkUsuarios()">
+    Ir a usuarios.
+  </button>
 </div>
 
 <!-- Vista cuando no existen rondas -->

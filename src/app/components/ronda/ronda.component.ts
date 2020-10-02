@@ -88,4 +88,9 @@ export class RondaComponent implements OnInit {
     this.show = false;
   }
 
+  //Metodo para redirigir a usuarios
+  linkUsuarios(){
+    this.router.navigate(['/Usuarios']);
+  }
+
 }
