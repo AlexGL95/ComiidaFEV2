@@ -9,6 +9,7 @@ import { RecetaComponent } from './components/receta/receta.component';
 import { NewRecetaComponent } from './components/new-receta/new-receta.component';
 import { HomeComponent } from './components/home/home.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { IngredientesComponent } from './components/ingredientes/ingredientes.component';
 import { AuthGuard } from './auth.guard';
 import { LogGuard } from './log.guard';
 
@@ -23,6 +24,7 @@ const APP_ROUTES: Routes = [
     {path: 'Success', component: SuccessComponent, canActivate: [AuthGuard]},
     {path: 'Home', component: HomeComponent, canActivate: [AuthGuard]},
     {path: 'Usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
+    {path: 'Ingredientes', component: IngredientesComponent, canActivate: [AuthGuard]},
     {path: '**', pathMatch: 'full', redirectTo: 'Home'}
 ];
 
