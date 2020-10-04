@@ -5,9 +5,17 @@
     <h2 align="center">Recetas</h2>
 </div>
 
-<!-- Mensajes -->
-<div class="alert alert-danger mt-3" role="alert" *ngIf="mensajeNoHayCoincidencias">
-    No hay coincidencias.
+<!-- Sin coincidencias -->
+<div class="container" *ngIf="mensajeNoHayCoincidencias">
+    <div class="container mt-4">
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)" type="search" maxlength="15" placeholder="Buscar" (keyup.enter)="buscador(texto.value)" #texto>
+            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" (click)="buscador(texto.value)">Buscar</button>
+        </form>
+    </div>
+    <div class="alert alert-danger mt-3" role="alert">
+        No hay coincidencias.
+    </div>
 </div>
 
 <!-- Cuerpo de la pagina -->
@@ -19,7 +27,7 @@
                 <!-- Buscador -->
                 <div class="container mt-4">
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2" onkeypress="return (event.charCode >= 65 && event.charCode <= 90)" onkeypress="return (event.charCode >= 97 && event.charCode <= 122)" type="search" maxlength="15" placeholder="Buscar" (keyup.enter)="buscador(texto.value)" #texto>
+                        <input class="form-control mr-sm-2" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)" type="search" maxlength="15" placeholder="Buscar" (keyup.enter)="buscador(texto.value)" #texto>
                         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" (click)="buscador(texto.value)">Buscar</button>
                     </form>
                 </div>

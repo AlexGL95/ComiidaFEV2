@@ -11,13 +11,11 @@ import { UserService } from 'src/app/services/user.service';
 export class RondaComponent implements OnInit {
 
   rondas = [];
-  ingredientes = {};
   show: boolean;
   mensajeCreaRonda: boolean = false;
   mensajeRondaActiva: boolean;
   mensajeCrearRonda: boolean;
   mensajeBorrarRonda: boolean;
-  mensajeIngredientes: boolean;
   mensajeUsuariosInsuficientes: boolean = false;
 
   constructor(private rondaService: RondaService, private router: Router, private userService: UserService) { }
@@ -71,19 +69,6 @@ export class RondaComponent implements OnInit {
         },
         err => this.mensajeBorrarRonda = true
       )
-  }
-
-  getIng(){
-    this.rondaService.getIng()
-        .subscribe(res => {
-          this.ingredientes = res;
-        },
-        err => this.mensajeIngredientes = true)
-    this.show = true;
-  }
-
-  ocultar(){
-    this.show = false;
   }
 
   //Metodo para redirigir a usuarios

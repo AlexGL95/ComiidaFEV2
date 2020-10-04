@@ -10,7 +10,7 @@
 <div class="container row">
     <div class="mt-4 text-center row-cols col-5">
         <form action="" class="form-inline text-center">
-            <input class="form-control mr-sm-2" (keyup)="ngOnInit(Bus.value)" type="search" maxlength="15" #Bus placeholder="Buscar">
+            <input class="form-control mr-sm-2" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)" (keyup)="ngOnInit(Bus.value)" type="search" maxlength="15" #Bus placeholder="Buscar">
             <button class="btn btn-outline-secondary my-2 my-sm-0 mr-sm-2" type="submit">Buscar</button>
             <button class="btn btn-success mt-3" (click)="nuevousuario()">Agregar usuario</button>
         </form>

@@ -7,118 +7,122 @@
 </div>
 
 <!-- Mensajes -->
-    <!-- No cocinas -->
-    <div class="container mt-3" *ngIf="mensajeHoyNoCocinas && !mensajeNoHayRonda">
-        <div class="alert alert-success text-center" role="alert">
-            No cocinas.
-        </div>
-        <!-- Boton de añadir recetas -->
-        <button type="button" class="btn btn-secondary mt-3 mr-2 btn-block" (click)="linkNuevaReceta()">
+<!-- No cocinas -->
+<div class="container mt-3" *ngIf="mensajeHoyNoCocinas && !mensajeNoHayRonda">
+    <div class="alert alert-success text-center" role="alert">
+        No cocinas.
+    </div>
+    <!-- Boton de añadir recetas -->
+    <button type="button" class="btn btn-secondary mt-3 mr-2 btn-block" (click)="linkNuevaReceta()">
             Añadir receta
         </button>
+</div>
+<!-- Ya hay recetas asignadas -->
+<div class="container mt-3" *ngIf="(mensajeExistenRecetas && !mensajeNoHayRonda && !mensajeRondaEnCurso)">
+    <div class="alert alert-info text-center" role="alert">
+        Tu equipo ya tiene recetas asignadas.
     </div>
-    <!-- Ya hay recetas asignadas -->
-    <div class="container mt-3" *ngIf="(mensajeExistenRecetas && !mensajeNoHayRonda && !mensajeRondaEnCurso)">
-        <div class="alert alert-info text-center" role="alert">
-            Tu equipo ya tiene recetas asignadas.
-        </div>
+</div>
+<!-- Hay espacios vacios -->
+<div class="container mt-3" *ngIf="mensajeEspaciosSinAsignar">
+    <div class="alert alert-danger text-center" role="alert">
+        Hay espacios vacíos.
     </div>
-    <!-- Hay espacios vacios -->
-    <div class="container mt-3" *ngIf="mensajeEspaciosSinAsignar">
-        <div class="alert alert-danger text-center" role="alert">
-            Hay espacios vacíos.
-        </div>
+</div>
+<!-- Ronda en curso -->
+<div class="container mt-3" *ngIf="mensajeRondaEnCurso">
+    <div class="alert alert-info text-center" role="alert">
+        La ronda actual esta en curso, y el tiempo de seleccion de ingredientes expiro.
     </div>
-    <!-- Ronda en curso -->
-    <div class="container mt-3" *ngIf="mensajeRondaEnCurso">
-        <div class="alert alert-info text-center" role="alert">
-            La ronda actual esta en curso.
-        </div>
-        <!-- Boton de añadir recetas -->
-        <button type="button" class="btn btn-secondary mt-3 mr-2 btn-block" (click)="linkNuevaReceta()">
-            Añadir receta
-        </button>
-    </div>
-    <!-- Sin rondas -->
-    <div class="container mt-3" *ngIf="mensajeNoHayRonda">
-        <div class="alert alert-danger text-center" role="alert">
-            No existen rondas actualmente.
-        </div>
-        <!-- Boton de añadir recetas -->
-        <button type="button" class="btn btn-success mt-3 mr-2 btn-block" (click)="linkRondas()">
+    <!-- Boton de redireccion a rondas -->
+    <button type="button" class="btn btn-success mt-3 mr-2 btn-block" *ngIf="IS_SUPER" (click)="linkRondas()">
             Ir a rondas.
         </button>
+    <!-- Boton de añadir recetas -->
+    <button type="button" class="btn btn-secondary mt-3 mr-2 btn-block" (click)="linkNuevaReceta()">
+            Añadir receta
+        </button>
+</div>
+<!-- Sin rondas usuario -->
+<div class="container mt-3" *ngIf="mensajeNoHayRonda">
+    <div class="alert alert-danger text-center" role="alert">
+        No existen rondas actualmente.
     </div>
+    <!-- Boton de redireccion a rondas -->
+    <button type="button" class="btn btn-success mt-3 mr-2 btn-block" *ngIf="IS_SUPER" (click)="linkRondas()">
+            Ir a rondas.
+        </button>
+</div>
 
 <div *ngIf="!mensajeHoyNoCocinas && !mensajeRondaEnCurso">
     <!-- Cuerpo de la pagina (Si no hay recetas asignadas) -->
-    <div class="container-fluid"  *ngIf="!mensajeExistenRecetas">
+    <div class="container-fluid" *ngIf="!mensajeExistenRecetas">
         <div class="row row-cols-2">
             <!-- Lado izquierdo: Informacion -->
             <div class="col border-right border-secondary">
-                    <!-- Fecha asignada -->
-                    <div class="row-cols-2 mt-4 ml-3">
-                            <h5>Fecha asignada:</h5>
-                            {{equipoUsuario.nombre}}
+                <!-- Fecha asignada -->
+                <div class="row-cols-2 mt-4 ml-3">
+                    <h5>Fecha asignada:</h5>
+                    {{equipoUsuario.nombre}}
+                </div>
+                <!-- Compañero -->
+                <div class="mt-4 ml-3">
+                    <h5>Cocinan:</h5>
+                    {{equipoUsuario.integrantes_nombres[0]}} y {{equipoUsuario.integrantes_nombres[1]}}
+                </div>
+                <!-- Tiempo restante si minutos es mayor a 10 y segundos tambien -->
+                <div class="mt-4 ml-3" *ngIf="(tiempoRestante.minutos >= 10) && (tiempoRestante.segundos >= 10)">
+                    <h5>Tiempo restante:</h5>
+                    0{{tiempoRestante.horas}}: {{tiempoRestante.minutos}}: {{tiempoRestante.segundos}}
+                </div>
+                <!-- Tiempo restante si minutos es menor a 10 y segundos no -->
+                <div class="mt-4 ml-3" *ngIf="(tiempoRestante.minutos < 10) && (tiempoRestante.segundos >= 10)">
+                    <h5>Tiempo restante:</h5>
+                    0{{tiempoRestante.horas}}: 0{{tiempoRestante.minutos}}: {{tiempoRestante.segundos}}
+                </div>
+                <!-- Tiempo restante si minutos es mayor a 10 y segundos no -->
+                <div class="mt-4 ml-3" *ngIf="(tiempoRestante.minutos >= 10) && (tiempoRestante.segundos < 10)">
+                    <h5>Tiempo restante:</h5>
+                    0{{tiempoRestante.horas}}: {{tiempoRestante.minutos}}: 0{{tiempoRestante.segundos}}
+                </div>
+                <!-- Tiempo restante si minutos es menor a 10 y segundos tambien -->
+                <div class="mt-4 ml-3" *ngIf="(tiempoRestante.minutos < 10) && (tiempoRestante.segundos < 10)">
+                    <h5>Tiempo restante:</h5>
+                    0{{tiempoRestante.horas}}: 0{{tiempoRestante.minutos}}: 0{{tiempoRestante.segundos}}
+                </div>
+                <!-- Numero de recetas -->
+                <div class="row row-cols-2 mt-4 ml-3">
+                    <div class="col-5">
+                        <h5>Numero de recetas a cocinar:</h5>
                     </div>
-                    <!-- Compañero -->
-                    <div class="mt-4 ml-3">
-                        <h5>Cocinan:</h5>
-                        {{equipoUsuario.integrantes_nombres[0]}} y {{equipoUsuario.integrantes_nombres[1]}}
+                    <div class="col">
+                        <input type="number" value="{{recetasSeleccionadas.length}}" min="1" max="5" onkeydown="return false" (click)="nRecetasMod(n.value)" #n/>
                     </div>
-                    <!-- Tiempo restante si minutos es mayor a 10 y segundos tambien -->
-                    <div class="mt-4 ml-3" *ngIf="(tiempoRestante.minutos >= 10) && (tiempoRestante.segundos >= 10)">
-                        <h5>Tiempo restante:</h5>
-                        0{{tiempoRestante.horas}}: {{tiempoRestante.minutos}}: {{tiempoRestante.segundos}}
-                    </div>
-                    <!-- Tiempo restante si minutos es menor a 10 y segundos no -->
-                    <div class="mt-4 ml-3" *ngIf="(tiempoRestante.minutos < 10) && (tiempoRestante.segundos >= 10)">
-                        <h5>Tiempo restante:</h5>
-                        0{{tiempoRestante.horas}}: 0{{tiempoRestante.minutos}}: {{tiempoRestante.segundos}}
-                    </div>
-                    <!-- Tiempo restante si minutos es mayor a 10 y segundos no -->
-                    <div class="mt-4 ml-3" *ngIf="(tiempoRestante.minutos >= 10) && (tiempoRestante.segundos < 10)">
-                        <h5>Tiempo restante:</h5>
-                        0{{tiempoRestante.horas}}: {{tiempoRestante.minutos}}: 0{{tiempoRestante.segundos}}
-                    </div>
-                    <!-- Tiempo restante si minutos es menor a 10 y segundos tambien -->
-                    <div class="mt-4 ml-3" *ngIf="(tiempoRestante.minutos < 10) && (tiempoRestante.segundos < 10)">
-                        <h5>Tiempo restante:</h5>
-                        0{{tiempoRestante.horas}}: 0{{tiempoRestante.minutos}}: 0{{tiempoRestante.segundos}}
-                    </div>
-                    <!-- Numero de recetas -->
-                    <div class="row row-cols-2 mt-4 ml-3">
-                        <div class="col-5">
-                            <h5># Recetas:</h5>
-                        </div>
-                        <div class="col">
-                            <input type="number" value="{{recetasSeleccionadas.length}}" min="1" max="5" onkeydown="return false" (click)="nRecetasMod(n.value)" #n/>
-                        </div>
-                    </div>
-                    <!-- Selector de recetas -->
-                    <div class="dropdown mt-4 ml-3" *ngFor="let recetaTitulo of recetasSeleccionadas; index as i;">
-                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                </div>
+                <!-- Selector de recetas -->
+                <div class="dropdown mt-4 ml-3" *ngFor="let recetaTitulo of recetasSeleccionadas; index as i;">
+                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
                             {{recetaTitulo.nombre}}
                         </button>
-                        <ul class="dropdown-menu">
-                            <li *ngFor="let receta of recetasElegibles; index as j;">
-                                <button type="button" class="btn" (click)="selReceta(i, receta.idLocal)">
+                    <ul class="dropdown-menu">
+                        <li *ngFor="let receta of recetasElegibles; index as j;">
+                            <button type="button" class="btn" (click)="selReceta(i, receta.idLocal)">
                                     {{receta.nombre}}
                                 </button>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Boton de asignacion -->
-                    <div class="mt-5 ml-5">
-                        <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-secondary mr-2" (click)="linkNuevaReceta()">
+                        </li>
+                    </ul>
+                </div>
+                <!-- Boton de asignacion -->
+                <div class="mt-5 ml-5">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-secondary mr-2" (click)="linkNuevaReceta()">
                                 Añadir receta
                             </button>
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" (click)="asignarRecetasAlEquipo()">
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" (click)="asignarRecetasAlEquipo()">
                                 Asignar receta
                             </button>
-                        </div>
                     </div>
+                </div>
             </div>
             <!-- Lado derecho: Recetas asignadas -->
             <div class="col">
@@ -146,27 +150,27 @@
     </div>
 
     <!-- Cuerpo de la pagina (Si hay recetas asignadas) -->
-    <div class="container-fluid"  *ngIf="(mensajeExistenRecetas && !mensajeNoHayRonda)">
+    <div class="container-fluid" *ngIf="(mensajeExistenRecetas && !mensajeNoHayRonda)">
         <div class="row row-cols-2">
             <!-- Lado izquierdo: Informacion -->
             <div class="col border-right border-secondary">
-                    <!-- Fecha asignada -->
-                    <div class="row-cols-2 mt-4 ml-3">
-                            <h5>Fecha asignada:</h5>
-                            {{equipoUsuario.nombre}}
-                    </div>
-                    <!-- Compañero -->
-                    <div class="mt-4 ml-3">
-                        <h5>Cocinan:</h5>
-                        {{equipoUsuario.integrantes_nombres[0]}} y {{equipoUsuario.integrantes_nombres[1]}}
-                    </div>
-                    <!-- Boton de añadir recetas -->
-                    <button type="button" class="btn btn-secondary mt-4 ml-3 mr-2" (click)="linkNuevaReceta()">
+                <!-- Fecha asignada -->
+                <div class="row-cols-2 mt-4 ml-3">
+                    <h5>Fecha asignada:</h5>
+                    {{equipoUsuario.nombre}}
+                </div>
+                <!-- Compañero -->
+                <div class="mt-4 ml-3">
+                    <h5>Cocinan:</h5>
+                    {{equipoUsuario.integrantes_nombres[0]}} y {{equipoUsuario.integrantes_nombres[1]}}
+                </div>
+                <!-- Boton de añadir recetas -->
+                <button type="button" class="btn btn-secondary mt-4 ml-3 mr-2" (click)="linkNuevaReceta()">
                         Añadir receta
                     </button>
             </div>
             <!-- Lado derecho: Recetas asignadas -->
-            <div class="col"  *ngIf="mensajeExistenRecetas">
+            <div class="col" *ngIf="mensajeExistenRecetas">
                 <div class="container">
                     <!-- Etiqueta de recetas asignadas -->
                     <div class="mt-3 ml-2">
@@ -175,7 +179,7 @@
                     <!-- Lista de recetas asignadas -->
                     <ul class="list-group">
                         <!-- Nombre -->
-                        <li class="list-group-item"  *ngFor="let recetaNombre of recetasAsignadas">
+                        <li class="list-group-item" *ngFor="let recetaNombre of recetasAsignadas">
                             {{recetaNombre}}
                         </li>
                     </ul>
@@ -188,23 +192,23 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Alerta</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Alerta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
+            </div>
+            <div class="modal-body" *ngIf="mensajeEspaciosSinAsignar">
+                Hay Espacios Vacíos
+            </div>
+            <div class="modal-body" *ngIf="cambio">
+                ¿Seguro de asignar esta(s) receta(s)? No Se Puede Reasignar Posteriormente
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" *ngIf="cambio" (click)="asignarRecetaConfirmada()">Estoy Seguro</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" *ngIf="cambio">No Estoy Seguro</button>
+            </div>
         </div>
-        <div class="modal-body" *ngIf="mensajeEspaciosSinAsignar">
-          Hay Espacios Vacíos
-        </div>
-        <div class="modal-body" *ngIf="cambio">
-          ¿Seguro de asignar esta(s) receta(s)? No Se Puede Reasignar Posteriormente
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" *ngIf="cambio" (click)="asignarRecetaConfirmada()">Estoy Seguro</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" *ngIf="cambio">No Estoy Seguro</button>
-        </div>
-      </div>
     </div>
 </div>

@@ -22,6 +22,7 @@ import { UserService } from 'src/app/services/user.service';
 export class HomeComponent{
 
   //Declaracion de variables
+  IS_SUPER: boolean = false;
   equiposArr:EquipoInterface[] = [];
   equipoUsuario: EquipoInterface  = { nombre: "", integrantes_nombres: [], recetas_nombres: [] };
   recetasAsignadas = [];
@@ -51,6 +52,9 @@ export class HomeComponent{
     private rondasService: RondaService,
     private usuarioService: UserService
   ) {
+
+    this.IS_SUPER = authService.leersuper();
+
     //Equipo del usuario
     let equipo: string;// = this.authService.leerEquipo();
     usuarioService.getAll().subscribe( usuarios => {
