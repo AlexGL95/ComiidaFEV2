@@ -1,0 +1,62 @@
+<!-- Navbar -->
+<app-navbar></app-navbar>
+
+<!-- Titulo: Ronda actual -->
+<div class="container-fluid border-bottom border-secondary">
+    <h2 align="center">Lista de compras</h2>
+</div>
+
+<!-- Mensajes -->
+<div class="alert alert-warning" role="alert" *ngIf="mensajeIngredientes">
+    No hay ingredientes activos aun.
+    <button type="button" class="close" data-dismiss="alert" (click)="mensajeIngredientes = false">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<!-- Cuerpo de la pagina -->
+<div class="container mt-5">
+    <!-- Instrucciones -->
+    <h4>Lista de ingredientes para {{nUsuarios}} personas.</h4>
+    <div class="mt-3">
+        <button type="button" class="btn btn-danger" (click)="restarUsuarios()">
+            <fa-icon [icon]="faMinus"></fa-icon>
+        </button>
+        <button type="button" class="btn btn-success ml-3" (click)="sumarUsuarios()">
+            <fa-icon [icon]="faPlus"></fa-icon>
+        </button>
+    </div>
+
+    <!-- Lista de compras -->
+    <ul class="list-group mt-3">
+        <!-- Encabezado -->
+        <li class="list-group-item bg-secondary">
+            <div class="row ">
+                <!-- Ingrediente -->
+                <h4 class="col pl-2 text-center">Ingrediente.</h4>
+                <!-- Cantidad x n -->
+                <h4 class="col pl-2 text-center">Cantidad.</h4>
+                <!-- Unidad -->
+                <h4 class="col pl-2 text-center">Unidad.</h4>
+            </div>
+        </li>
+        <!-- Cuerpo de la lista -->
+        <li class="list-group-item" *ngFor="let ingrediente of ingredientesArr; index as i;">
+            <div class="row">
+                <!-- Ingrediente -->
+                <ul class="col pl-2 text-center">
+                    {{ingrediente.nombre}}
+                </ul>
+                <!-- Cantidad x n -->
+                <ul class="col pl-2 text-center">
+                    {{ingrediente.cantidad}}
+                </ul>
+                <!-- Unidad -->
+                <ul class="col pl-2 text-center">
+                    {{ingrediente.unidad}}
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+</div>

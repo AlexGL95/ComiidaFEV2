@@ -25,6 +25,7 @@ import { EditarUsuarioComponent } from './components/editar-usuario/editar-usuar
 import { HomeComponent } from './components/home/home.component';
 import { RecetaComponent } from 'src/app/components/receta/receta.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { IngredientesComponent } from './components/ingredientes/ingredientes.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
     RecetaComponent,
     HomeComponent,
     NewRecetaComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    IngredientesComponent
   ],
   imports: [
     BrowserModule,
