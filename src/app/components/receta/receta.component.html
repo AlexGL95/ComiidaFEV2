@@ -19,7 +19,7 @@
                 <!-- Buscador -->
                 <div class="container mt-4">
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" maxlength="15" placeholder="Buscar" (keyup.enter)="buscador(texto.value)" #texto>
+                        <input class="form-control mr-sm-2" onkeypress="return (event.charCode >= 65 && event.charCode <= 90)" onkeypress="return (event.charCode >= 97 && event.charCode <= 122)" type="search" maxlength="15" placeholder="Buscar" (keyup.enter)="buscador(texto.value)" #texto>
                         <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" (click)="buscador(texto.value)">Buscar</button>
                     </form>
                 </div>
