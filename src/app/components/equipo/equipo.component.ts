@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EquipoService } from 'src/app/services/equipo.service';
 import { EquipoInterface, UpdateDateDto } from './equipo.interface';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
+import { Moment } from "moment";
 
 @Component({
   selector: 'app-equipo',
@@ -13,6 +15,7 @@ export class EquipoComponent {
   //Declaracion de variables
   equiposArr: EquipoInterface[] = [];
   fechasArr: string[] = [];
+  fechasView: string[] = [];
   equiposModificados: UpdateDateDto[];
   envioValido: Boolean;
   mensajeError: Boolean = false;
@@ -28,12 +31,14 @@ export class EquipoComponent {
       for (let m = 0; m < this.equiposArr.length; m++) {
         this.fechasArr[m] = this.equiposArr[m].nombre;
       }
+      this.renderFechas(this.fechasArr);
     });
   }
 
   //Metodo que modifica el arreglo de fechas mostradas
   modFechasArr( index: number, fecha: string ) {
     this.fechasArr[index] = fecha;
+    this.renderFechas(this.fechasArr);
     this.mensajeError = false;
     this.mensajeEnviado = false;
   }
@@ -80,6 +85,23 @@ export class EquipoComponent {
       this.mensajeError = true;
     }
   }
+
+    //Metodo para convertir horas en ingles a español
+    renderFechas( fechas: string[] ) {
+      for (let m = 0; m < fechas.length; m++) {
+        const fechaEs = moment(fechas[m], 'MMM Do YY').toDate();
+        let dia: string;
+        switch (fechaEs.getDay()) {
+          case 1: { dia = 'Lunes'; break; }
+          case 2: { dia = 'Martes'; break; }
+          case 3: { dia = 'Miercoles'; break; }
+          case 4: { dia = 'Jueves'; break; }
+          case 5: { dia = 'Viernes'; break; }
+          default: { break; }
+        }
+        this.fechasView[m] = `${dia} ${fechaEs.getDate()}/${fechaEs.getMonth()+1}/${fechaEs.getFullYear()}`; 
+      }
+    }
 
     //Metodo para redirigir a nueva receta
     linkRondas(){

@@ -96,6 +96,7 @@ export class HomeComponent{
         for (let m = 0; m < this.equiposArr.length; m++) {
           if ( this.equiposArr[m].nombre === equipo ) {
             this.equipoUsuario = this.equiposArr[m];
+            this.equipoUsuario.nombre = this.formatoFechaEs(this.equipoUsuario.nombre);
           }
         }
 
@@ -128,6 +129,21 @@ export class HomeComponent{
         }
       }
     );
+  }
+
+  //Metodo para convertir horas en ingles a español
+  formatoFechaEs( fechaUs: string ): string {
+    const fechaEs = moment(fechaUs, 'MMM Do YY').toDate();
+    let dia: string;
+    switch (fechaEs.getDay()) {
+      case 1: { dia = 'Lunes'; break; }
+      case 2: { dia = 'Martes'; break; }
+      case 3: { dia = 'Miercoles'; break; }
+      case 4: { dia = 'Jueves'; break; }
+      case 5: { dia = 'Viernes'; break; }
+      default: { break; }
+    }
+    return `${dia} ${fechaEs.getDate()}/${fechaEs.getMonth()+1}/${fechaEs.getFullYear()}`;
   }
 
   //Metodo para modificacion del arreglo recetasSeleccionadas
