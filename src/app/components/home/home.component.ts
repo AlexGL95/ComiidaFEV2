@@ -42,6 +42,7 @@ export class HomeComponent{
   horasAbierto: number = 0;
   cambio: boolean;
   cambio2: boolean;
+  fechaEquipo: string;
 
   constructor(
     private recetaService: RecetaService,
@@ -96,6 +97,7 @@ export class HomeComponent{
         for (let m = 0; m < this.equiposArr.length; m++) {
           if ( this.equiposArr[m].nombre === equipo ) {
             this.equipoUsuario = this.equiposArr[m];
+            this.fechaEquipo = this.equipoUsuario.nombre;
             this.equipoUsuario.nombre = this.formatoFechaEs(this.equipoUsuario.nombre);
           }
         }
@@ -235,19 +237,26 @@ export class HomeComponent{
     }
   }
 
+  //Asignacion de equipos
   asignarRecetaConfirmada(){
-     //2.-Obtener datos del equipo
-     let idEquipo: number = parseInt( this.authService.leerIdEquipo() );
+     //1.-Obtener datos del equipo
+     let idEquipo: number;
      let idRecetas: number[] = [];
-
-     //3.-Cambiar estado de las recetas
-     for (let m = 0; m < this.recetasSeleccionadas.length; m++) {
-       this.recetaService.changeStateById( this.recetasSeleccionadas[m].idDb ).subscribe();
-       idRecetas.push(this.recetasSeleccionadas[m].idDb);
-     }
-     //4.-Asignarlas al equipo
-     this.equipoRecetaService.asignacion(idEquipo, idRecetas).subscribe( () => {
-       window.location.reload();
+     this.equiposArr.forEach( equipo => {
+        if ( (equipo.integrantes_nombres[0] === this.authService.leeruser()) || (equipo.integrantes_nombres[1] === this.authService.leeruser()) ) {
+          this.equipoService.getIdByName(this.fechaEquipo).subscribe( id => {
+            idEquipo = id;
+            //2.-Cambiar estado de las recetas
+            for (let m = 0; m < this.recetasSeleccionadas.length; m++) {
+              this.recetaService.changeStateById( this.recetasSeleccionadas[m].idDb ).subscribe();
+              idRecetas.push(this.recetasSeleccionadas[m].idDb);
+            }
+            //3.-Asignarlas al equipo
+            this.equipoRecetaService.asignacion(idEquipo, idRecetas).subscribe( () => {
+              window.location.reload();
+            });
+          });
+        }
      });
   }
 
