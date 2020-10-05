@@ -12,3 +12,7 @@ export interface Receta {
     categoria: string;
     ingredientes: string;
 }
+
+export interface Condimento{
+    nombre: string;
+}

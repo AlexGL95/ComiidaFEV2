@@ -43,9 +43,10 @@ export class RegistroComponent implements OnInit {
 
       });
 
-  } else {
-    this.mensajeInvalido = true;
-  }
+    } else {
+      this.mensajeInvalido = true;
+    }
+  
   }
 
   checkPasswords(formGroup: FormGroup) {
