@@ -44,7 +44,7 @@ export class UsuariosComponent implements OnInit {
         if (this.usuariosarr.length <= 0) {
           this.resultado = true;
         }else{
-          this.resultado = true;
+          this.resultado = false;
         }
       }
     });
