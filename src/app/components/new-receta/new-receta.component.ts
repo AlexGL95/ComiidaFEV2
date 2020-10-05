@@ -26,6 +26,7 @@ export class NewRecetaComponent implements OnInit {
   ing = [];
   ing2 = [];
   condimentos: any = [];
+  condarray = [];
   receta = '';
   nombre = '';
   condi = '';
@@ -40,10 +41,12 @@ export class NewRecetaComponent implements OnInit {
   mensajeRecetaRepetida = false;
   mensajeCondimento = false;
   mensajeCondimento2 = false;
+  mensajeCondimentoRepetido: boolean;
   canti = 0;
   checkbox: HTMLInputElement;
   checkbox2: HTMLInputElement;
   checkbox3: HTMLInputElement;
+  checkbox4: HTMLInputElement;
   
   createFormGroup(){
     return new FormGroup({
@@ -59,7 +62,7 @@ export class NewRecetaComponent implements OnInit {
                this.SUPER = this.authService.leersuper(); 
               }
 
-  ngOnInit(): void {
+  ngOnInit(bus?: string, ): void {
     this.ingredientes.length = 1;
     this.ingredientes2.length = 1;
     this.nuevaRecetaService.obtenerCondimentos()
@@ -168,22 +171,32 @@ export class NewRecetaComponent implements OnInit {
   crearCondimento(): boolean{
     if(this.condi !== undefined && this.condi !== ''){
       this.condimento.nombre = this.condi;
-      this.nuevaRecetaService.crearCondimento(this.condimento)
-          .subscribe( res => {
-            this.nuevaRecetaService.obtenerCondimentos()
-                .subscribe(res => {
-                this.condimentos = res;
-                console.log(this.condimentos);
-                },
-                err => this.mensajeCondimento = true);
-          },
-          err => this.mensajeCondimento = true );
+      this.verificarcondi();
       return false;
     } else{
       this.mensajeCondimento2 = true;
     }
     
-    
+  }
+
+  verificarcondi(){
+    this.nuevaRecetaService.crearCondimento(this.condimento).subscribe( res => {
+      console.log(res);
+      if (res === null) {
+        this.mensajeCondimentoRepetido = true;
+      } else if (res !== null) {
+        this.mensajeCondimentoRepetido = false;
+        this.nuevaRecetaService.obtenerCondimentos()
+                .subscribe(res => {
+                this.condimentos = res;
+                console.log(this.condimentos);
+                },
+                err => this.mensajeCondimento = true);
+      }
+      
+    },
+    err => this.mensajeCondimentoRepetido = true
+    );
   }
 
   borrarCondimento(id: number){
