@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EquipoService } from 'src/app/services/equipo.service';
 import { EquipoInterface, UpdateDateDto } from './equipo.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-equipo',
@@ -17,7 +18,10 @@ export class EquipoComponent {
   mensajeError: Boolean = false;
   mensajeEnviado: Boolean = false;
 
-  constructor( private equipoService: EquipoService ) {
+  constructor( 
+    private equipoService: EquipoService,
+    private router: Router
+  ) {
     //Adquisicion de datos
     this.equipoService.getEquipos().subscribe( equipo => {
       this.equiposArr = equipo;
@@ -76,5 +80,10 @@ export class EquipoComponent {
       this.mensajeError = true;
     }
   }
+
+    //Metodo para redirigir a nueva receta
+    linkRondas(){
+      this.router.navigate(['/Ronda']);
+    }
 
 }
