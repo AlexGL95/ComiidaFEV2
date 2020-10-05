@@ -17,6 +17,8 @@ export class RegistroComponent implements OnInit {
   patt = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-zd$@$!%*?&].{7,}';
   mensajeInvalido: boolean;
   mensajeRegistro: boolean;
+  contra = '';
+  contra2 = '';
 
   singin(nombre: string, pass: string, copass: string){
     if (this.RegistroForm.valid) {
@@ -90,7 +92,7 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  //Metodo para redirigir a 
+  // Metodo para redirigir a
   linkBack(){
     this.router.navigate(['/Usuarios']);
   }
