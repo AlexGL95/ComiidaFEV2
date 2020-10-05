@@ -15,9 +15,6 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 })
 export class IngredientesComponent {
 
-  // Borrar.
-  ingEjemplo = 'Pollo-1pz/Salsa-100ml/Espaggeti-100gr/Crema-100gr/Galletas-50gr/Limon-1pz/QuesoCrema-20gr/Sal/Pimienta';
-
   // Declaracion de variables
   ingredientesArr: IngredientesInterface[] = [];
   nUsuariosMin = 1;
@@ -25,7 +22,6 @@ export class IngredientesComponent {
   nUsuarios = 1;
   faPlus = faPlus;
   faMinus = faMinus;
-
   mensajeIngredientes = false;
   mensajeSinRecetas = true;
 
@@ -43,12 +39,18 @@ export class IngredientesComponent {
 
   getIng(){
     this.rondaService.getIng().subscribe( ingredientes => {
-          this.procIng(ingredientes);
-          this.mensajeSinRecetas = false;
-        },
-        err => {
-          this.mensajeIngredientes = true;
-        } );
+      if (ingredientes !== null) {
+        this.procIng(ingredientes);
+        this.mensajeSinRecetas = false;
+      }
+      else if (ingredientes === null) {
+        this.mensajeIngredientes = true;
+      }
+    },
+    err => {
+      this.mensajeIngredientes = true;
+      console.log(err);
+    } );
   }
 
   // Metodo de procesado de la lista de ingredientes
