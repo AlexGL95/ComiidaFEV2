@@ -17,7 +17,7 @@ export class NewRecetaComponent implements OnInit {
   RecetaForm: FormGroup;
 
   categorias = ['Entrada', 'Plato Fuerte', 'Acompañamiento', 'Postre', 'Bebida', 'Salsa'];
-  unidades = ['Kg', 'gr', 'Lt', 'ml', 'pz'];
+  unidades = ['gr', 'ml', 'pz'];
   mensajeCat = 'Seleccionar Categoría';
   mensajeUni = ['Unidades'];
   ingredientes = [];
@@ -28,12 +28,14 @@ export class NewRecetaComponent implements OnInit {
   condimentos: any = [];
   receta = '';
   nombre = '';
+  condi = '';
+  condimentado = '';
   recetta = {} as Receta;
   condimento = {} as Condimento;
-  condi = '';
   camposFaltantes: boolean;
   cambio: boolean;
   cambio2: boolean;
+  SUPER: boolean = false;
   nombreValido = false;
   mensajeRecetaRepetida = false;
   mensajeCondimento = false;
@@ -42,7 +44,7 @@ export class NewRecetaComponent implements OnInit {
   checkbox: HTMLInputElement;
   checkbox2: HTMLInputElement;
   checkbox3: HTMLInputElement;
-  condimentado = '';
+  
   createFormGroup(){
     return new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -54,7 +56,7 @@ export class NewRecetaComponent implements OnInit {
               private router: Router,
               private recetaserv: RecetaService,
               private authService: AuthService){
-                
+               this.SUPER = this.authService.leersuper(); 
               }
 
   ngOnInit(): void {
@@ -68,6 +70,7 @@ export class NewRecetaComponent implements OnInit {
       err => this.mensajeCondimento = true);
   }
 
+  
   get name(){ return this.RecetaForm.get('name'); }
 
   selecCategoria(i:number){
@@ -79,7 +82,7 @@ export class NewRecetaComponent implements OnInit {
   }
 
   nuevoIng(): void{ 
-    if(this.ingredientes.length < 10 && this.ing[this.ingredientes.length-1] && this.ing2[this.ingredientes2.length-1] && this.mensajeUni[this.ingredientes.length-1]!=='Unidades' && this.mensajeCat!=='Seleccionar Categoría'){
+    if(this.ingredientes.length < 10){
       this.mensajeUni[this.ingredientes.length] = 'Unidades';
       this.ingredientes.length ++;
       this.ingredientes2.length ++;
@@ -100,7 +103,7 @@ export class NewRecetaComponent implements OnInit {
     this.receta = '';
     this.condimentado = '';
     for(let i = 0; i < this.ingredientes.length; i++){
-      if(this.ing[i]!==undefined && this.ing[i]!=='' && this.ing2[i]!==0 && this.mensajeUni[i]!== 'Unidades' && this.mensajeCat!== 'Seleccionar Categoría'){
+      if(this.ing[i]!==undefined && this.ing[i]!=='' && this.ing2[i]!==0 && this.ing2[i]!==undefined && this.ing2[i]!=='' && this.mensajeUni[i]!== 'Unidades'){
         if(this.ingredientes.length <= 1){
           this.receta = `${this.ing[i]}-${this.ing2[i]}${this.mensajeUni[i]}`
         }else if(i===0){
@@ -108,9 +111,6 @@ export class NewRecetaComponent implements OnInit {
         }else{
           this.receta = `${this.receta}/${this.ing[i]}-${this.ing2[i]}${this.mensajeUni[i]}`
         }
-      } else{
-        this.camposFaltantes = true;
-        return false;
       }
     }
 
@@ -121,13 +121,16 @@ export class NewRecetaComponent implements OnInit {
       }
     }
 
-    if(this.nombre!=='' && this.receta !== ''){
+    if(this.nombre!=='' && this.receta !== '' && this.mensajeCat!== 'Seleccionar Categoría'){
       this.recetta.nombre = this.nombre + "(" + this.authService.leeruser() + ")";
       this.recetta.categoria = this.mensajeCat;
       this.recetta.ingredientes = this.receta;
       this.recetta.activo = false;
       //this.verificaruni();
       console.log(this.recetta);
+    } else {
+      this.camposFaltantes = true;
+        return false;
     }
   }
 
