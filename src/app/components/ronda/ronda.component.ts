@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RondaService } from 'src/app/services/ronda.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+//Icons
+import { faTimes, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-ronda',
@@ -13,16 +15,17 @@ export class RondaComponent implements OnInit {
   rondas = [];
   show: boolean;
   mensajeCreaRonda: boolean = false;
-  mensajeRondaActiva: boolean;
   mensajeCrearRonda: boolean;
   mensajeBorrarRonda: boolean;
   mensajeUsuariosInsuficientes: boolean = false;
+  faTimes = faTimes;
+  faCheck = faCheck;
 
   constructor(private rondaService: RondaService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
 
-    this.rondaService.activarRonda()
+    this.rondaService.getAll()
           .subscribe(
             res => {
               // Condicional. ¿Existe al menos una ronda?
@@ -31,7 +34,7 @@ export class RondaComponent implements OnInit {
               }
               this.rondas = res;
             },
-            err => this.mensajeRondaActiva = true
+            err => console.log(err)
           );
     this.userService.getAll().subscribe( usuarios => {
       if ( usuarios.length < 4 ) {
@@ -55,7 +58,7 @@ export class RondaComponent implements OnInit {
   deleteRonda() {
     this.rondaService.deleteRonda()
         .subscribe(res => {
-          this.rondaService.activarRonda()
+          this.rondaService.getAll()
               .subscribe(res => {
                 //Condicional. ¿Existe al menos una ronda?
                 if ( res.length === 0 ) {
@@ -64,7 +67,7 @@ export class RondaComponent implements OnInit {
                 }
                 this.rondas = res;
               },
-              err => this.mensajeRondaActiva = true
+              err => console.log(err)
             )
         },
         err => this.mensajeBorrarRonda = true

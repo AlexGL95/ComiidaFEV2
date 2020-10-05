@@ -29,7 +29,7 @@
                         <input #x type="password" class="form-control" formControlName="password" maxlength="15" id="password" required #pass />
                         <div class="input-group-append c-pointer" (click)="x.type = x.type == 'password' ? 'text' : 'password'">
                             <span class="input-group-text">
-                  <i class="fa faEyeSlash"></i>
+                                <fa-icon [icon]="faEyeSlash"></fa-icon>
                 </span>
                         </div>
                     </div>
