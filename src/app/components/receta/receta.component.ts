@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 //Services
 import { RecetaService } from 'src/app/services/receta.service';
+import { AuthService } from 'src/app/services/auth.service';
 //Interfaces
 import { RecetaInterface } from './receta.interface';
 //Icons
@@ -18,6 +19,7 @@ export class RecetaComponent{
   faInfo = faInfo;
 
   //Declaracion de variables
+  IS_SUPER: boolean = false;
   recetasDb:  RecetaInterface[] = [];
   recetasArr: RecetaInterface[] = [];
   ingrString: string = "";
@@ -25,8 +27,12 @@ export class RecetaComponent{
   mensajeNoHayCoincidencias: boolean = false;
 
   //Constructor
-  constructor( private recetaService: RecetaService ) {
+  constructor(
+    private recetaService: RecetaService,
+    private authService: AuthService
+  ) {
     //Adquisicion de datos
+    this.IS_SUPER = authService.leersuper();
     this.recetaService.getRecetas().subscribe( recetas => {
       this.recetasDb = recetas;
       this.buscador("");
