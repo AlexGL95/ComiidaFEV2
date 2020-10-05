@@ -18,6 +18,7 @@ export class UsuariosComponent implements OnInit {
   confirmar: boolean;
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
+  tamu = 0;
 
   const;
   constructor(
@@ -30,6 +31,7 @@ export class UsuariosComponent implements OnInit {
       let i = 0;
       this.usuariosarr = res;
       this.auxarr = [];
+      this.tamu = res.length;
       if (bus) {
         // tslint:disable-next-line: prefer-for-of
         for (let index = 0; index < this.usuariosarr.length; index++) {
@@ -42,7 +44,7 @@ export class UsuariosComponent implements OnInit {
         if (this.usuariosarr.length <= 0) {
           this.resultado = true;
         }else{
-          this.resultado = true;
+          this.resultado = false;
         }
       }
     });

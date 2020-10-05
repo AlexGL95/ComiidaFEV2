@@ -2,7 +2,7 @@
 // tslint:disable: no-string-literal
 // tslint:disable: object-literal-shorthand
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { usuariomodel } from 'src/app/Models/Usuario.model';
@@ -23,7 +23,10 @@ export class EditarUsuarioComponent implements OnInit {
   idx;
   i = 0;
   mensajeUpdate: boolean;
+  pass = false;
   mensajeInv: boolean;
+  contra = '';
+  contra2 = '';
 
   update(nombre: string, pass: string, copass: string){
     this.usrse.getAll().subscribe(res => {
@@ -40,7 +43,7 @@ export class EditarUsuarioComponent implements OnInit {
                   nombre: nombre,
                   pass: pass};
                 console.log('Coincidencias', this.i);
-                if (this.i > 0) {
+                if (this.i > 1) {
                       this.mensajeUpdate = true;
                     }else{
                       this.userservice.updateusuario(this.idx, this.user).subscribe(res => 
@@ -74,16 +77,12 @@ export class EditarUsuarioComponent implements OnInit {
 
   }
 
-    checkPasswords(formGroup: FormGroup) {
-      // here we have the 'passwords' group
-      const { value: password } = formGroup.get('password');
-      const { value: copassword } = formGroup.get('copassword');
-      return password === copassword ? null : { passwordNotMatch: true };
-    }
+   
 
     get usuario(){ return this.RegistroForm.get('usuario'); }
     get password(){ return this.RegistroForm.get('password'); }
     get copassword(){ return this.RegistroForm.get('copassword'); }
+    get f(){ return this.RegistroForm.controls; }
 
     constructor(
       private formBuilder: FormBuilder,
@@ -92,6 +91,20 @@ export class EditarUsuarioComponent implements OnInit {
       private auth: AuthService,
       private usrse: UserService,
       private router: Router) {
+        // parcheador de nombres
+        this.activatedRoute.params.subscribe((params) => {
+          this.idx = params['id'];
+        });
+        console.log(this.idx);
+        this.userservice.getOne(this.idx)
+        .pipe(first())
+        .subscribe((comp) => {
+          this.usu = comp;
+          this.RegistroForm.patchValue({
+            usuario: this.usu.nombre,
+          });
+        });
+
         this.RegistroForm = this.formBuilder.group(
           {
             usuario: new FormControl('', [
@@ -114,24 +127,19 @@ export class EditarUsuarioComponent implements OnInit {
                   Validators.pattern(this.patt),
                 ]),
               ],
-            },
-            { Validator: this.checkPasswords.bind(this) }
+            }
             );
           }
 
+          checkPasswords(formGroup: FormGroup): ValidatorFn {
+            // here we have the 'passwords' group
+            const { value: password } = formGroup.get('password');
+            const { value: copassword } = formGroup.get('copassword');
+            return (control: AbstractControl): { [key: string]: any } | null =>
+            password === copassword ? null : { passwordNotMatch: true };
+          }
+
           ngOnInit(): void {
-            this.activatedRoute.params.subscribe((params) => {
-              this.idx = params['id'];
-            });
-            console.log(this.idx);
-            this.userservice.getOne(this.idx)
-            .pipe(first())
-            .subscribe((comp) => {
-              this.usu = comp;
-              this.RegistroForm.patchValue({
-                usuario: this.usu.nombre,
-              });
-            });
 
           }
 

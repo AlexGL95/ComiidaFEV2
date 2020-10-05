@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { usuariomodel } from '../../Models/Usuario.model';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+//Icons
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
 
 
   singup( nombre: string, pass: string){
-    if (this.LoginForm.valid) {
+    if (this.LoginForm.valid) { 
         this.user = {
         nombre,
         pass

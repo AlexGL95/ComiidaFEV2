@@ -26,14 +26,6 @@
 
 <!-- Vista cuando existen rondas -->
 <div class="container" *ngIf="!mensajeCreaRonda">
-
-    <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeRondaActiva">
-        <strong>No Hay Ronda Activa</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeRondaActiva = false">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    </div>
-
     <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="mensajeCrearRonda">
         <strong>No Se Pudo Crear Ronda</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="mensajeCrearRonda = false">
@@ -64,7 +56,8 @@
                         <td>{{ ronda.id }}</td>
                         <td>{{ ronda.fecha_inicio }}</td>
                         <td>{{ ronda.fecha_final }}</td>
-                        <td>{{ ronda.activa }}</td>
+                        <td *ngIf="ronda.activa"><fa-icon [icon]="faCheck"></fa-icon></td>
+                        <td *ngIf="!ronda.activa"><fa-icon [icon]="faTimes"></fa-icon></td>
                     </tr>
                 </tbody>
             </table>

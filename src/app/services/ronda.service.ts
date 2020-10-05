@@ -15,10 +15,6 @@ export class RondaService {
   createRonda(){
     return this.http.get<Ronda[]>(`${this.URIrondas}/ronda`);
   }
-  
-  activarRonda(){
-    return this.http.get<Ronda[]>(`${this.URIrondas}/activa`);
-  }
 
   deleteRonda(){
     return this.http.delete(`${this.URIrondas}`);

@@ -21,4 +21,8 @@ export class EquipoService {
     return this.http.put(this.URL_API_EQUIPOS, fechaMod );
   }
 
+  getIdByName( fecha: string ) {
+    return this.http.get<number>( this.URL_API_EQUIPOS + `/${fecha}`);
+  }
+
 }
