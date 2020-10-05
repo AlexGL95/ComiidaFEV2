@@ -13,8 +13,8 @@
         No cocinas.
     </div>
     <!-- Boton de añadir recetas -->
-    <button type="button" class="btn btn-secondary mt-3 mr-2 btn-block" (click)="linkNuevaReceta()">
-            Añadir receta
+    <button type="button" class="btn btn-info mt-3 mr-2 btn-block" (click)="linkNuevaReceta()">
+            Añadir receta al recetario
         </button>
 </div>
 <!-- Ya hay recetas asignadas -->
@@ -39,8 +39,8 @@
             Ir a rondas.
         </button>
     <!-- Boton de añadir recetas -->
-    <button type="button" class="btn btn-secondary mt-3 mr-2 btn-block" (click)="linkNuevaReceta()">
-            Añadir receta
+    <button type="button" class="btn btn-info mt-3 mr-2 btn-block" (click)="linkNuevaReceta()">
+            Añadir receta al recetario
         </button>
 </div>
 <!-- Sin rondas usuario -->
@@ -115,11 +115,11 @@
                 <!-- Boton de asignacion -->
                 <div class="mt-5 ml-5">
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-secondary mr-2" (click)="linkNuevaReceta()">
-                                Añadir receta
+                        <button type="button" class="btn btn-info mr-2" (click)="linkNuevaReceta()">
+                                Añadir receta al recetario
                             </button>
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" (click)="asignarRecetasAlEquipo()">
-                                Asignar receta
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" (click)="asignarRecetasAlEquipo()">
+                                Asignar recetas al equipo
                             </button>
                     </div>
                 </div>
@@ -165,8 +165,8 @@
                     {{equipoUsuario.integrantes_nombres[0]}} y {{equipoUsuario.integrantes_nombres[1]}}
                 </div>
                 <!-- Boton de añadir recetas -->
-                <button type="button" class="btn btn-secondary mt-4 ml-3 mr-2" (click)="linkNuevaReceta()">
-                        Añadir receta
+                <button type="button" class="btn btn-info mt-4 ml-3 mr-2" (click)="linkNuevaReceta()">
+                        Añadir receta al recetario
                     </button>
             </div>
             <!-- Lado derecho: Recetas asignadas -->
