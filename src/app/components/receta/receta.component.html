@@ -42,7 +42,7 @@
                                 <fa-icon [icon]="faInfo"></fa-icon>
                             </button>
                             <!-- Boton de eliminar -->
-                            <button type="button" class="btn btn-md btn-danger" (click)="borrarReceta(i)">
+                            <button type="button" class="btn btn-md btn-danger" *ngIf="IS_SUPER" (click)="borrarReceta(i)">
                                 <fa-icon [icon]="faTrashAlt"></fa-icon>
                             </button>
                         </ul>
