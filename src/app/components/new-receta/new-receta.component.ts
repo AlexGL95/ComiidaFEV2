@@ -90,8 +90,6 @@ export class NewRecetaComponent implements OnInit {
       this.ingredientes.length ++;
       this.ingredientes2.length ++;
       this.camposFaltantes = false;
-    } else {
-      this.camposFaltantes = true;
     }
   }
 
@@ -129,8 +127,7 @@ export class NewRecetaComponent implements OnInit {
       this.recetta.categoria = this.mensajeCat;
       this.recetta.ingredientes = this.receta;
       this.recetta.activo = false;
-      //this.verificaruni();
-      console.log(this.recetta);
+      this.verificaruni();
     } else {
       this.camposFaltantes = true;
         return false;
@@ -181,7 +178,6 @@ export class NewRecetaComponent implements OnInit {
 
   verificarcondi(){
     this.nuevaRecetaService.crearCondimento(this.condimento).subscribe( res => {
-      console.log(res);
       if (res === null) {
         this.mensajeCondimentoRepetido = true;
       } else if (res !== null) {
@@ -189,7 +185,6 @@ export class NewRecetaComponent implements OnInit {
         this.nuevaRecetaService.obtenerCondimentos()
                 .subscribe(res => {
                 this.condimentos = res;
-                console.log(this.condimentos);
                 },
                 err => this.mensajeCondimento = true);
       }
@@ -205,7 +200,6 @@ export class NewRecetaComponent implements OnInit {
           this.nuevaRecetaService.obtenerCondimentos()
               .subscribe(res => {
               this.condimentos = res;
-              console.log(this.condimentos);
               },
               err => this.mensajeCondimento = true);
         },
