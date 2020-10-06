@@ -54,10 +54,20 @@
     <div class="alert alert-danger text-center" role="alert">
         No existen rondas actualmente.
     </div>
-    <!-- Boton de redireccion a rondas -->
-    <button type="button" class="btn btn-secondary mt-3 mr-2 btn-block" *ngIf="IS_SUPER" (click)="linkRondas()">
-            Ir a rondas.
-        </button>
+    <div class="row">
+        <!-- Boton de añadir recetas -->
+        <div class="col">
+            <button type="button" class="btn btn-info mt-3 mr-2 btn-block" (click)="linkNuevaReceta()">
+                Añadir receta al recetario
+            </button>
+        </div>
+        <!-- Boton de redireccion a rondas -->
+        <div class="col">
+            <button type="button" class="btn btn-secondary mt-3 mr-2 btn-block" *ngIf="IS_SUPER" (click)="linkRondas()">
+                Ir a rondas.
+            </button>
+        </div>
+    </div>
 </div>
 
 <div *ngIf="!mensajeHoyNoCocinas && !mensajeRondaEnCurso">
