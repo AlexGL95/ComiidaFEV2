@@ -34,14 +34,20 @@
     <div class="alert alert-info text-center" role="alert">
         La ronda actual esta en curso, y el tiempo de seleccion de ingredientes expiro.
     </div>
-    <!-- Boton de redireccion a rondas -->
-    <button type="button" class="btn btn-success mt-3 mr-2 btn-block" *ngIf="IS_SUPER" (click)="linkRondas()">
-            Ir a rondas.
-        </button>
-    <!-- Boton de añadir recetas -->
-    <button type="button" class="btn btn-info mt-3 mr-2 btn-block" (click)="linkNuevaReceta()">
-            Añadir receta al recetario
-        </button>
+    <div class="row">
+        <!-- Boton de añadir recetas -->
+        <div class="col">
+            <button type="button" class="btn btn-info mt-3 mr-2 btn-block" (click)="linkNuevaReceta()">
+                Añadir receta al recetario
+            </button>
+        </div>
+        <!-- Boton de redireccion a rondas -->
+        <div class="col">
+            <button type="button" class="btn btn-secondary mt-3 mr-2 btn-block" *ngIf="IS_SUPER" (click)="linkRondas()">
+                Ir a rondas.
+            </button>
+        </div>
+    </div>
 </div>
 <!-- Sin rondas usuario -->
 <div class="container mt-3" *ngIf="mensajeNoHayRonda">
@@ -49,7 +55,7 @@
         No existen rondas actualmente.
     </div>
     <!-- Boton de redireccion a rondas -->
-    <button type="button" class="btn btn-success mt-3 mr-2 btn-block" *ngIf="IS_SUPER" (click)="linkRondas()">
+    <button type="button" class="btn btn-secondary mt-3 mr-2 btn-block" *ngIf="IS_SUPER" (click)="linkRondas()">
             Ir a rondas.
         </button>
 </div>
