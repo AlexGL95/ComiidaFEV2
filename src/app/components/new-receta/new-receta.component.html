@@ -137,7 +137,7 @@
             <div class="row row-cols-2 mt-3" *ngFor="let cond of condimentos; index as i">
                 <div class="col">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" (click)="checkFluency(i)" class="custom-control-input" id="customCheck.{{i}}" [(ngModel)]="check[i]" checked>
+                        <input type="checkbox" (click)="checkFluency(i)" class="custom-control-input" id="customCheck.{{i}}">
                         <label class="custom-control-label" for="customCheck.{{i}}">{{cond.nombre}}</label>
                     </div>
                 </div>
