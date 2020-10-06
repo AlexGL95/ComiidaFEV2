@@ -110,7 +110,7 @@ export class HomeComponent{
           this.recetaService.getRecetas().subscribe( recetas => {
             for (let m = 0; m < recetas.length; m++) {
               if ( recetas[m].activo === false ) {
-                this.recetasArr.push( {idLocal:m, idDb: m+1, nombre:recetas[m].nombre, elegida:false, ingredientes:recetas[m].ingredientes } );
+                this.recetasArr.push( {idLocal:m, idDb: recetas[m].id, nombre:recetas[m].nombre, elegida:false, ingredientes:recetas[m].ingredientes } );
               }
             }
 

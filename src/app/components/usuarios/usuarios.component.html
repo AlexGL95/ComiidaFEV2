@@ -5,7 +5,9 @@
     <h2 align="center">Usuarios</h2>
 </div>
 <!-- Mensaje de alerta no menos de 4 usuarios-->
-
+<div class="alert alert-danger" role="alert" *ngIf="(tamu <= 4)">
+    No puedes quedarte con menos de 4 usuarios
+</div>
 
 <!-- Lista de usuarios -->
 <div class="container row">
