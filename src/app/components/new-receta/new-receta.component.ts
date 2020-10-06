@@ -165,11 +165,12 @@ export class NewRecetaComponent implements OnInit {
 
   }
 
-  crearCondimento(): boolean{
+  crearCondimento(){
     if(this.condi !== undefined && this.condi !== ''){
       this.condimento.nombre = this.condi;
+      
       this.verificarcondi();
-      return false;
+      
     } else{
       this.mensajeCondimento2 = true;
     }
@@ -185,7 +186,12 @@ export class NewRecetaComponent implements OnInit {
         this.nuevaRecetaService.obtenerCondimentos()
                 .subscribe(res => {
                 this.condimentos = res;
-                },
+                this.canti = 0
+                for(let h = 0; h < this.condimentos.length; h++){
+                  this.checkbox2 = <HTMLInputElement> document.getElementById(`customCheck.${h}`);
+                  this.checkbox2.checked = true;
+                }
+              },
                 err => this.mensajeCondimento = true);
       }
       
@@ -200,6 +206,11 @@ export class NewRecetaComponent implements OnInit {
           this.nuevaRecetaService.obtenerCondimentos()
               .subscribe(res => {
               this.condimentos = res;
+              this.canti = 0
+                for(let h = 0; h < this.condimentos.length; h++){
+                  this.checkbox2 = <HTMLInputElement> document.getElementById(`customCheck.${h}`);
+                  this.checkbox2.checked = true;
+                }
               },
               err => this.mensajeCondimento = true);
         },
