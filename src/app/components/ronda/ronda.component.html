@@ -9,7 +9,7 @@
     <div class="alert alert-danger text-center" role="alert">
         Necesitas al menos 4 usuarios para generar una ronda.
     </div>
-    <button type="button" class="btn btn-success btn-block mt-3" (click)="linkUsuarios()">
+    <button type="button" class="btn btn-secondary btn-block mt-3" (click)="linkUsuarios()">
     Ir a usuarios.
   </button>
 </div>
@@ -56,14 +56,18 @@
                         <td>{{ ronda.id }}</td>
                         <td>{{ ronda.fecha_inicio }}</td>
                         <td>{{ ronda.fecha_final }}</td>
-                        <td *ngIf="ronda.activa"><fa-icon [icon]="faCheck"></fa-icon></td>
-                        <td *ngIf="!ronda.activa"><fa-icon [icon]="faTimes"></fa-icon></td>
+                        <td *ngIf="ronda.activa">
+                            <fa-icon [icon]="faCheck"></fa-icon>
+                        </td>
+                        <td *ngIf="!ronda.activa">
+                            <fa-icon [icon]="faTimes"></fa-icon>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="col-md-4 p-3">
+        <div class="col-md-4 p-3 text-center">
             <form (submit)="createRonda()">
                 <!-- Vista cuando no hay suficientes usurios -->
                 <div class="container mt-5" *ngIf="(rondas.length >= 5)">

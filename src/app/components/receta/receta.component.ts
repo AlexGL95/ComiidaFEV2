@@ -18,7 +18,7 @@ export class RecetaComponent{
   faTrashAlt = faTrashAlt;
   faInfo = faInfo;
 
-  //Declaracion de variables
+  // Declaracion de variables
   IS_SUPER: boolean = false;
   recetasDb:  RecetaInterface[] = [];
   recetasArr: RecetaInterface[] = [];
@@ -26,12 +26,12 @@ export class RecetaComponent{
   ingrArr: string[] = [];
   mensajeNoHayCoincidencias: boolean = false;
 
-  //Constructor
+  // Constructor
   constructor(
     private recetaService: RecetaService,
     private authService: AuthService
   ) {
-    //Adquisicion de datos
+    // Adquisicion de datos
     this.IS_SUPER = authService.leersuper();
     this.recetaService.getRecetas().subscribe( recetas => {
       this.recetasDb = recetas;
@@ -47,7 +47,15 @@ export class RecetaComponent{
 
   borrarReceta(id: number) {
     //Eliminacion de la receta
-    this.recetaService.deleteById(id+1).subscribe( () => {
+    let idDb: number;
+    for (let m = 0; m < this.recetasArr.length; m++) {
+      if ( this.recetasArr[id] === this.recetasDb[m] ) {
+        idDb = this.recetasDb[m].id;
+        break;
+      }
+    }
+    console.log(idDb);
+    this.recetaService.deleteById(idDb).subscribe( () => {
       //Adquisicion de datos
       this.recetaService.getRecetas().subscribe( recetas => {
         this.recetasArr = recetas;

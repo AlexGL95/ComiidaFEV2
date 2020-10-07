@@ -10,59 +10,63 @@
     No se pueden tener menos de 4 usuarios.
 </div>
 
-<!-- Lista de usuarios -->
-<div class="container row">
-    <!-- Izquierda -->
-    <div class="mt-4 ml-5 text-center row-cols col-5">
+<!-- Encabezado -->
+<div class="container-fluid ancho">
+    <div class="row">
         <!-- Buscador -->
-        <form action="" class="form-inline text-center">
-            <input class="form-control mr-sm-2" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)  || (event.charCode === 32)" (keyup)="ngOnInit(Bus.value)" type="search" maxlength="15" #Bus placeholder="Buscar">
-            <button class="btn btn-outline-secondary my-2 my-sm-0 mr-sm-2" type="submit">Buscar</button>
-        </form>
-        <br>
-        <!-- Lista de usuarios -->
-        <ul class="list-group">
-            <!--Encabezado de la lista-->
-            <li class="list-group-item bg-secondary">
-                <div class="row ">
-                    <!-- Columna de integrantes -->
-                    <div class="col pl-2 text-center">Nombre</div>
-                    <!-- Columna de acciones -->
-                    <div class="col pl-2 text-center">Acciones</div>
-                </div>
-            </li>
-            <div class="alert alert-danger" role="alert" *ngIf="(usuariosarr.length <= 0)">
-                No se encontraron coincidencias
+        <div class="col-auto mt-3">
+            <form action="" class="form-inline text-center">
+                <input class="form-control w-50" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)  || (event.charCode === 32) || (event.charCode === 209)|| (event.charCode === 241)" (keyup)="ngOnInit(Bus.value)"
+                    type="search" maxlength="15" #Bus placeholder="Buscar">
+                <button class="btn btn-outline-secondary ml-2 my-2 my-sm-0 mr-sm-2" type="submit">Buscar</button>
+            </form>
+        </div>
+        <div class="col mt-3 boton">
+            <!-- Nuevo usuario -->
+            <button class="btn btn-success" (click)="nuevousuario()">Agregar usuario</button>
+        </div>
+    </div>
+</div>
+
+<!-- Lista de usuarios -->
+<div class="container-fluid mt-4">
+    <!-- Lista de usuarios -->
+    <ul class="list-group ancho">
+        <!--Encabezado de la lista-->
+        <li class="list-group-item bg-secondary">
+            <div class="row ">
+                <!-- Columna de integrantes -->
+                <div class="col pl-2 text-center">Nombre</div>
+                <!-- Columna de acciones -->
+                <div class="col pl-2 text-center">Acciones</div>
             </div>
-            <!-- Cuerpo de la lista -->
-            <li class="list-group-item" *ngFor="let equipo of usuariosarr; index as i;">
-                <div class="row">
-                    <!-- Columna de usuarios -->
-                    <ul class=" list-group text-justify">
-                        <div class="ml-5">{{ usuariosarr[i].nombre }}</div>
-                    </ul>
-                    <!-- Columna de acciones -->
-                    <div class="col text-right">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <button class=" ml-1 btn btn-warning" (click)="editarusuario(usuariosarr[i].id)">
+        </li>
+        <div class="alert alert-danger" role="alert" *ngIf="(usuariosarr.length <= 0)">
+            No se encontraron coincidencias
+        </div>
+        <!-- Cuerpo de la lista -->
+        <li class="list-group-item" *ngFor="let equipo of usuariosarr; index as i;">
+            <div class="row">
+                <!-- Columna de usuarios -->
+                <ul class=" col list-group text-center">
+                    <div class="ml-5">{{i+1}}.-{{ usuariosarr[i].nombre }}</div>
+                </ul>
+                <!-- Columna de acciones -->
+                <div class="col text-center">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <button class=" ml-1 btn btn-warning" (click)="editarusuario(usuariosarr[i].id)">
                                     <fa-icon [icon]="faEdit"></fa-icon>
                                 </button>
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" *ngIf="((!usuariosarr[i].super) && tamu > 4)" (click)="const = i">
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" *ngIf="((!usuariosarr[i].super) && tamu > 4)" (click)="const = i">
                                     <fa-icon [icon]="faTrashAlt"></fa-icon>
                                 </button>
-                            </li>
-                        </ul>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
-            </li>
-        </ul>
-    </div>
-    <!-- Derecha -->
-    <div class="mt-2 ml-5 text-center row-cols col-5">
-        <!-- Nuevo usuario -->
-        <button class="btn btn-success mt-3" (click)="nuevousuario()">Agregar usuario</button>
-    </div>
+            </div>
+        </li>
+    </ul>
 </div>
 
 <!-- Modal -->

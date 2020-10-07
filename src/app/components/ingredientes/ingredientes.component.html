@@ -12,29 +12,30 @@
 </div>
 
 <!-- Cuerpo de la pagina -->
-<div class="container mt-5" *ngIf="!mensajeSinRecetas">
+<div class="container mt-5 " *ngIf="!mensajeSinRecetas">
     <!-- Instrucciones -->
-    <h4>Lista de ingredientes para {{nUsuarios}} personas.</h4>
-    <div class="mt-3">
-        <button type="button" class="btn btn-danger" (click)="restarUsuarios()">
+    <h4 class="ancho">Lista de ingredientes para {{nUsuarios}} personas.</h4>
+    <div class="ancho">
+        <div class="btn-group mt-3 " role="group">
+            <button type="button" class="btn btn-danger" (click)="restarUsuarios()">
             <fa-icon [icon]="faMinus"></fa-icon>
         </button>
-        <button type="button" class="btn btn-success ml-3" (click)="sumarUsuarios()">
+            <button type="button" class="btn btn-success" (click)="sumarUsuarios()">
             <fa-icon [icon]="faPlus"></fa-icon>
         </button>
+        </div>
     </div>
-
     <!-- Lista de compras -->
-    <ul class="list-group mt-3">
-        <!-- Encabezado -->
+    <ul class="list-group mt-3 ancho">
+        <!--Encabezado de la lista-->
         <li class="list-group-item bg-secondary">
-            <div class="row ">
-                <!-- Ingrediente -->
-                <h4 class="col pl-2 text-center">Ingrediente.</h4>
-                <!-- Cantidad x n -->
-                <h4 class="col pl-2 text-center">Cantidad.</h4>
-                <!-- Unidad -->
-                <h4 class="col pl-2 text-center">Unidad.</h4>
+            <div class="row">
+                <!-- Columna de ingrediente -->
+                <div class="col encabezado">Ingrediente</div>
+                <!-- Columna de cantidad -->
+                <div class="col encabezado">Cantidad</div>
+                <!-- Columna de unidad -->
+                <div class="col encabezado">Unidad</div>
             </div>
         </li>
         <!-- Cuerpo de la lista -->
