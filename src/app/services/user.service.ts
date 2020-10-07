@@ -24,7 +24,6 @@ updateusuario(id, data: usuariomodel){
   const Data = { // payload para Actualizacion de usuarios
     ...data
   };
-  console.log(id, data);
   return this.http.put(`${this.url}/usuarios/${id}`, Data);
 }
 
@@ -35,15 +34,5 @@ return this.http.get<UsuarioInterface[]>(`${this.url}/usuarios`);
 delete(id){
   return this.http.delete(`${this.url}/usuarios/${id}`);
 }
-
-/*
-updateusuario(){
-    const Data = { // payload para Actualizacion de usuarios
-      ...data
-    };
-    console.log(id,data);
-    return this.http.put(`http://localhost:3000/usuarios/1`, {nombre:"Pablo", pass: "hola"});
-  }
-  */
 
 }

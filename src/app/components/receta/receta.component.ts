@@ -57,7 +57,6 @@ export class RecetaComponent{
         break;
       }
     }
-    console.log(id);
     
     this.recetaService.deleteById(idDb).subscribe( () => {
       //Recarga

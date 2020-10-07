@@ -55,7 +55,6 @@ editarusuario(id){
 }
 delusuario(id){
   this.user.delete(id).subscribe(res => {
-    console.log(res);
     this.ngOnInit();
     window.location.reload();
   });

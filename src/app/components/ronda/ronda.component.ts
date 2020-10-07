@@ -83,10 +83,8 @@ export class RondaComponent implements OnInit {
   }
 
   showmodalsuccess() {
-    console.log(this.tr);
     if (this.tr <= 0) {
       window.location.reload();
-      console.log(this.tr);
     }
   }
 }

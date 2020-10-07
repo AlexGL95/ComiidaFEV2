@@ -25,9 +25,6 @@ export class RegistroComponent implements OnInit {
 
   singin(nombre: string, pass: string, copass: string){
     if (this.RegistroForm.valid) {
-
-      console.log('Registro');
-
       this.user = {
       nombre: nombre,
       pass: pass};
@@ -42,7 +39,6 @@ export class RegistroComponent implements OnInit {
       },
       err => {
         console.log(err);
-
       });
 
     } else {

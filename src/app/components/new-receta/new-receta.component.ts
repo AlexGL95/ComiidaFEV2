@@ -70,7 +70,6 @@ export class NewRecetaComponent implements OnInit {
     this.nuevaRecetaService.obtenerCondimentos()
       .subscribe(res => {
       this.condimentos = res;
-      console.log(this.condimentos);
       },
       err => this.mensajeCondimento = true);
       
@@ -145,7 +144,6 @@ export class NewRecetaComponent implements OnInit {
 
   verificaruni(){
     this.nuevaRecetaService.crearReceta(this.recetta).subscribe( res => {
-      console.log(res);
       if (res === null) {
         this.mensajeRecetaRepetida = true;
       } else if (res !== null) {
