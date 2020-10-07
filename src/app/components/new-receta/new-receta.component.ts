@@ -225,7 +225,7 @@ export class NewRecetaComponent implements OnInit {
       this.canti --
     }
 
-    if(this.canti > 2){
+    if(this.canti > 9){
       for(let h = 0; h < this.condimentos.length; h++){
         this.checkbox2 = <HTMLInputElement> document.getElementById(`customCheck.${h}`);
         if(this.checkbox2.checked !== true){
