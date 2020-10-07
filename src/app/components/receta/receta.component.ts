@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { RecetaInterface } from './receta.interface';
 //Icons
 import { faTrashAlt, faInfo } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-receta',
@@ -30,7 +31,8 @@ export class RecetaComponent{
   // Constructor
   constructor(
     private recetaService: RecetaService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     // Adquisicion de datos
     this.IS_SUPER = authService.leersuper();
@@ -78,5 +80,10 @@ export class RecetaComponent{
       this.mensajeNoHayCoincidencias = true;
     }
   }
+
+    //Metodo para redirigir a nueva receta
+    linkNuevaReceta(){
+      this.router.navigate(['/NuevaReceta']);
+    }
 
 }
