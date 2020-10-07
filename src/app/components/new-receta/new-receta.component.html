@@ -1,4 +1,4 @@
-<div class="container app">
+<div class="container-sm">
     <!-- Titulo: Nueva receta -->
     <div class="container-fluid border-bottom border-secondary mt-2">
         <h2 align="center">Nueva receta</h2>
@@ -30,119 +30,123 @@
         </button>
     </div>
     <div class="row row-cols-2 mt-3">
-        <div class="col-md-8 mt-3">
-            <div class="form-inline">
-                <button type="button" class="btn btn-secondary" (click)="regreso()">Regresar A Home</button>
-                <div class="col-md-5">
-                    <button type="button" class="btn btn-info" (click)="guardar()">
-                        Guardar Receta
-                    </button>
-                </div>
-            </div>
-
-            <div class="form-group mt-3">
-                <label for="name" class="control-label-sm-3">
-                    Nombre:
-                </label>
-                <div class="col-sm-10">
-                    <input type="text" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode === 32)" class="form-control" maxlength="30" placeholder="Nombre De Receta" [(ngModel)]="nombre">
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col">
-                    <div class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                            {{mensajeCat}}
+        <div class="container-sm">
+            <div class="col-sm-8 mt-3">
+                <div class="form-inline">
+                    <button type="button" class="btn btn-secondary" (click)="regreso()">Regresar A Home</button>
+                    <div class="col-md-5">
+                        <button type="button" class="btn btn-info" (click)="guardar()">
+                            Guardar Receta
                         </button>
-                        <ul class="dropdown-menu">
-                            <li *ngFor="let categoria of categorias; index as i">
-                                <button type="button" class="btn" (click)="selecCategoria(i)">{{categoria}}</button>
-                            </li>
-                        </ul>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group mt-4">
-                <label for="position" class="control-label-sm-2">
-                    Ingredientes:
-                </label>
-                <button class="btn btn-success ml-3" (click)="nuevoIng()">Agregar</button>
-            </div>
-
-            <div class="alert alert-primary" role="alert">
-                Recuerde que los ingredientes se consideran por persona, ejemplo:
-            </div>
-
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Pollo</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col">1</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col">pz</th>
-                    <th scope="col">x Persona</th>
-                  </tr>
-                </thead>
-              </table>
-
-            <div class="row row-cols-4 mt-3" *ngFor="let ingrediente of ingredientes; index as i">
-                <div class="col" >
-                    <input type="text" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode === 32)" maxlength="15" class="form-control" name="name.{{i}}.ing" placeholder="Nuevo ingrediente" [(ngModel)]="ing[i]">
+    
+                <div class="form-group mt-3">
+                    <label for="name" class="control-label-sm-3">
+                        Nombre:
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="text" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode === 32)" class="form-control" maxlength="30" placeholder="Nombre De Receta" [(ngModel)]="nombre">
+                    </div>
                 </div>
-
-                <div class="col">
-                    <input type="text" class="form-control" maxlength="3" name="name.{{i}}.cant" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" placeholder="Cantidad" [(ngModel)]="ing2[i]">
-                </div>
-
-                <div class="col">
-                    <div class="col-md-4">
+    
+                <div class="form-group">
+                    <div class="col">
                         <div class="dropdown">
                             <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                                {{mensajeUni[i]}}
+                                {{mensajeCat}}
                             </button>
                             <ul class="dropdown-menu">
-                                <li *ngFor="let unidad of unidades">
-                                    <button type="button" class="btn btn-block" (click)="selecUnidades(i, unidad)">{{unidad}}</button>
+                                <li *ngFor="let categoria of categorias; index as i">
+                                    <button type="button" class="btn" (click)="selecCategoria(i)">{{categoria}}</button>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-     
-                <div class="col">
-                    <button type="button" class="btn btn-danger" (click)="borrarIng(i)" *ngIf="ingredientes.length > 1">Retirar</button>
+    
+                <div class="form-group mt-4">
+                    <label for="position" class="control-label-sm-2">
+                        Ingredientes:
+                    </label>
+                    <button class="btn btn-success ml-3" (click)="nuevoIng()">Agregar</button>
                 </div>
-
-            </div>
-
-        </div>
-
-        <div class="col-md-4">
-            <div class="container-fluid border-bottom border-secondary mt-2">
-                <h3 align="center">Condimentos/Especias</h3>
-            </div>
-            
-            <div class="alert alert-primary" role="alert">
-                Si necesita algún condimento y/o especia puede seleccionarlo en las casillas de abajo.
-            </div>
-            <button type="button" class="btn btn-primary mt-3" (click)="condi = ''" data-toggle="modal" data-target="#exampleModal">
-                Agregar Condimento
-            </button>
-            <div class="row row-cols-2 mt-3" *ngFor="let cond of condimentos; index as i">
-                <div class="col">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" (click)="checkFluency(i)" class="custom-control-input" id="customCheck.{{i}}">
-                        <label class="custom-control-label" for="customCheck.{{i}}">{{cond.nombre}}</label>
+    
+                <div class="alert alert-primary" role="alert">
+                    Recuerde que los ingredientes se consideran por persona, ejemplo:
+                </div>
+    
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Pollo</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">1</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col">pz</th>
+                        <th scope="col">x Persona</th>
+                      </tr>
+                    </thead>
+                  </table>
+    
+                <div class="row row-cols-4 mt-3" *ngFor="let ingrediente of ingredientes; index as i">
+                    <div class="col" >
+                        <input type="text" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode === 32)" maxlength="15" class="form-control" name="name.{{i}}.ing" placeholder="Nuevo ingrediente" [(ngModel)]="ing[i]">
                     </div>
+    
+                    <div class="col">
+                        <input type="text" class="form-control" maxlength="3" name="name.{{i}}.cant" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" placeholder="Cantidad" [(ngModel)]="ing2[i]">
+                    </div>
+    
+                    <div class="col">
+                        <div class="col-md-4">
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                                    {{mensajeUni[i]}}
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li *ngFor="let unidad of unidades">
+                                        <button type="button" class="btn btn-block" (click)="selecUnidades(i, unidad)">{{unidad}}</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+         
+                    <div class="col">
+                        <button type="button" class="btn btn-danger" (click)="borrarIng(i)" *ngIf="ingredientes.length > 1">Retirar</button>
+                    </div>
+    
                 </div>
-                <div class="col">
-                    <button type="button" class="btn btn-danger" *ngIf="SUPER" (click)="borrarCondimento(condimentos[i].id)">Retirar</button>
+    
+            </div>
+    
+        </div>
+        <div class="container-sm">
+            <div class="col-sm-4">
+                <div class="container-fluid border-bottom border-secondary mt-2">
+                    <h3 align="center">Condimentos/Especias</h3>
+                </div>
+                
+                <div class="alert alert-primary" role="alert">
+                    Si necesita algún condimento y/o especia puede seleccionarlo en las casillas de abajo.
+                </div>
+                <button type="button" class="btn btn-primary mt-3" (click)="condi = ''" data-toggle="modal" data-target="#exampleModal">
+                    Agregar Condimento
+                </button>
+                <div class="row row-cols-2 mt-3" *ngFor="let cond of condimentos; index as i">
+                    <div class="col">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" (click)="checkFluency(i)" class="custom-control-input" id="customCheck.{{i}}">
+                            <label class="custom-control-label" for="customCheck.{{i}}">{{cond.nombre}}</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-danger" *ngIf="SUPER" (click)="borrarCondimento(condimentos[i].id)">Retirar</button>
+                    </div>
                 </div>
             </div>
         </div>
