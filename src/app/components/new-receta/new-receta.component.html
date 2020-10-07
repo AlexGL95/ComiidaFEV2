@@ -29,38 +29,45 @@
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="row row-cols-2 mt-3">
-        <div class="col-md-8 mt-3">
-            <div class="form-inline">
-                <button type="button" class="btn btn-secondary" (click)="regreso()">Regresar A Home</button>
-                <div class="col-md-5">
-                    <button type="button" class="btn btn-info" (click)="guardar()">
-                        Guardar Receta
-                    </button>
-                </div>
-            </div>
 
+    <div class="row mt-3">
+        <div class="col-auto">
+            <button type="button" class="btn btn-secondary" (click)="regreso()">
+                Regresar A Home
+            </button>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-info" (click)="guardar()">
+                Guardar Receta
+            </button>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col mt-3">
             <div class="form-group mt-3">
                 <label for="name" class="control-label-sm-3">
                     Nombre:
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode === 32)" class="form-control" maxlength="30" placeholder="Nombre De Receta" [(ngModel)]="nombre">
+                    <input type="text" onkeypress="return (
+                    (event.charCode >= 65 && event.charCode <= 90) || 
+                    (event.charCode >= 97 && event.charCode <= 122) || 
+                    (event.charCode === 32) || (event.charCode === 209)|| (event.charCode === 241)
+                    )" class="form-control" maxlength="30" placeholder="Nombre De Receta" [(ngModel)]="nombre">
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="col">
-                    <div class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                            {{mensajeCat}}
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li *ngFor="let categoria of categorias; index as i">
-                                <button type="button" class="btn" (click)="selecCategoria(i)">{{categoria}}</button>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="col">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                        {{mensajeCat}}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li *ngFor="let categoria of categorias; index as i">
+                            <button type="button" class="btn" (click)="selecCategoria(i)">{{categoria}}</button>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
@@ -78,21 +85,19 @@
                         <tr>
                             <th scope="col">Pollo</th>
                             <th scope="col"></th>
-                            <th scope="col"></th>
                             <th scope="col">1</th>
                             <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
                             <th scope="col">pz</th>
-                            <th scope="col">x Persona</th>
+                            <th scope="col">/Persona</th>
                         </tr>
                     </thead>
                 </table>
             </div>
+
             <div class="row row-cols-4 mt-3" *ngFor="let ingrediente of ingredientes; index as i">
                 <div class="col">
-                    <input type="text" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode === 32)" maxlength="15" class="form-control" name="name.{{i}}.ing" placeholder="Nuevo ingrediente"
-                        [(ngModel)]="ing[i]">
+                    <input type="text" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode === 32) || (event.charCode === 209)|| (event.charCode === 241)" maxlength="25" class="form-control"
+                        name="name.{{i}}.ing" placeholder="Nuevo ingrediente" [(ngModel)]="ing[i]">
                 </div>
 
                 <div class="col">
@@ -117,12 +122,10 @@
                 <div class="col">
                     <button type="button" class="btn btn-danger" (click)="borrarIng(i)" *ngIf="ingredientes.length > 1">Retirar</button>
                 </div>
-
             </div>
-
         </div>
 
-        <div class="col-md-4">
+        <div class="col mb-4">
             <div class="container-fluid border-bottom border-secondary mt-2">
                 <h3 align="center">Condimentos/Especias</h3>
             </div>
@@ -130,9 +133,11 @@
             <div class="alert alert-primary " role="alert">
                 Si necesita algún condimento y/o especia puede seleccionarlo en las casillas de abajo.
             </div>
+
             <button type="button" *ngIf="SUPER" class="btn btn-primary mt-3 mb-3 text-center" (click)="condi = ''" data-toggle="modal" data-target="#exampleModal">
                 Nuevo Condimento
             </button>
+
             <div class="row row-cols-2 mt-3" *ngFor="let cond of condimentos; index as i">
                 <div class="col border-bottom">
                     <div class="custom-control custom-checkbox ">
@@ -144,6 +149,7 @@
                     <button type="button" class="btn btn-danger" *ngIf="SUPER" (click)="borrarCondimento(condimentos[i].id)">Retirar</button>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -159,7 +165,8 @@
           </button>
             </div>
             <div class="modal-body">
-                <input type="text" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode === 32)" maxlength="20" class="form-control" name="name.condi" placeholder="Nuevo Condimento" [(ngModel)]="condi">
+                <input type="text" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode === 32) || (event.charCode === 209)|| (event.charCode === 241)" maxlength="30" class="form-control"
+                    name="name.condi" placeholder="Nuevo Condimento" [(ngModel)]="condi">
             </div>
             <div class="alert alert-primary" role="alert" *ngIf="condi == ''">
                 Debe agregar un nombre para poder guardar

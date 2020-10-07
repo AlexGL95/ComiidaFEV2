@@ -1,0 +1,9 @@
+@media only screen and (min-width: 641px) {
+    .ancho {
+        padding: 30%;
+    }
+}
+
+.ancho {
+    padding: 40%;
+}

@@ -5,56 +5,67 @@
     <h2 align="center">Recetas</h2>
 </div>
 
+
+<!-- Encabezado -->
+<div class="container-fluid ancho">
+    <!-- Buscador -->
+    <div class="col-auto mt-3">
+        <form action="" class="form-inline text-center">
+            <input class="form-control w-50" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)  || (event.charCode === 32) || (event.charCode === 209)|| (event.charCode === 241)" (keyup)="buscador(texto.value)"
+                type="search" maxlength="15" placeholder="Buscar" #texto>
+            <button class="btn btn-outline-secondary ml-2 my-2 my-sm-0 mr-sm-2" type="submit">Buscar</button>
+        </form>
+    </div>
+</div>
+
 <!-- Cuerpo de la pagina -->
 <div class="container">
     <div class="row">
         <!-- izquierda -->
-        <div class="col-5">
-            <div class="container">
-                <!-- Buscador -->
-                <div class="container mt-4">
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2" onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)  || (event.charCode === 32)" type="search" maxlength="15" placeholder="Buscar" (keyup)="buscador(texto.value)"
-                            #texto>
-                        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit" (click)="buscador(texto.value)">Buscar</button>
-                    </form>
-                </div>
-            </div>
+        <div class="col-auto">
             <!-- Lista de recetas -->
-            <ul class="list-group mt-3 ml-3" *ngIf="!mensajeNoHayCoincidencias">
-                <!-- Encabezado -->
-                <li class="list-group-item bg-secondary">
-                    <div class="row ">
-                        <!-- Ingrediente -->
-                        <h4 class="col pl-2 text-center">Nombre.</h4>
-                        <!-- Cantidad x n -->
-                        <h4 class="col pl-2 text-center">Accion.</h4>
-                    </div>
-                </li>
-                <!-- Cuerpo de la lista -->
-                <li class="list-group-item" *ngFor="let receta of recetasArr; index as i;">
-                    <div class="row">
-                        <!-- Columna de nombre -->
-                        <ul class="col pl-2 text-center">
-                            {{receta.nombre}}
-                        </ul>
-                        <!-- Columna de accion -->
-                        <ul class="col pl-2 text-center">
-                            <!-- Boton de informacion -->
-                            <button type="button" class="btn btn-md btn-info mr-2" (click)="obtenerListaDeIngredientes(i)">
-                                <fa-icon [icon]="faInfo"></fa-icon>
-                            </button>
-                            <!-- Boton de eliminar -->
-                            <button type="button" class="btn btn-md btn-danger" *ngIf="IS_SUPER" (click)="borrarReceta(i)">
-                                <fa-icon [icon]="faTrashAlt"></fa-icon>
-                            </button>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
+            <div class="container-fluid mt-4" *ngIf="!mensajeNoHayCoincidencias">
+                <ul class="list-group">
+                    <!--Encabezado de la lista-->
+                    <li class="list-group-item bg-secondary">
+                        <div class="row ">
+                            <!-- Columna de recetas -->
+                            <div class="col ml-3">Nombre</div>
+                            <!-- Columna de acciones -->
+                            <div class="col ml-3">Acciones</div>
+                        </div>
+                    </li>
+                    <!-- Cuerpo de la lista -->
+                    <li class="list-group-item" *ngFor="let receta of recetasArr; index as i;">
+                        <div class="row">
+                            <!-- Columna de recetas -->
+                            <ul class=" col list-group">
+                                <div class="ml-3">{{receta.nombre}}</div>
+                            </ul>
+                            <!-- Columna de acciones -->
+                            <div class="col">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <!-- Boton de informacion -->
+                                            <button type="button" class="btn btn-md btn-info mr-2" (click)="obtenerListaDeIngredientes(i)">
+                                                <fa-icon [icon]="faInfo"></fa-icon>
+                                            </button>
+                                            <!-- Boton de eliminar -->
+                                            <button type="button" class="btn btn-md btn-danger" *ngIf="IS_SUPER && !receta.activo" (click)="borrarReceta(i)">
+                                                <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                            </button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
         <!-- Derecha -->
-        <div class="col-auto mt-4 mx-auto" *ngIf="!mensajeNoHayCoincidencias">
+        <div class="col my-3 mx-auto" *ngIf="!mensajeNoHayCoincidencias">
             <!-- Etiqueta de ingredientes -->
             <h4 class="mt-4 ml-3" *ngIf="ingrArr.length > 0">Ingredientes</h4>
             <!-- Recuadro de ingredientes -->

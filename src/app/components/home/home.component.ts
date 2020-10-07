@@ -13,6 +13,8 @@ import { EquipoRecetaService } from 'src/app/services/equipo-receta.service';
 import { RondaService } from 'src/app/services/ronda.service';
 import { Ronda } from 'src/app/interfaces/Ronda';
 import { UserService } from 'src/app/services/user.service';
+// Icons
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +25,8 @@ export class HomeComponent{
 
   //Declaracion de variables
   IS_SUPER: boolean = false;
+  faPlus = faPlus;
+  faMinus = faMinus;
   equiposArr:EquipoInterface[] = [];
   equipoUsuario: EquipoInterface  = { nombre: "", integrantes_nombres: [], recetas_nombres: [] };
   recetasAsignadas = [];
@@ -364,6 +368,21 @@ export class HomeComponent{
   //Metodo para redirigir a nueva receta
   linkRondas(){
     this.router.navigate(['/Ronda']);
+  }
+
+  sumarRecetas( n: string ) {
+    if ( parseInt(n, 10) < 5 ) {
+      const n2 = parseInt(n, 10) + 1;
+      console.log(n2);
+      this.nRecetasMod(n2);
+    }
+  }
+
+  restarRecetas( n: string ) {
+    if ( parseInt(n, 10)  > 1 ) {
+      const n2 = parseInt(n, 10) - 1;
+      this.nRecetasMod(n2);
+    }
   }
 
 }

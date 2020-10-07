@@ -12,30 +12,29 @@
     </div>
 
     <div class="alert alert-success alert-dismissible" *ngIf="mensajeEnviado">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="mensajeEnviado = false">&times;</a>
-        Envio exitoso.
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="mensajeEnviado = false">&times;</a> Envio exitoso.
     </div>
 </div>
 
 <!-- Lista de equipos -->
-<div class="container mt-3">
-    <ul class="list-group">
+<div class="container-fluid mt-4">
+    <ul class="list-group ancho">
         <!--Encabezado de la lista-->
         <li class="list-group-item bg-secondary">
-            <div class="row row-cols-3">
-                <!-- Columna de fecha -->
-                <div class="col">Fecha</div>
+            <div class="row ">
+                <!-- Columna de fechas -->
+                <div class="col pl-2 text-center delgado">Fecha</div>
                 <!-- Columna de integrantes -->
-                <div class="col">Integrantes</div>
+                <div class="col pl-2 text-center delgado">Integrantes</div>
                 <!-- Columna de recetas -->
-                <div class="col">Recetas</div>
+                <div class="col pl-2 text-center delgado">Recetas</div>
             </div>
         </li>
         <!-- Cuerpo de la lista -->
         <li class="list-group-item" *ngFor="let equipo of equiposArr; index as i;">
-            <div class="row row-cols-3">
-                <!-- Columna de fecha -->
-                <div class="col">
+            <div class="row">
+                <!-- Columna de fechas -->
+                <ul class=" col list-group delgado2">
                     <div class="dropdown">
                         <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
                             {{fechasView[i]}}
@@ -46,14 +45,16 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </ul>
                 <!-- Columna de integrantes -->
-                <div class="col">{{equipo.integrantes_nombres[0]}} y {{equipo.integrantes_nombres[1]}}</div>
+                <div class="col delgado2 mt-2">
+                    {{equipo.integrantes_nombres[0]}} y {{equipo.integrantes_nombres[1]}}
+                </div>
                 <!-- Columna de recetas -->
-                <div class="col">
+                <div class="col delgado2">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" *ngFor="let receta of equipo.recetas_nombres">
-                            {{receta}}
+                            >{{receta}}
                         </li>
                     </ul>
                 </div>
@@ -63,7 +64,7 @@
 </div>
 
 <!-- Boton de guardar -->
-<div class="container mt-3 ml-auto">
+<div class="container mt-3 ml-auto ancho">
     <div class="row">
         <div class="col">
             <button type="button" class="btn btn-secondary btn-block" (click)="linkRondas()">
