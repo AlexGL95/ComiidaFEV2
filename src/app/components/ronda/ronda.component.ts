@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { RondaService } from 'src/app/services/ronda.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-//Icons
+// Icons
 import { faTimes, faCheck } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ronda',
@@ -13,24 +14,26 @@ import { faTimes, faCheck } from '@fortawesome/free-solid-svg-icons';
 export class RondaComponent implements OnInit {
 
   rondas = [];
+  tr = 0;
   show: boolean;
-  mensajeCreaRonda: boolean = false;
+  mensajeCreaRonda = false;
   mensajeCrearRonda: boolean;
   mensajeBorrarRonda: boolean;
-  mensajeUsuariosInsuficientes: boolean = false;
+  mensajeUsuariosInsuficientes = false;
   faTimes = faTimes;
   faCheck = faCheck;
 
   constructor(private rondaService: RondaService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-
     this.rondaService.getAll()
           .subscribe(
             res => {
+              this.tr = res.length;
               // Condicional. ¿Existe al menos una ronda?
               if ( res.length === 0 ) {
                 this.mensajeCreaRonda = true;
+                
               }
               this.rondas = res;
             },
@@ -46,12 +49,12 @@ export class RondaComponent implements OnInit {
   createRonda(): boolean{
     this.rondaService.createRonda()
         .subscribe(res => {
-          this.mensajeCreaRonda = false; //Al crear una ronda, ya existe al menos una
+          this.mensajeCreaRonda = false; // Al crear una ronda, ya existe al menos una
           this.rondas = res;
-          window.location.reload();
+          this.showmodalsuccess();
         },
-        err => {this.mensajeCrearRonda = true}
-        )
+        err => {this.mensajeCrearRonda = true;}
+        );
     return false;
   }
 
@@ -60,7 +63,7 @@ export class RondaComponent implements OnInit {
         .subscribe(res => {
           this.rondaService.getAll()
               .subscribe(res => {
-                //Condicional. ¿Existe al menos una ronda?
+                // Condicional. ¿Existe al menos una ronda?
                 if ( res.length === 0 ) {
                   this.mensajeCreaRonda = true;
                   window.location.reload();
@@ -68,15 +71,22 @@ export class RondaComponent implements OnInit {
                 this.rondas = res;
               },
               err => console.log(err)
-            )
+            );
         },
         err => this.mensajeBorrarRonda = true
-      )
+      );
   }
 
-  //Metodo para redirigir a usuarios
+  // Metodo para redirigir a usuarios
   linkUsuarios(){
     this.router.navigate(['/Usuarios']);
   }
 
+  showmodalsuccess() {
+    console.log(this.tr);
+    if (this.tr <= 0) {
+      window.location.reload();
+      console.log(this.tr);
+    }
+  }
 }

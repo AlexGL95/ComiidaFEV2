@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from '../../services/user.service';
 import Swal from 'sweetalert2';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -17,6 +18,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
   styleUrls: ['./editar-usuario.component.css']
 })
 export class EditarUsuarioComponent implements OnInit {
+  faEyeSlash = faEyeSlash;
   patt = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9d$@$!%*?&].{7,}';
   RegistroForm: FormGroup;
   user: usuariomodel;
@@ -157,7 +159,7 @@ export class EditarUsuarioComponent implements OnInit {
             Swal.fire({
               icon: 'success',
               title: 'Éxito!',
-              text: 'Correcto',
+              text: 'Usuario Editado correctamente',
             });
             this.router.navigate(['/Usuarios']);
           }
