@@ -55,6 +55,7 @@ export class IngredientesComponent {
 
   // Metodo de procesado de la lista de ingredientes
   procIng( ing: string ){
+    let nIng = 0;
     this.ingredientesArr = [];
     // 1.-Se obtienen los ingredientes por separado.
     const ingredientesTemp = ing.split('/');
@@ -68,22 +69,34 @@ export class IngredientesComponent {
         if ( cantidad.indexOf('gr') >= 0 ) {
           const cantidadTemp = cantidad.split('g');
           const cantidadInt = parseInt( cantidadTemp[0], 10 );
-          this.ingredientesArr.push( { nombre: ingrediente[0], cantidad: `${this.nUsuarios * cantidadInt}`, unidad: 'gr'} );
+          this.ingredientesArr.push( { nombre: `Ingrediente ${nIng}.- ` + ingrediente[0], cantidad: `${this.nUsuarios * cantidadInt}`, unidad: 'gr'} );
+          nIng += 1;
         // Condicion. Son mililitros.
         } else if ( cantidad.indexOf('ml') >= 0 ) {
           const cantidadTemp = cantidad.split('m');
           const cantidadInt = parseInt( cantidadTemp[0], 10 );
-          this.ingredientesArr.push( { nombre: ingrediente[0], cantidad: `${this.nUsuarios * cantidadInt}`, unidad: 'ml'} );
+          this.ingredientesArr.push( { nombre: `Ingrediente ${nIng}.- ` + ingrediente[0], cantidad: `${this.nUsuarios * cantidadInt}`, unidad: 'ml'} );
+          nIng += 1;
         // Condicion. Son piezas.
         } else if ( cantidad.indexOf('pz') >= 0 ) {
           const cantidadTemp = cantidad.split('p');
           const cantidadInt = parseInt( cantidadTemp[0], 10 );
-          this.ingredientesArr.push( { nombre: ingrediente[0], cantidad: `${this.nUsuarios * cantidadInt}`, unidad: 'pz'} );
+          this.ingredientesArr.push( { nombre: `Ingrediente ${nIng}.- ` + ingrediente[0], cantidad: `${this.nUsuarios * cantidadInt}`, unidad: 'pz'} );
+          nIng += 1;
         }
       }
-      // 3.-Si el ingrediente solo tiene un nombre = Guarda como condimento
+      // 3.-Si el ingrediente solo tiene un nombre
       else if (ingrediente.length === 1) {
-        this.ingredientesArr.push( { nombre: ingrediente[0], cantidad: '', unidad: ''} );
+        //4.-Si tienen () es nombre
+        if (ingrediente[0].indexOf('(') >= 0) {
+          this.ingredientesArr.push( { nombre: 'Nombre: ' + ingrediente[0], cantidad: '', unidad: ''} );
+          nIng = 1;
+        }
+        //5.-Si no, es condimento
+        else {
+          this.ingredientesArr.push( { nombre: `Ingrediente ${nIng}.- ` + ingrediente[0], cantidad: '', unidad: ''} );
+          nIng += 1;
+        }
       }
     }
   }

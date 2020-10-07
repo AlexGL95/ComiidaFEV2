@@ -24,6 +24,7 @@ export class RecetaComponent{
   recetasArr: RecetaInterface[] = [];
   ingrString: string = "";
   ingrArr: string[] = [];
+  const = 0;
   mensajeNoHayCoincidencias: boolean = false;
 
   // Constructor
@@ -54,12 +55,11 @@ export class RecetaComponent{
         break;
       }
     }
-    console.log(idDb);
+    console.log(id);
+    
     this.recetaService.deleteById(idDb).subscribe( () => {
-      //Adquisicion de datos
-      this.recetaService.getRecetas().subscribe( recetas => {
-        this.recetasArr = recetas;
-      } );
+      //Recarga
+      window.location.reload();
     } );
   }
 

@@ -3,7 +3,7 @@
 
 <!-- Titulo: Ronda actual -->
 <div class="container-fluid border-bottom border-secondary">
-    <h2 align="center">Ronda actual</h2>
+    <h2 align="center">Inicio</h2>
 </div>
 
 <!-- Mensajes -->
@@ -26,7 +26,7 @@
 <!-- Hay espacios vacios -->
 <div class="container mt-3" *ngIf="mensajeEspaciosSinAsignar">
     <div class="alert alert-danger text-center" role="alert">
-        Hay espacios vacíos.
+        Selecciona al menos una receta.
     </div>
 </div>
 <!-- Ronda en curso -->
@@ -223,10 +223,10 @@
           </button>
             </div>
             <div class="modal-body" *ngIf="mensajeEspaciosSinAsignar">
-                Hay Espacios Vacíos
+                Selecciona al menos una receta.
             </div>
             <div class="modal-body" *ngIf="cambio">
-                ¿Seguro de asignar esta(s) receta(s)? No Se Puede Reasignar Posteriormente
+                ¿Seguro de asignar esta(s) receta(s)? No Se Puede Reasignar Posteriormente.
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" *ngIf="cambio" (click)="asignarRecetaConfirmada()">Estoy Seguro</button>

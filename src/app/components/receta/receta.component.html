@@ -52,7 +52,7 @@
                                                 <fa-icon [icon]="faInfo"></fa-icon>
                                             </button>
                                             <!-- Boton de eliminar -->
-                                            <button type="button" class="btn btn-md btn-danger" *ngIf="IS_SUPER && !receta.activo" (click)="borrarReceta(i)">
+                                            <button type="button" class="btn btn-md btn-danger" *ngIf="IS_SUPER && !receta.activo" data-toggle="modal" data-target="#exampleModal" (click)="const = i">
                                                 <fa-icon [icon]="faTrashAlt"></fa-icon>
                                             </button>
                                         </div>
@@ -93,3 +93,22 @@
         No hay coincidencias.
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">¿Seguro que quieres borrar esta receta?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No Estoy Seguro</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="borrarReceta(const)">Estoy Seguro</button>
+        </div>
+      </div>
+    </div>
+  </div>
