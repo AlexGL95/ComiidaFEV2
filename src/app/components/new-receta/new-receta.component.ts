@@ -5,6 +5,7 @@ import { NewrecetaService } from 'src/app/services/newreceta.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { RecetaService } from 'src/app/services/receta.service';
+import Swal from 'sweetalert2';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -140,7 +141,7 @@ export class NewRecetaComponent implements OnInit {
       if (res === null) {
         this.mensajeRecetaRepetida = true;
       } else if (res !== null) {
-        this.router.navigate(['/Success']);
+        this.showmodalsuccess();
         this.mensajeRecetaRepetida = false;
       }
     },
@@ -242,4 +243,12 @@ export class NewRecetaComponent implements OnInit {
     }
   }
 
+  showmodalsuccess() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Éxito!',
+      text: 'Receta creada correctamente',
+    });
+    this.router.navigate(['/Home']);
+  }
 }

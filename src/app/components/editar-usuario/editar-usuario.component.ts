@@ -8,6 +8,8 @@ import { first } from 'rxjs/operators';
 import { usuariomodel } from 'src/app/Models/Usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from '../../services/user.service';
+import Swal from 'sweetalert2';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-editar-usuario',
@@ -15,7 +17,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./editar-usuario.component.css']
 })
 export class EditarUsuarioComponent implements OnInit {
-  patt = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-zd$@$!%*?&].{7,}';
+  patt = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9d$@$!%*?&].{7,}';
   RegistroForm: FormGroup;
   user: usuariomodel;
   usuariosarr: any = [];
@@ -23,12 +25,15 @@ export class EditarUsuarioComponent implements OnInit {
   idx;
   i = 0;
   mensajeUpdate: boolean;
+  mensajeUpdate2 = false;
+  mensajeUpdate3 = false;
   pass = false;
   mensajeInv: boolean;
   contra = '';
   contra2 = '';
 
   update(nombre: string, pass: string, copass: string){
+    this.i = 0;
     this.usrse.getAll().subscribe(res => {
           this.usuariosarr = res;
           for (let index = 0; index < this.usuariosarr.length; index++) {
@@ -42,26 +47,28 @@ export class EditarUsuarioComponent implements OnInit {
                 this.user = {
                   nombre: nombre,
                   pass: pass};
-                console.log('Coincidencias', this.i);
                 if (this.i > 1) {
-                      this.mensajeUpdate = true;
-                    }else{
-                      this.userservice.updateusuario(this.idx, this.user).subscribe(res => 
-                        {}, err => {this.mensajeUpdate = true; });
-                      this.router.navigate(['/Usuarios']);
-                    }
+                      this.mensajeUpdate2 = true;
+                  }else{
+                      this.userservice.updateusuario(this.idx, this.user).subscribe(res =>
+                        {
+                          console.log('Coincidencias', this.i);
+                        }, err => {this.mensajeUpdate = true; });
+                      this.showmodalsuccess();
+                  }
+
               } else {
                 this.user = {
                   nombre: nombre
                 };
-                console.log('aqui solo el nombre' + this.user);
-                console.log('Coincidencias', this.i);
                 if (this.i > 0) {
-                  this.mensajeUpdate = true;
+                  this.mensajeUpdate3 = true;
                 } else {
-                  this.userservice.updateusuario(this.idx, this.user).subscribe(res => 
-                  console.log(res),
-                  err => this.mensajeUpdate = true);
+                  this.userservice.updateusuario(this.idx, this.user).subscribe( res => {
+                    this.showmodalsuccess();
+                    //this.router.navigate(['/Usuarios']);
+                  },
+                  (err) => this.mensajeUpdate = true);
                 }
 
               }
@@ -76,8 +83,6 @@ export class EditarUsuarioComponent implements OnInit {
         });
 
   }
-
-   
 
     get usuario(){ return this.RegistroForm.get('usuario'); }
     get password(){ return this.RegistroForm.get('password'); }
@@ -145,6 +150,15 @@ export class EditarUsuarioComponent implements OnInit {
 
           //Metodo para redirigir a 
           linkBack(){
+            this.router.navigate(['/Usuarios']);
+          }
+
+          showmodalsuccess() {
+            Swal.fire({
+              icon: 'success',
+              title: 'Éxito!',
+              text: 'Correcto',
+            });
             this.router.navigate(['/Usuarios']);
           }
 
