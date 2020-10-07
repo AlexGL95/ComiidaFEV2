@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { usuariomodel } from 'src/app/Models/Usuario.model';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
@@ -14,7 +15,7 @@ export class RegistroComponent implements OnInit {
 
   RegistroForm: FormGroup;
   user: usuariomodel;
-  patt = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-zd$@$!%*?&].{7,}';
+  patt = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9d$@$!%*?&].{7,}';
   mensajeInvalido: boolean;
   mensajeRegistro: boolean;
   contra = '';
@@ -34,8 +35,7 @@ export class RegistroComponent implements OnInit {
         if (!resp) {
           this.mensajeRegistro = true;
         }else{
-          console.log(resp);
-          this.router.navigate(['/Usuarios']);
+          this.showmodalsuccess();
         }
       },
       err => {
@@ -99,5 +99,12 @@ export class RegistroComponent implements OnInit {
   }
 
   /**/
-
+  showmodalsuccess() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Éxito!',
+      text: 'Usuario creado correctamente',
+    });
+    this.router.navigate(['/Usuarios']);
+  }
 }

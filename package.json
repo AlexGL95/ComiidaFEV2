@@ -26,11 +26,13 @@
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "@popperjs/core": "^2.5.1",
+    "@sweetalert2/ngx-sweetalert2": "^8.1.1",
     "angular-dropdown": "^0.5.5",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
     "moment": "^2.29.0",
     "ng-wormhole": "^3.0.2",
+    "sweetalert2": "^10.3.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
