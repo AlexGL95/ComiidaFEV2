@@ -373,7 +373,6 @@ export class HomeComponent{
   sumarRecetas( n: string ) {
     if ( parseInt(n, 10) < 5 ) {
       const n2 = parseInt(n, 10) + 1;
-      console.log(n2);
       this.nRecetasMod(n2);
     }
   }

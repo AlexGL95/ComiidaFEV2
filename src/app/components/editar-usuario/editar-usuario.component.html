@@ -59,7 +59,11 @@
                     <label for="password">Nueva contraseña</label>
                     <div class="input-group">
                         <input type="password" class="form-control" maxlength="15" placeholder="Contraseña" formControlName="password" [(ngModel)]="contra" required #pass/>
-
+                        <div class="input-group-append c-pointer" (click)="pass.type = pass.type == 'password' ? 'text' : 'password'">
+                            <span class="input-group-text">
+                                <fa-icon [icon]="faEyeSlash"></fa-icon>
+                            </span>
+                        </div>
                     </div>
                     <div class="alert-danger" *ngIf="password.errors && (password.dirty || password.touched)">
                         <div class="container-fluid" *ngIf="f.password.errors.minlength">
@@ -76,7 +80,11 @@
                     <label for="password">Confirmar contraseña</label>
                     <div class="input-group">
                         <input type="password" class="form-control" maxlength="15" placeholder="Contraseña" formControlName="copassword" [(ngModel)]="contra2" required #copass />
-
+                        <div class="input-group-append c-pointer" (click)="copass.type = copass.type == 'password' ? 'text' : 'password'">
+                            <span class="input-group-text">
+                                <fa-icon [icon]="faEyeSlash"></fa-icon>
+                            </span>
+                        </div>
                     </div>
                     <div class="alert-danger" *ngIf="copassword.errors && (copassword.dirty || copassword.touched)">
                         <div class="container-fluid" *ngIf="f.copassword.errors.minlength">

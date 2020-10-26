@@ -5,6 +5,7 @@ import { usuariomodel } from 'src/app/Models/Usuario.model';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-registro',
@@ -15,6 +16,7 @@ export class RegistroComponent implements OnInit {
 
   RegistroForm: FormGroup;
   user: usuariomodel;
+  faEyeSlash = faEyeSlash;
   patt = '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9d$@$!%*?&].{7,}';
   mensajeInvalido: boolean;
   mensajeRegistro: boolean;
@@ -23,9 +25,6 @@ export class RegistroComponent implements OnInit {
 
   singin(nombre: string, pass: string, copass: string){
     if (this.RegistroForm.valid) {
-
-      console.log('Registro');
-
       this.user = {
       nombre: nombre,
       pass: pass};
@@ -40,7 +39,6 @@ export class RegistroComponent implements OnInit {
       },
       err => {
         console.log(err);
-
       });
 
     } else {

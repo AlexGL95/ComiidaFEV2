@@ -51,14 +51,12 @@ export class AuthService {
       authData
     ).pipe(
       map(resp => {
-        console.log('Entro a map');
         this.storetoken( resp['token']);
         this.storeuser( resp ['nombre']);
         this.storesuper( resp['super']);
         this.storeIdEquipo( resp['idequipo'] );
         this.storeFechaDeEquipo( resp['fechaDeEquipo']);
         this.storeid( resp['iduser']);
-        console.log(resp);
         return resp;
       })
     );

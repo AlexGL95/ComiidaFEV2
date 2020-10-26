@@ -33,8 +33,6 @@ export class LoginComponent implements OnInit {
         nombre,
         pass
       };
-        console.log('Singup');
-        console.log(this.user);
         this.auth.login(this.user).subscribe(
           (resp) => {
             this.router.navigate(['/Home']);
